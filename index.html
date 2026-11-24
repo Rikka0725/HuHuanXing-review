@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>互换性与测量技术 · 期末复习</title>
+<style>
+:root{--bg:#f4f1ea;--paper:#fffdf9;--ink:#1f2933;--muted:#64748b;--line:#e5ded2;--accent:#0f766e;--accent-soft:#e6f4f1;--red:#b91c1c;--red-soft:#fef2f2;--amber:#92400e;--amber-soft:#fffbeb;--shadow:0 4px 18px rgba(31,41,51,.06)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei","PingFang SC","Noto Sans CJK SC",sans-serif;line-height:1.75;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:#f1ede5;border-radius:4px;padding:1px 5px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.92em}
+.topbar{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:16px;padding:10px 20px;background:rgba(255,253,249,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+.brand h1{font-size:18px;margin:0;letter-spacing:.5px}
+.brand p{margin:0;font-size:12px;color:var(--muted)}
+.search-wrap{flex:1;display:flex;gap:8px;max-width:520px;margin-left:auto}
+.search-wrap input{flex:1;min-width:0;padding:9px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:14px;outline:none}
+.search-wrap input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.search-count{font-size:12px;color:var(--muted);white-space:nowrap;align-self:center}
+button{cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:8px 14px;font-size:13px;transition:.2s}
+button:hover{border-color:var(--accent);color:var(--accent)}
+.menu-btn{display:none;font-size:18px;padding:6px 10px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.layout{display:flex;align-items:flex-start;gap:24px;max-width:1400px;margin:0 auto;padding:24px 20px 80px}
+.sidebar{position:sticky;top:78px;flex:0 0 240px;max-height:calc(100vh - 100px);overflow:auto;padding:16px;background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+.sidebar h2{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:0 0 10px}
+.sidebar nav{display:flex;flex-direction:column;gap:4px}
+.toc-link{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;color:var(--ink);font-size:14px}
+.toc-link:hover{background:var(--accent-soft);text-decoration:none}
+.toc-link.active{background:var(--accent-soft);color:var(--accent);font-weight:700}
+.toc-meta{font-size:11px;color:var(--muted);background:#f1ede5;border-radius:999px;padding:1px 8px}
+.sidebar-note{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);font-size:12px;color:var(--muted);line-height:1.6}
+main{flex:1;min-width:0;max-width:1000px}
+.chapter{background:var(--paper);border:1px solid var(--line);border-radius:16px;margin-bottom:18px;box-shadow:var(--shadow);overflow:hidden}
+.chapter>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;user-select:none}
+.chapter>summary::-webkit-details-marker{display:none}
+.chapter>summary .chevron{transition:transform .2s;color:var(--muted)}
+.chapter[open]>summary .chevron{transform:rotate(90deg)}
+.chapter-title{font-size:18px;font-weight:800}
+.chapter-meta{font-size:12px;color:var(--muted);font-weight:400}
+.chapter-body{padding:0 20px 20px}
+.card{background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:16px 18px;margin:14px 0;box-shadow:0 2px 8px rgba(31,41,51,.03)}
+.card.mini{border-left-color:#64748b}
+.card.compact{margin:12px 0}
+.card.mock{border-left-color:#7c3aed}
+.card-head{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.card-head h3,.card-head h4{margin:0;font-size:16px;line-height:1.5}
+.card-head h4{font-size:15px}
+.pill{display:inline-block;background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:2px 10px;font-size:12px;font-weight:700;white-space:nowrap}
+.card.mock .pill{background:#f3e8ff;color:#7c3aed}
+.block{margin:10px 0}
+.label{font-size:12px;font-weight:800;letter-spacing:.5px;color:var(--accent);margin-bottom:3px}
+.block.pitfall{background:var(--red-soft);border-left:3px solid var(--red);border-radius:8px;padding:8px 12px}
+.block.pitfall .label{color:var(--red)}
+.block.source{background:var(--amber-soft);border-left:3px solid var(--amber);border-radius:8px;padding:8px 12px;font-size:13px}
+.block.source .label{color:var(--amber)}
+.block.q p{margin:0;font-weight:600}
+.block.review-q{background:#f8f5ee;border-left:3px solid #64748b;border-radius:8px;padding:8px 12px}
+.block.review-q .label{color:#475569}
+.block.answer-block{background:#f0fdf4;border-left:3px solid #16a34a;border-radius:8px;padding:8px 12px}
+.block.answer-block .label{color:#15803d}
+.circled{list-style:none;padding-left:0;margin:4px 0}
+.circled li{padding-left:1.6em;text-indent:-1.6em;margin:4px 0}
+.answer{margin-top:10px;border-top:1px dashed var(--line);padding-top:8px}
+.answer summary{cursor:pointer;color:var(--muted);font-size:13px;font-weight:600}
+.answer-body{margin-top:8px}
+.original{font-size:13px;color:var(--muted);background:#f8f5ee;border-radius:8px;padding:8px 10px}
+.qsource{font-size:12px;color:var(--muted);margin:8px 0 0}
+.must-block,.selftest-block{margin-top:18px}
+.must-block h3,.selftest-block h3{font-size:16px;margin:0 0 8px;color:var(--ink)}
+.must-list{background:#f8f5ee;border:1px solid var(--line);border-radius:12px;padding:12px 18px 12px 36px;margin:0}
+.must-list li{margin:5px 0}
+@media (min-width:900px){.must-list{columns:2;column-gap:32px}}
+.selftest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.table-section,.comp-section{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 20px;margin-bottom:18px;box-shadow:var(--shadow)}
+.table-section h3,.comp-section h3{font-size:16px;margin:0 0 10px}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;border:1px solid var(--line);border-radius:10px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:620px;background:#fff}
+th,td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left}
+th{background:#f1ede5;font-weight:800;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td:last-child,th:last-child{border-right:none}
+blockquote{margin:10px 0;padding:10px 14px;background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:8px;color:#134e4a}
+hr{border:none;border-top:1px dashed var(--line);margin:16px 0}
+.chapter-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:12px 0}
+.chapter-link{display:flex;flex-direction:column;gap:2px;padding:12px 14px;background:#fff;border:1px solid var(--line);border-radius:10px;color:var(--ink)}
+.chapter-link:hover{border-color:var(--accent);text-decoration:none;background:var(--accent-soft)}
+.chapter-link span{font-size:12px;color:var(--muted)}
+.warn{background:#fef3c7;color:#92400e;border-radius:4px;padding:0 4px;font-weight:700}
+.notice{margin:14px 0;padding:10px 14px;background:#fff;border:1px dashed var(--line);border-radius:10px;font-size:13px;color:var(--muted)}
+.is-hidden{display:none!important}
+#noResults{display:none;padding:16px;background:#fff;border:1px dashed var(--line);border-radius:12px;color:var(--muted);text-align:center}
+#noResults.show{display:block}
+#backTop{position:fixed;right:20px;bottom:20px;width:42px;height:42px;border-radius:50%;display:none;align-items:center;justify-content:center;box-shadow:var(--shadow);z-index:30}
+#backTop.show{display:flex}
+#overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,.35);z-index:45}
+#overlay.show{display:block}
+@media (max-width:900px){
+.topbar{flex-wrap:wrap;gap:8px;padding:8px 12px}
+.menu-btn{display:inline-block}
+.brand{flex:1;min-width:0}
+.brand h1{font-size:16px}
+.search-wrap{order:3;flex-basis:100%;max-width:none;margin-left:0}
+.actions{order:4;flex-basis:100%;justify-content:flex-end}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:280px;max-height:none;border-radius:0;z-index:50;transform:translateX(-100%);transition:transform .25s ease;box-shadow:0 0 30px rgba(0,0,0,.18)}
+.sidebar.open{transform:translateX(0)}
+.layout{display:block;padding:14px 12px 70px}
+main{max-width:none}
+.chapter-body{padding:0 12px 14px}
+.chapter>summary{padding:14px 12px}
+.chapter-title{font-size:16px}
+.card{padding:14px 12px}
+.table-section,.comp-section{padding:14px 12px}
+table{min-width:520px;font-size:12.5px}
+.must-list{columns:1}
+}
+@media print{
+@page{margin:14mm}
+body{background:#fff;font-size:11pt}
+.topbar,.sidebar,#overlay,#backTop,.actions,.search-wrap,.menu-btn,#noResults{display:none!important}
+.layout{display:block;padding:0;max-width:none}
+main{max-width:none}
+.chapter,.table-section,.comp-section,.card{box-shadow:none;background:#fff}
+.chapter{border:1px solid #bbb;break-inside:auto}
+.card{break-inside:avoid;border:1px solid #ccc;border-left:3px solid #555}
+details{display:block!important}
+details>summary{list-style:none}
+.table-wrap{overflow:visible;border:1px solid #ccc}
+table{min-width:0;font-size:10pt}
+th,td{padding:4px 6px}
+a{color:inherit;text-decoration:none}
+h2,h3,h4{break-after:avoid}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <button id="menuBtn" class="menu-btn" aria-label="打开目录">☰</button>
+  <div class="brand"><h1>互换性与测量技术</h1><p>期末复习 · 简答题 + 综合题考点</p></div>
+  <div class="search-wrap"><input id="searchInput" type="search" placeholder="搜索知识点、题目、公式…"><button id="clearBtn">清空</button><span id="searchCount" class="search-count"></span></div>
+  <div class="actions"><button id="expandBtn">展开全部</button><button id="collapseBtn">折叠全部</button><button id="printBtn">打印</button></div>
+</header>
+<div class="layout">
+  <aside id="sidebar" class="sidebar"><h2>章节目录</h2><nav><a href="#overview" class="toc-link">总览 <span class="toc-meta">索引</span></a><a href="#chapter-1" class="toc-link">第1章 概述 <span class="toc-meta">6</span></a><a href="#chapter-2" class="toc-link">第2章 测量基础 <span class="toc-meta">6</span></a><a href="#chapter-5" class="toc-link">第5章 表面粗糙度 <span class="toc-meta">6</span></a><a href="#chapter-6" class="toc-link">第6章 螺纹 <span class="toc-meta">6</span></a><a href="#chapter-7" class="toc-link">第7章 齿轮 <span class="toc-meta">3</span></a><a href="#comprehensive" class="toc-link">第3/4/8章 综合题 <span class="toc-meta">3</span></a><a href="#must" class="toc-link">简答题必背清单 <span class="toc-meta">19</span></a><a href="#mock" class="toc-link">简答模拟题 <span class="toc-meta">10</span></a><a href="#compare" class="toc-link">易混概念对比表 <span class="toc-meta">12</span></a></nav><div class="sidebar-note">搜索会过滤卡片；打印时会自动展开全部折叠内容。</div></aside>
+  <main id="main">
+    <section id="overview" class="section searchable" data-search="总览 资料索引 资料未覆盖 复习说明">
+      <h1>期末复习总览</h1>
+      <blockquote><strong>课程</strong>：互换性与测量技术  <br><strong>考试范围</strong>：简答题——第1、2、5、6、7章；综合题——第3、4、8章。  <br><strong>资料依据</strong>：以《互换性与测量技术-复习主要知识点.pdf》为主，PPT为补充；量块“等/级”使用规则采用老师提供的书内内容。  <br><strong>页码说明</strong>：文中“p××”均指对应PDF的页序号，不是幻灯片页脚编号。</blockquote>
+<hr><div class="notice"><strong>公式说明：</strong>本页公式按 Markdown 原文以纯文本展示，未引入 KaTeX/MathJax，因此<strong>不需要联网 CDN</strong>，离线也能看。若需把 <code>D^(1/3)</code>、<code>Σ</code> 等渲染成数学排版，可后续接入 KaTeX CDN（需联网）。</div><h2>章节导航</h2><div class="chapter-grid"><a class="chapter-link" href="#chapter-1"><strong>第1章 概述</strong><span>6个知识点 · 必背10条 · 自测26题</span></a><a class="chapter-link" href="#chapter-2"><strong>第2章 测量基础</strong><span>6个知识点 · 必背10条 · 自测12题</span></a><a class="chapter-link" href="#chapter-5"><strong>第5章 表面粗糙度</strong><span>6个知识点 · 必背10条 · 自测12题</span></a><a class="chapter-link" href="#chapter-6"><strong>第6章 螺纹</strong><span>6个知识点 · 必背10条 · 自测12题</span></a><a class="chapter-link" href="#chapter-7"><strong>第7章 齿轮</strong><span>3个知识点 · 必背10条 · 自测10题</span></a><a class="chapter-link" href="#comprehensive"><strong>第3/4/8章 综合题</strong><span>3章考点 · 公式 · 步骤</span></a><a class="chapter-link" href="#must"><strong>简答题必背清单</strong><span>19道高频题</span></a><a class="chapter-link" href="#mock"><strong>简答模拟题</strong><span>10道 · 评分点</span></a><a class="chapter-link" href="#compare"><strong>易混概念对比表</strong><span>12组表格</span></a></div><h2>二、资料索引</h2><div class="table-wrap"><table><thead><tr><th>文件名</th><th>页数</th><th>对应章节/内容</th></tr></thead><tbody><tr><td>互换性与测量技术-复习主要知识点.pdf</td><td>3</td><td>复习提纲，<strong>主依据</strong>；第1、2、5章在第1页，第3、4、6章在第2页，第7、8章在第3页</td></tr><tr><td>第一章.pdf</td><td>43</td><td>第1章 互换性与标准化概论</td></tr><tr><td>第二章.pdf</td><td>81</td><td>第2章 几何量测量技术基础</td></tr><tr><td>第三章1.pdf</td><td>103</td><td>第3章 圆柱体结合：术语定义、标准公差、基本偏差、标注、选用</td></tr><tr><td>第三章2.pdf</td><td>10</td><td>第3章：基准制、配合分类、配合公差、配合选用与计算</td></tr><tr><td>第三章3.pdf</td><td>9</td><td>第3章：光滑极限量规</td></tr><tr><td>第三章4.pdf</td><td>6</td><td>第3章：滚动轴承与孔、轴结合</td></tr><tr><td>第四章.pdf</td><td>147</td><td>第4章 形状和位置精度的控制与评定</td></tr><tr><td>第五章.pdf</td><td>70</td><td>第5章 表面特征的控制与评定（表面粗糙度、表面结构）</td></tr><tr><td>第六章.pdf</td><td>29</td><td>第6章 圆柱螺纹结合的精度设计与检测</td></tr><tr><td>第七章.pdf</td><td>39</td><td>第7章 圆柱齿轮传动精度的控制与评定</td></tr><tr><td>第八章.pdf</td><td>38</td><td>第8章 尺寸链的精度设计</td></tr></tbody></table></div>
+<p><strong>说明</strong>：</p>
+<ol><li>第五章.pdf 首页标题为“第5章 表面特征的控制与评定”，正文为表面粗糙度、表面结构内容，按第5章处理。</li><li>第四章.pdf 第3页目录与第112页正文的节号标注不一致，引用时统一按PDF页码。</li><li>复习PDF中的“圆周封闭原则”，PPT第二章第79页称“闭合原则”，二者按同一原则处理。</li></ol>
+<hr><h2>三、<span class="warn">资料未覆盖</span>/待确认清单</h2><div class="table-wrap"><table><thead><tr><th>位置</th><th>情况</th><th>处理</th></tr></thead><tbody><tr><td>第1章“几何量公差”</td><td>PPT第12页只定义“几何要素”“几何量”，第42页定义“公差”，未单列“几何量公差”词条</td><td>现按“几何参数的允许变动量”合并表述；如需严格定义，建议老师确认</td></tr><tr><td>第5章第6条“光切法、干涉法”</td><td>PPT第59页只列名称，未展开原理</td><td>简答题可按“名称+比较法/针描法/印模法”作答；原理部分建议老师确认</td></tr><tr><td>第6章第6条“螺纹的测量”</td><td>复习PDF要求“熟悉测量工具、主要测量参数”；PPT第6章p29小结仅提到“螺纹参数的测量”，未展开工具和参数</td><td>暂标“<span class="warn">资料未覆盖</span>，<span class="warn">需老师确认</span>”</td></tr><tr><td>第4章第7条“形位公差选用原则”</td><td>复习PDF要求了解选用原则；PPT第147页小结仅提到选用包括项目、公差值、公差原则和基准，未展开具体条款</td><td>综合题清单中只列“选用内容”，具体原则<span class="warn">需老师确认</span></td></tr></tbody></table></div>
+<h3>已补充的书内内容</h3>
+<ul><li><strong>第2章量块“等/级”</strong>：共同技术要求为测量面平面度、粗糙度、研合性及硬度、量块长度、长度变动量、长度稳定度；级按中心长度极限偏差，等按中心长度测量不确定度；按级用标称尺寸、忽略制造误差，按等用检定书实际尺寸、忽略检定误差。依据：老师提供的书内内容。</li></ul>
+<hr><h2>四、使用说明</h2><ol><li><strong>简答题复习顺序</strong>：先背每章“本章必背清单”，再用“本章自测题”检查，最后用 <code>09_简答题必背清单.md</code> 和 <code>10_简答模拟题与评分点.md</code> 做考前冲刺。</li><li><strong>综合题复习顺序</strong>：先看 <code>08_综合题考点_第3_4_8章.md</code> 的公式和步骤模板，再回到PPT例题练习（第三章1 p26、p42、p58；第四章 p131—137；第八章 p30—37）。</li><li><strong>易混点</strong>：优先看 <code>11_易混概念对比表.md</code>，重点记“公差与偏差”“配合公差”“泰勒原则”“包容要求与最大实体要求”“尺寸链增环/减环”。</li><li><strong><span class="warn">资料未覆盖</span>处不要自行补写</strong>：按表中“处理”列复习，或向老师确认。</li></ol>
+    </section>
+    <div id="noResults">没有找到匹配内容，请换个关键词。</div>
+    
+<details id="chapter-1" class="chapter searchable" open>
+  <summary>
+    <div><div class="chapter-title">第1章 概述</div><div class="chapter-meta">6个知识点 · 必背10条 · 自测26题</div></div>
+    <span class="chevron">▶</span>
+  </summary>
+  <div class="chapter-body">
+    
+<article class="card searchable" data-search="几何要素、几何量与几何量公差 什么是几何要素、几何量、几何量公差？三者有何联系？ ①几何要素定义（点、线、面）；②几何量定义（大小、形状、位置及其精度的参量）；③几何量公差定义（允许变动量）；④三者联系（要素→几何量→加工误差→公差限制）；⑤公差是判断几何量是否在允许范围内的依据。 几何要素是“点、线、面”本身；几何量是描述要素的“参量”；公差是“允许变动量”，不是实际误差。PPT未单列“几何量公差”词条，按p12与p42合并表述。 PPT《第一章》p12“几何要素与几何量”；p15“加工误差”；p19“加工误差的控制——几何量公差”；p42“公差与误差”；复习PDF第1页第1章第1条。 ① 几何要素：构成机械零件几何特征的点、线、面。 ② 几何量：表示几何要素大小、形状、位置及其精度的参量。 ③ 几何量公差：允许几何量变动的范围，即设计给定的允许变动量。 ④ 三者关系：几何要素用几何量描述；加工后几何量发生变动即加工误差；用几何量公差限制变动，保证精度与互换性。">
+  <div class="card-head"><span class="pill">知识点 1</span><h3>几何要素、几何量与几何量公差</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>什么是几何要素、几何量、几何量公差。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 几何要素：构成机械零件几何特征的点、线、面。</li><li>② 几何量：表示几何要素大小、形状、位置及其精度的参量。</li><li>③ 几何量公差：允许几何量变动的范围，即设计给定的允许变动量。</li><li>④ 三者关系：几何要素用几何量描述；加工后几何量发生变动即加工误差；用几何量公差限制变动，保证精度与互换性。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>什么是几何要素、几何量、几何量公差？三者有何联系？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①几何要素定义（点、线、面）；</li><li>②几何量定义（大小、形状、位置及其精度的参量）；</li><li>③几何量公差定义（允许变动量）；</li><li>④三者联系（要素→几何量→加工误差→公差限制）；</li><li>⑤公差是判断几何量是否在允许范围内的依据。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>几何要素是“点、线、面”本身；几何量是描述要素的“参量”；公差是“允许变动量”，不是实际误差。PPT未单列“几何量公差”词条，按p12与p42合并表述。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第一章》p12“几何要素与几何量”；p15“加工误差”；p19“加工误差的控制——几何量公差”；p42“公差与误差”；复习PDF第1页第1章第1条。</p></div>
+  
+</article>
+<article class="card searchable" data-search="加工误差的控制——几何量公差 加工误差为什么用几何量公差控制？公差大小对加工难度、成本和精度有何影响？ ①加工误差是几何量的实际变动；②控制手段是规定几何量公差；③公差大→难度小、成本低、精度低；④公差小→难度大、成本高、精度高；⑤应在满足功能前提下取较大公差，兼顾经济性。 不是“公差越小越好”；公差是设计允许范围，误差是加工后的实际偏离。PPT第19—22页正文多为图示，结论以第35—37页、第42页为依据。 PPT《第一章》p15“加工误差”；p16—18“加工误差对机器的性能和质量影响极大”；p19—22“加工误差的控制——几何量公差”；p35—37“公差技术”；p42“公差与误差”；复习PDF第1页第2条。 ① 加工误差是加工后几何量的变动，对机器性能和质量影响很大。 ② 控制思路：设计时给定几何量公差，把几何量变动限制在允许范围内。 ③ 公差大 → 允许变动大 → 加工难度小、成本低 → 合格零件精度低、质量差。 ④ 公差小 → 允许变动小 → 加工难度大、成本高 → 合格零件精度高、质量好。 ⑤ 因此公差是控制加工误差、保证精度和互换性的技术手段；应在满足功能要求的前提下选取尽可能大的公差。">
+  <div class="card-head"><span class="pill">知识点 2</span><h3>加工误差的控制——几何量公差</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>加工误差的控制——几何量公差。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 加工误差是加工后几何量的变动，对机器性能和质量影响很大。</li><li>② 控制思路：设计时给定几何量公差，把几何量变动限制在允许范围内。</li><li>③ 公差大 → 允许变动大 → 加工难度小、成本低 → 合格零件精度低、质量差。</li><li>④ 公差小 → 允许变动小 → 加工难度大、成本高 → 合格零件精度高、质量好。</li><li>⑤ 因此公差是控制加工误差、保证精度和互换性的技术手段；应在满足功能要求的前提下选取尽可能大的公差。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>加工误差为什么用几何量公差控制？公差大小对加工难度、成本和精度有何影响？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①加工误差是几何量的实际变动；</li><li>②控制手段是规定几何量公差；</li><li>③公差大→难度小、成本低、精度低；</li><li>④公差小→难度大、成本高、精度高；</li><li>⑤应在满足功能前提下取较大公差，兼顾经济性。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>不是“公差越小越好”；公差是设计允许范围，误差是加工后的实际偏离。PPT第19—22页正文多为图示，结论以第35—37页、第42页为依据。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第一章》p15“加工误差”；p16—18“加工误差对机器的性能和质量影响极大”；p19—22“加工误差的控制——几何量公差”；p35—37“公差技术”；p42“公差与误差”；复习PDF第1页第2条。</p></div>
+  
+</article>
+<article class="card searchable" data-search="互换性的概念及其关系 什么是互换性？说明互换性、加工误差、公差之间的关系，以及互换性、公差、标准化之间的关系。 ①互换性定义四要素（同一规格、按规定技术要求、相互替换、效果相同）；②加工误差与公差是“实际变动”与“允许变动量”的关系；③公差大/小对加工难度、成本、精度的影响；④标准化是互换性的前提；⑤公差是互换性的保证。 “标准是前提、公差是保证”的顺序不能颠倒；互换性不是要求零件完全一样，而是“在公差范围内充分近似、装配后效果相同”。 PPT《第一章》p23“2、互换性及其实现”；p27“互换性的实现”；p35—37“公差技术”；p42“标准是互换性的前提……公差是互换性的保证”；复习PDF第1页第3条。 ① 互换性：同一规格的一批零部件，按规定技术要求制造，能够彼此相互替换使用而效果相同的性能。 ② 加工误差与公差：加工误差是几何量的实际变动，公差是允许变动量，二者是“实际偏离”与“允许范围”的关系。 ③ 公差与加工难度、成本、精度：公差大则加工难度小、成本低、精度低；公差小则加工难度大、成本高、精度高。 ④ 互换性与公差：公差是互换性的保证，几何量在公差范围内彼此充分近似即可实现互换性。 ⑤ 互换性与标准化：标准化是互换性的前提，互换性设计需依据标准。">
+  <div class="card-head"><span class="pill">知识点 3</span><h3>互换性的概念及其关系</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>互换性的概念，理解互换性、加工误差、公差的概念以及它们之间的关系（加工难度、成本、精度），理解互换性、公差、标准化之间的关系。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 互换性：同一规格的一批零部件，按规定技术要求制造，能够彼此相互替换使用而效果相同的性能。</li><li>② 加工误差与公差：加工误差是几何量的实际变动，公差是允许变动量，二者是“实际偏离”与“允许范围”的关系。</li><li>③ 公差与加工难度、成本、精度：公差大则加工难度小、成本低、精度低；公差小则加工难度大、成本高、精度高。</li><li>④ 互换性与公差：公差是互换性的保证，几何量在公差范围内彼此充分近似即可实现互换性。</li><li>⑤ 互换性与标准化：标准化是互换性的前提，互换性设计需依据标准。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>什么是互换性？说明互换性、加工误差、公差之间的关系，以及互换性、公差、标准化之间的关系。</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①互换性定义四要素（同一规格、按规定技术要求、相互替换、效果相同）；</li><li>②加工误差与公差是“实际变动”与“允许变动量”的关系；</li><li>③公差大/小对加工难度、成本、精度的影响；</li><li>④标准化是互换性的前提；</li><li>⑤公差是互换性的保证。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>“标准是前提、公差是保证”的顺序不能颠倒；互换性不是要求零件完全一样，而是“在公差范围内充分近似、装配后效果相同”。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第一章》p23“2、互换性及其实现”；p27“互换性的实现”；p35—37“公差技术”；p42“标准是互换性的前提……公差是互换性的保证”；复习PDF第1页第3条。</p></div>
+  
+</article>
+<article class="card searchable" data-search="互换性的分类 互换性如何分类？完全互换性与不完全互换性有何区别？各举一例。 ①分为完全互换性与不完全互换性；②完全互换定义（不挑选、不修配）；③不完全互换定义（允许选择或调整）；④不完全互换的实现方法（分组装配法、调整法）；⑤正确举例（灯泡；滚动轴承分组装配）。 分组装配、调整法属于不完全互换；不完全互换不是“不能互换”，而是需要附加选择或调整。外互换是部件整体与相配件之间，内互换是部件内部零件之间。 PPT《第一章》p24“互换性的种类（按实现方法及互换程度的不同分）”；p25“按决定参数分、按部位或范围分”；复习PDF第1页第4条。 ① 按实现方法及互换程度分为完全互换性和不完全互换性。 ② 完全互换性：零部件装配或更换时不需要挑选或修配，例：同规格型号的灯泡。 ③ 不完全互换性（有限互换性）：装配时允许有附加的选择或调整。 ④ 不完全互换可用分组装配法、调整法或其他方法实现，例：滚动轴承内、外套圈及滚动体装配前分十几组甚至几十组。 ⑤ 其他分类：按决定参数分几何参数互换性、功能互换性；按部位或范围分外互换性、内互换性。">
+  <div class="card-head"><span class="pill">知识点 4</span><h3>互换性的分类</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>互换性的分类（理解完全互换性与不完全互换性的含义，会举例说明）。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 按实现方法及互换程度分为完全互换性和不完全互换性。</li><li>② 完全互换性：零部件装配或更换时不需要挑选或修配，例：同规格型号的灯泡。</li><li>③ 不完全互换性（有限互换性）：装配时允许有附加的选择或调整。</li><li>④ 不完全互换可用分组装配法、调整法或其他方法实现，例：滚动轴承内、外套圈及滚动体装配前分十几组甚至几十组。</li><li>⑤ 其他分类：按决定参数分几何参数互换性、功能互换性；按部位或范围分外互换性、内互换性。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>互换性如何分类？完全互换性与不完全互换性有何区别？各举一例。</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①分为完全互换性与不完全互换性；</li><li>②完全互换定义（不挑选、不修配）；</li><li>③不完全互换定义（允许选择或调整）；</li><li>④不完全互换的实现方法（分组装配法、调整法）；</li><li>⑤正确举例（灯泡；滚动轴承分组装配）。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>分组装配、调整法属于<strong>不完全互换</strong>；不完全互换不是“不能互换”，而是需要附加选择或调整。外互换是部件整体与相配件之间，内互换是部件内部零件之间。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第一章》p24“互换性的种类（按实现方法及互换程度的不同分）”；p25“按决定参数分、按部位或范围分”；复习PDF第1页第4条。</p></div>
+  
+</article>
+<article class="card searchable" data-search="标准、标准化与优先数系 什么是标准、标准化、优先数系？优先数系如何构成、有何优点？ ①标准定义；②标准化定义（制订、实施、监督全过程）；③优先数系定义及代号Rr；④公比q=10^(1/r)与R5数列；⑤优点四条（分级合理、规律明确、国际统一、适应性强）。 优先数系是等比数列，不是等差数列；R5公比约为1.6；标准是“共同遵守的准则”，标准化是“全过程活动”，二者不是同义词。标准分级与GB/GB/T属PPT补充，复习PDF该条只要求概念。 PPT《第一章》p28“3、标准化与优先数系”；p32“标准化的意义”；p33“标准的分级”；p34“优先数和优先数系（GB321-80）”；复习PDF第1页第5条。 ① 标准：在一定范围内作为共同遵守的准则。 ② 标准化：制订标准、组织实施标准和对标准实施进行监督的社会活动的全过程。 ③ 标准分级（PPT补充）：国家标准、专业标准（行业标准）、企业标准；GB为强制性国家标准，GB/T为推荐性国家标准。 ④ 优先数系：用于同种产品同一参数的分级取值系列，由十进制等比数列构成，代号Rr，r取5、10、20、40、80等。 ⑤ 公比q=10^(1/r)，R5系列相邻两数比值约为1.6，基本系列为1、1.6、2.5、4.0、6.3、10；优点是分级合理、规律明确、国际统一、适应性强。">
+  <div class="card-head"><span class="pill">知识点 5</span><h3>标准、标准化与优先数系</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>理解标准、标准化、优先数系的概念。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 标准：在一定范围内作为共同遵守的准则。</li><li>② 标准化：制订标准、组织实施标准和对标准实施进行监督的社会活动的全过程。</li><li>③ 标准分级（PPT补充）：国家标准、专业标准（行业标准）、企业标准；GB为强制性国家标准，GB/T为推荐性国家标准。</li><li>④ 优先数系：用于同种产品同一参数的分级取值系列，由十进制等比数列构成，代号Rr，r取5、10、20、40、80等。</li><li>⑤ 公比q=10^(1/r)，R5系列相邻两数比值约为1.6，基本系列为1、1.6、2.5、4.0、6.3、10；优点是分级合理、规律明确、国际统一、适应性强。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>什么是标准、标准化、优先数系？优先数系如何构成、有何优点？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①标准定义；</li><li>②标准化定义（制订、实施、监督全过程）；</li><li>③优先数系定义及代号Rr；</li><li>④公比q=10^(1/r)与R5数列；</li><li>⑤优点四条（分级合理、规律明确、国际统一、适应性强）。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>优先数系是<strong>等比数列</strong>，不是等差数列；R5公比约为1.6；标准是“共同遵守的准则”，标准化是“全过程活动”，二者不是同义词。标准分级与GB/GB/T属PPT补充，复习PDF该条只要求概念。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第一章》p28“3、标准化与优先数系”；p32“标准化的意义”；p33“标准的分级”；p34“优先数和优先数系（GB321-80）”；复习PDF第1页第5条。</p></div>
+  
+</article>
+<article class="card searchable" data-search="技术测量的基本原则 技术测量有哪些基本原则？简述阿贝测长原则和圆周封闭（闭合）原则的含义与作用。 ①基准统一原则（基准一致、避免误差累积）；②最小变形原则（控制热变形、弹性变形）；③最短测量链原则（减少环节数、减小环节误差）；④阿贝原则（被测物与标准尺共线、串联，减小方向偏差）；⑤闭合原则（封闭连锁总和等于理论值，检查正确性、发现并消除系统误差）；⑥重复原则、随机原则。 阿贝原则的关键是“共线、串联”，不是“多次测量”；闭合原则用于发现并消除系统误差，重复原则用于保证可靠性、防止粗大误差；“圆周封闭原则”与PPT“闭合原则”是同一原则的不同表述。 PPT《第二章》§2.7 p72—81：基准统一p73、最小变形p74、最短测量链p75、阿贝测长p76—78、闭合p79、重复p80、随机p81；复习PDF第1页第1章第6条。 ① 基准统一原则：设计、制造（加工及装配）、测试评价全过程的各种基准原则上应一致，以避免误差累积。 ② 最小变形原则：测量时被测工件与测量器具之间的相对变形最小，主要控制热变形和弹性变形，可增加系统刚度、减小测量力或采用非接触测量。 ③ 最短测量链原则：尽量减少测量链的组成环节数，并减小各组成环节的误差。 ④ 阿贝测长原则：将被测物与标准尺沿测量轴线成直线排列，被测尺寸与标准尺寸在同一直线上、成串联关系，以减小导轨方向偏差对测量结果的影响。 ⑤ 闭合原则（复习资料称“圆周封闭原则”）：对封闭连锁测量，利用总和应等于理论定值来检查测量过程正确性，发现并消除仪器系统误差。 ⑥ 重复原则：对同一参数重复多次测量，保证测量可靠性、防止粗大误差。 ⑦ 随机原则：对影响较小且不确定的因素按随机误差处理，用数理统计方法给出最近真值和一定置信概率下的量值范围。">
+  <div class="card-head"><span class="pill">知识点 6</span><h3>技术测量的基本原则</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>理解技术测量的基本原则，圆周封闭原则、阿贝测长原则等。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 基准统一原则：设计、制造（加工及装配）、测试评价全过程的各种基准原则上应一致，以避免误差累积。</li><li>② 最小变形原则：测量时被测工件与测量器具之间的相对变形最小，主要控制热变形和弹性变形，可增加系统刚度、减小测量力或采用非接触测量。</li><li>③ 最短测量链原则：尽量减少测量链的组成环节数，并减小各组成环节的误差。</li><li>④ 阿贝测长原则：将被测物与标准尺沿测量轴线成直线排列，被测尺寸与标准尺寸在同一直线上、成串联关系，以减小导轨方向偏差对测量结果的影响。</li><li>⑤ 闭合原则（复习资料称“圆周封闭原则”）：对封闭连锁测量，利用总和应等于理论定值来检查测量过程正确性，发现并消除仪器系统误差。</li><li>⑥ 重复原则：对同一参数重复多次测量，保证测量可靠性、防止粗大误差。</li><li>⑦ 随机原则：对影响较小且不确定的因素按随机误差处理，用数理统计方法给出最近真值和一定置信概率下的量值范围。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>技术测量有哪些基本原则？简述阿贝测长原则和圆周封闭（闭合）原则的含义与作用。</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①基准统一原则（基准一致、避免误差累积）；</li><li>②最小变形原则（控制热变形、弹性变形）；</li><li>③最短测量链原则（减少环节数、减小环节误差）；</li><li>④阿贝原则（被测物与标准尺共线、串联，减小方向偏差）；</li><li>⑤闭合原则（封闭连锁总和等于理论值，检查正确性、发现并消除系统误差）；</li><li>⑥重复原则、随机原则。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>阿贝原则的关键是“共线、串联”，不是“多次测量”；闭合原则用于<strong>发现并消除系统误差</strong>，重复原则用于保证可靠性、防止粗大误差；“圆周封闭原则”与PPT“闭合原则”是同一原则的不同表述。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第二章》§2.7 p72—81：基准统一p73、最小变形p74、最短测量链p75、阿贝测长p76—78、闭合p79、重复p80、随机p81；复习PDF第1页第1章第6条。</p></div>
+  
+</article>
+    <div class="must-block"><h3>本章必背清单</h3><ol class="must-list"><li>几何要素：构成机械零件几何特征的点、线、面。</li><li>几何量：表示几何要素大小、形状、位置及其精度的参量。</li><li>几何量公差：允许几何量变动的范围，即设计给定的允许变动量。</li><li>加工误差：加工后几何量的变动；控制手段是规定几何量公差。</li><li>公差大→难度小、成本低、精度低；公差小→难度大、成本高、精度高。</li><li>互换性：同一规格一批零部件按规定技术要求制造，能彼此相互替换使用而效果相同。</li><li>完全互换：不挑选、不修配，例灯泡；不完全互换：允许选择或调整，用分组装配法、调整法，例滚动轴承。</li><li>三者关系：标准化是互换性的前提，公差是互换性的保证。</li><li>标准：一定范围内共同遵守的准则；标准化：制订、实施、监督标准的全过程；优先数系：十进制等比数列R5—R80，q=10^(1/r)。</li><li>测量原则：基准统一、最小变形、最短测量链、阿贝、闭合（圆周封闭）、重复、随机。</li></ol></div>
+    <div class="selftest-block"><h3>本章自测题</h3><div class="selftest-grid">
+<article class="card mini searchable" data-search="什么是几何要素？按结构特征分为哪几类？各举一例。 ①几何要素是构成零件几何特征的点、线、面；②点要素：圆锥顶点、球心；③线要素：素线、轴线；④面要素：圆柱面、圆锥面、球面、环状平面、渐开线齿面；⑤分类依据是结构特征。 对应第1条：几何要素、几何量、几何量公差">
+  <div class="card-head"><span class="pill">自测 1 · 对应第1条</span><h4>什么是几何要素？按结构特征分为哪几类？各举一例。</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①几何要素是构成零件几何特征的点、线、面；</li><li>②点要素：圆锥顶点、球心；</li><li>③线要素：素线、轴线；</li><li>④面要素：圆柱面、圆锥面、球面、环状平面、渐开线齿面；</li><li>⑤分类依据是结构特征。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="什么是几何量？它包括哪些方面的参量？ ①表示几何要素的参量；②大小；③形状；④位置；⑤精度。 对应第1条：几何要素、几何量、几何量公差">
+  <div class="card-head"><span class="pill">自测 2 · 对应第1条</span><h4>什么是几何量？它包括哪些方面的参量？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①表示几何要素的参量；</li><li>②大小；</li><li>③形状；</li><li>④位置；</li><li>⑤精度。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="什么是几何量公差？公差与误差有何区别？ ①公差是几何参数的允许变动量；②误差是实际值与真值之差；③公差由设计给定，是允许范围；④误差是加工后的实际偏离；⑤公差用于控制误差、判断合格。 对应第1条：几何要素、几何量、几何量公差">
+  <div class="card-head"><span class="pill">自测 3 · 对应第1条</span><h4>什么是几何量公差？公差与误差有何区别？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①公差是几何参数的允许变动量；</li><li>②误差是实际值与真值之差；</li><li>③公差由设计给定，是允许范围；</li><li>④误差是加工后的实际偏离；</li><li>⑤公差用于控制误差、判断合格。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="几何要素、几何量、几何量公差三者有何联系？ ①要素是点、线、面；②几何量描述要素的大小、形状、位置及精度；③加工后几何量变动形成加工误差；④公差限制几何量变动；⑤三者共同服务于精度与互换性。 对应第1条：几何要素、几何量、几何量公差">
+  <div class="card-head"><span class="pill">自测 4 · 对应第1条</span><h4>几何要素、几何量、几何量公差三者有何联系？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①要素是点、线、面；</li><li>②几何量描述要素的大小、形状、位置及精度；</li><li>③加工后几何量变动形成加工误差；</li><li>④公差限制几何量变动；</li><li>⑤三者共同服务于精度与互换性。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="什么是加工误差？为什么要控制加工误差？ ①加工误差是加工后几何量的变动；②影响机器性能；③影响产品质量；④影响互换性；⑤控制手段是规定几何量公差。 对应第2条：加工误差的控制——几何量公差">
+  <div class="card-head"><span class="pill">自测 5 · 对应第2条</span><h4>什么是加工误差？为什么要控制加工误差？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①加工误差是加工后几何量的变动；</li><li>②影响机器性能；</li><li>③影响产品质量；</li><li>④影响互换性；</li><li>⑤控制手段是规定几何量公差。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="为什么用几何量公差控制加工误差？ ①公差是允许变动量；②设计时给定标准公差；③要求完工零件不超过公差；④使精度、互换性、配合要求得到满足；⑤兼顾加工经济性。 对应第2条：加工误差的控制——几何量公差">
+  <div class="card-head"><span class="pill">自测 6 · 对应第2条</span><h4>为什么用几何量公差控制加工误差？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①公差是允许变动量；</li><li>②设计时给定标准公差；</li><li>③要求完工零件不超过公差；</li><li>④使精度、互换性、配合要求得到满足；</li><li>⑤兼顾加工经济性。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="公差大小对加工难度、成本和精度有何影响？公差选取原则是什么？ ①公差大→允许变动大→加工难度小；②成本低；③精度低、质量差；④公差小→加工难度大、成本高、精度高；⑤满足功能前提下尽量取大公差。 对应第2条：加工误差的控制——几何量公差">
+  <div class="card-head"><span class="pill">自测 7 · 对应第2条</span><h4>公差大小对加工难度、成本和精度有何影响？公差选取原则是什么？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①公差大→允许变动大→加工难度小；</li><li>②成本低；</li><li>③精度低、质量差；</li><li>④公差小→加工难度大、成本高、精度高；</li><li>⑤满足功能前提下尽量取大公差。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="什么是互换性？ ①同一规格的一批零部件；②按规定技术要求制造；③能够彼此相互替换使用；④替换后效果相同；⑤是一种性能。 对应第3条：互换性概念及其关系">
+  <div class="card-head"><span class="pill">自测 8 · 对应第3条</span><h4>什么是互换性？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①同一规格的一批零部件；</li><li>②按规定技术要求制造；</li><li>③能够彼此相互替换使用；</li><li>④替换后效果相同；</li><li>⑤是一种性能。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="互换性在机械制造业中有哪些作用？ ①设计方面：采用标准件、通用件，缩短设计周期；②制造方面：组织专业化生产，提高质量、效率，降低成本；③装配方面：保证流水线生产，提高装配效率；④使用维修方面：减少维修时间和费用；⑤提高机器使用价值。 对应第3条：互换性概念及其关系">
+  <div class="card-head"><span class="pill">自测 9 · 对应第3条</span><h4>互换性在机械制造业中有哪些作用？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①设计方面：采用标准件、通用件，缩短设计周期；</li><li>②制造方面：组织专业化生产，提高质量、效率，降低成本；</li><li>③装配方面：保证流水线生产，提高装配效率；</li><li>④使用维修方面：减少维修时间和费用；</li><li>⑤提高机器使用价值。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="说明互换性、加工误差、公差之间的关系。 ①加工误差是几何量的实际变动；②公差是允许变动量；③公差用于控制加工误差；④公差是互换性的保证；⑤几何量在公差范围内充分近似即可实现互换性。 对应第3条：互换性概念及其关系">
+  <div class="card-head"><span class="pill">自测 10 · 对应第3条</span><h4>说明互换性、加工误差、公差之间的关系。</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①加工误差是几何量的实际变动；</li><li>②公差是允许变动量；</li><li>③公差用于控制加工误差；</li><li>④公差是互换性的保证；</li><li>⑤几何量在公差范围内充分近似即可实现互换性。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="说明互换性、公差、标准化之间的关系。 ①标准化是互换性的前提；②互换性设计需依据标准；③公差是互换性的保证；④几何量在公差范围内彼此充分近似；⑤三者共同构成精度设计与互换性实现的基础。 对应第3条：互换性概念及其关系">
+  <div class="card-head"><span class="pill">自测 11 · 对应第3条</span><h4>说明互换性、公差、标准化之间的关系。</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①标准化是互换性的前提；</li><li>②互换性设计需依据标准；</li><li>③公差是互换性的保证；</li><li>④几何量在公差范围内彼此充分近似；</li><li>⑤三者共同构成精度设计与互换性实现的基础。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="互换性按实现方法及互换程度如何分类？ ①分为完全互换性；②不完全互换性；③完全互换定义；④不完全互换定义；⑤其他分类：几何参数/功能、外/内互换性。 对应第4条：互换性的分类">
+  <div class="card-head"><span class="pill">自测 12 · 对应第4条</span><h4>互换性按实现方法及互换程度如何分类？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①分为完全互换性；</li><li>②不完全互换性；</li><li>③完全互换定义；</li><li>④不完全互换定义；</li><li>⑤其他分类：几何参数/功能、外/内互换性。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="完全互换性与不完全互换性有何区别？各举一例。 ①完全互换：装配或更换时不挑选、不修配；②不完全互换：允许附加选择或调整；③区别在是否需附加措施；④例：同规格灯泡；⑤例：滚动轴承内外套圈及滚动体分组装配。 对应第4条：互换性的分类">
+  <div class="card-head"><span class="pill">自测 13 · 对应第4条</span><h4>完全互换性与不完全互换性有何区别？各举一例。</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①完全互换：装配或更换时不挑选、不修配；</li><li>②不完全互换：允许附加选择或调整；</li><li>③区别在是否需附加措施；</li><li>④例：同规格灯泡；</li><li>⑤例：滚动轴承内外套圈及滚动体分组装配。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="不完全互换性有哪些实现方法？ ①分组装配法；②调整法；③其他方法；④例：滚动轴承分十几组甚至几十组；⑤适用于装配时允许附加选择或调整的场合。 对应第4条：互换性的分类">
+  <div class="card-head"><span class="pill">自测 14 · 对应第4条</span><h4>不完全互换性有哪些实现方法？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①分组装配法；</li><li>②调整法；</li><li>③其他方法；</li><li>④例：滚动轴承分十几组甚至几十组；</li><li>⑤适用于装配时允许附加选择或调整的场合。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="互换性还有哪些分类方式？ ①按决定参数分；②几何参数互换性；③功能互换性；④按部位或范围分；⑤外互换性与内互换性。 对应第4条：互换性的分类">
+  <div class="card-head"><span class="pill">自测 15 · 对应第4条</span><h4>互换性还有哪些分类方式？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①按决定参数分；</li><li>②几何参数互换性；</li><li>③功能互换性；</li><li>④按部位或范围分；</li><li>⑤外互换性与内互换性。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="什么是标准？什么是标准化？二者有何区别？ ①标准：一定范围内共同遵守的准则；②标准化：制订标准、组织实施标准、监督实施的全过程；③标准是准则/依据；④标准化是全过程活动；⑤标准化是实现互换性生产的基础。 对应第5条：标准、标准化、优先数系">
+  <div class="card-head"><span class="pill">自测 16 · 对应第5条</span><h4>什么是标准？什么是标准化？二者有何区别？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①标准：一定范围内共同遵守的准则；</li><li>②标准化：制订标准、组织实施标准、监督实施的全过程；</li><li>③标准是准则/依据；</li><li>④标准化是全过程活动；</li><li>⑤标准化是实现互换性生产的基础。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="我国标准分为几级？GB、GB/T、GB/*分别表示什么？（PPT补充） ①国家标准；②专业标准（行业标准）；③企业标准；④GB强制性、GB/T推荐性、GB/*原国标转行标；⑤行业标准如JB、JJB，企业标准代号Q。 对应第5条：标准、标准化、优先数系">
+  <div class="card-head"><span class="pill">自测 17 · 对应第5条</span><h4>我国标准分为几级？GB、GB/T、GB/*分别表示什么？（PPT补充）</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①国家标准；</li><li>②专业标准（行业标准）；</li><li>③企业标准；</li><li>④GB强制性、GB/T推荐性、GB/*原国标转行标；</li><li>⑤行业标准如JB、JJB，企业标准代号Q。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="什么是优先数系？它由什么数列构成？代号和公比是什么？ ①同种产品同一参数的分级取值系列；②十进制等比数列；③代号Rr；④r取5、10、20、40、80等；⑤公比q=10^(1/r)。 对应第5条：标准、标准化、优先数系">
+  <div class="card-head"><span class="pill">自测 18 · 对应第5条</span><h4>什么是优先数系？它由什么数列构成？代号和公比是什么？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①同种产品同一参数的分级取值系列；</li><li>②十进制等比数列；</li><li>③代号Rr；</li><li>④r取5、10、20、40、80等；</li><li>⑤公比q=10^(1/r)。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="优先数系有哪些优点？写出R5基本系列。 ①数值分级合理；②规律明确，利于数值扩散；③国际统一的数值制；④具有广泛适应性；⑤R5：1、1.6、2.5、4.0、6.3、10，相邻比值约1.6。 对应第5条：标准、标准化、优先数系">
+  <div class="card-head"><span class="pill">自测 19 · 对应第5条</span><h4>优先数系有哪些优点？写出R5基本系列。</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①数值分级合理；</li><li>②规律明确，利于数值扩散；</li><li>③国际统一的数值制；</li><li>④具有广泛适应性；</li><li>⑤R5：1、1.6、2.5、4.0、6.3、10，相邻比值约1.6。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="技术测量有哪些基本原则？ ①基准统一原则；②最小变形原则；③最短测量链原则；④阿贝测长原则；⑤闭合原则、重复原则、随机原则。 对应第6条：技术测量的基本原则">
+  <div class="card-head"><span class="pill">自测 20 · 对应第6条</span><h4>技术测量有哪些基本原则？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①基准统一原则；</li><li>②最小变形原则；</li><li>③最短测量链原则；</li><li>④阿贝测长原则；</li><li>⑤闭合原则、重复原则、随机原则。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="什么是阿贝测长原则？作用是什么？ ①1890年阿贝提出；②被测物与标准尺沿测量轴线成直线排列；③被测尺寸与标准尺寸在同一直线上、成串联关系；④减小导轨方向偏差对测量结果的影响；⑤提高测量精度。 对应第6条：技术测量的基本原则">
+  <div class="card-head"><span class="pill">自测 21 · 对应第6条</span><h4>什么是阿贝测长原则？作用是什么？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①1890年阿贝提出；</li><li>②被测物与标准尺沿测量轴线成直线排列；</li><li>③被测尺寸与标准尺寸在同一直线上、成串联关系；</li><li>④减小导轨方向偏差对测量结果的影响；</li><li>⑤提高测量精度。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="什么是圆周封闭（闭合）原则？作用是什么？ ①对封闭连锁测量；②总和应等于理论定值；③检查测量过程正确性；④发现并消除仪器系统误差；⑤如圆周分度测量中各角之和与理论值比较。 对应第6条：技术测量的基本原则">
+  <div class="card-head"><span class="pill">自测 22 · 对应第6条</span><h4>什么是圆周封闭（闭合）原则？作用是什么？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①对封闭连锁测量；</li><li>②总和应等于理论定值；</li><li>③检查测量过程正确性；</li><li>④发现并消除仪器系统误差；</li><li>⑤如圆周分度测量中各角之和与理论值比较。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="基准统一原则的含义和要求是什么？ ①设计、制造、测试评价全过程基准一致；②避免误差累积；③设计时选装配基准为设计基准；④加工时尽量选设计基准为工艺基准；⑤工艺测量以工艺基准为测量基准，终测选装配基准。 对应第6条：技术测量的基本原则">
+  <div class="card-head"><span class="pill">自测 23 · 对应第6条</span><h4>基准统一原则的含义和要求是什么？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①设计、制造、测试评价全过程基准一致；</li><li>②避免误差累积；</li><li>③设计时选装配基准为设计基准；</li><li>④加工时尽量选设计基准为工艺基准；</li><li>⑤工艺测量以工艺基准为测量基准，终测选装配基准。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="什么是最小变形原则？如何减小变形影响？ ①被测工件与测量器具相对变形最小；②控制热变形；③控制弹性变形；④增加测量系统刚度；⑤减小测量力或采用非接触测量。 对应第6条：技术测量的基本原则">
+  <div class="card-head"><span class="pill">自测 24 · 对应第6条</span><h4>什么是最小变形原则？如何减小变形影响？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①被测工件与测量器具相对变形最小；</li><li>②控制热变形；</li><li>③控制弹性变形；</li><li>④增加测量系统刚度；</li><li>⑤减小测量力或采用非接触测量。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="什么是最短测量链原则？举例说明。 ①测量链由测量面、被测工件等环节组成；②各环节误差按1:1传递并累积；③尽量减少组成环节数；④减小各环节误差；⑤例：量块组合用最少块数，指示表测量时少垫量块。 对应第6条：技术测量的基本原则">
+  <div class="card-head"><span class="pill">自测 25 · 对应第6条</span><h4>什么是最短测量链原则？举例说明。</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①测量链由测量面、被测工件等环节组成；</li><li>②各环节误差按1:1传递并累积；</li><li>③尽量减少组成环节数；</li><li>④减小各环节误差；</li><li>⑤例：量块组合用最少块数，指示表测量时少垫量块。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="重复原则和随机原则的含义是什么？ ①重复原则：同一参数重复多次测量；②结果相同或变化不大则可靠性高；③不同方法测得相同或相近结果也表明可靠性高；④随机原则：影响小的不确定因素按随机误差处理；⑤用数理统计给出最近真值和一定置信概率的量值范围。 对应第6条：技术测量的基本原则">
+  <div class="card-head"><span class="pill">自测 26 · 对应第6条</span><h4>重复原则和随机原则的含义是什么？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①重复原则：同一参数重复多次测量；</li><li>②结果相同或变化不大则可靠性高；</li><li>③不同方法测得相同或相近结果也表明可靠性高；</li><li>④随机原则：影响小的不确定因素按随机误差处理；</li><li>⑤用数理统计给出最近真值和一定置信概率的量值范围。</li></ul></div>
+</article></div></div>
+  </div>
+</details>
+<details id="chapter-2" class="chapter searchable" open>
+  <summary>
+    <div><div class="chapter-title">第2章 几何量测量技术基础</div><div class="chapter-meta">6个知识点 · 必背10条 · 自测12题</div></div>
+    <span class="chevron">▶</span>
+  </summary>
+  <div class="chapter-body">
+    
+<article class="card searchable" data-search="测量的本质与四要素 什么是测量？一个完整的测量过程包括哪四个要素？ ①测量定义（与标准量比较、求比值）；②测量对象；③计量单位；④测量方法；⑤测量精度。 测量≠检验；测量给出数值，检验只判断合格与否。 PPT《第二章》p6“测试与检验”；p7“技术测量的概念、四个要素”；复习PDF第1页第2章第1条。 ① 技术测量：将被测量与标准量进行比较，得出其比值的全过程。 ② 四要素：测量对象、计量单位、测量方法、测量精度。 ③ 测量可得具体数值；检验只知道工件是否合格，不知道具体数值。">
+  <div class="card-head"><span class="pill">知识点 1</span><h3>测量的本质与四要素</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>测量的本质，一个完整的测量过程的四个要素。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 技术测量：将被测量与标准量进行比较，得出其比值的全过程。</li><li>② 四要素：测量对象、计量单位、测量方法、测量精度。</li><li>③ 测量可得具体数值；检验只知道工件是否合格，不知道具体数值。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>什么是测量？一个完整的测量过程包括哪四个要素？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①测量定义（与标准量比较、求比值）；</li><li>②测量对象；</li><li>③计量单位；</li><li>④测量方法；</li><li>⑤测量精度。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>测量≠检验；测量给出数值，检验只判断合格与否。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第二章》p6“测试与检验”；p7“技术测量的概念、四个要素”；复习PDF第1页第2章第1条。</p></div>
+  
+</article>
+<article class="card searchable" data-search="量块的用途、精度与选用 量块有什么用途？“级”与“等”有何区别？按级、按等使用各依据什么？选用原则是什么？ ①用途四条（传递基准、检定校准、调零、精密测量/画线/机床调整）；②分级按制造精度（K、0、1、2、3级），分等按检定精度（1—5等）；③共同技术要求（平面度、粗糙度、研合性、硬度、长度、长度变动量、长度稳定度）；④主要区别：级按中心长度极限偏差，等按中心长度测量不确定度；⑤使用与选用：按级用标称尺寸、忽略制造误差，按等用检定书实际尺寸、忽略检定误差，选用最少块数、研合、由后向前消去最末尾数。 “级”按制造精度、“等”按检定精度；按级忽略制造误差，按等忽略检定误差；不要写成“级用实测值、等用标称值”。 PPT《第二章》p10“量块的作用”；p16“分级与分等”；p17—18“研合性、选用原则”；复习PDF第1页第2章第2条；书内内容（老师提供）。 ① 用途：长度基准的传递媒介；检定和校准量具或量仪；相对测量时调整零位；直接用于精密测量、精密画线和精密机床调整。 ② 分级：按制造精度分为K、0、1、2、3级；分等：按检定精度分为1、2、3、4、5等。 ③ 共同技术要求：测量面的平面度、粗糙度、研合性及硬度、量块长度、长度变动量、长度稳定度。 ④ 级与等的主要区别：对量块长度的认可方式不同，级按中心长度的极限偏差，等按中心长度测量的不确定度。 ⑤ 使用规则：按“级”使用时，依据刻在量块上的标称尺寸，忽略量块尺寸的制造误差；按“等”使用时，依据检定书中的实际尺寸，忽略检定量块实际尺寸时的测量误差。 ⑥ 选用原则：尽量使用最少数量的量块；利用研合性组合尺寸；按“由后向前逐步消去最末尾数法”选取。">
+  <div class="card-head"><span class="pill">知识点 2</span><h3>量块的用途、精度与选用</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>量块的用途，量块精度的两种规定（理解“等”与“级”的使用），量块的选用原则。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 用途：长度基准的传递媒介；检定和校准量具或量仪；相对测量时调整零位；直接用于精密测量、精密画线和精密机床调整。</li><li>② 分级：按制造精度分为K、0、1、2、3级；分等：按检定精度分为1、2、3、4、5等。</li><li>③ 共同技术要求：测量面的平面度、粗糙度、研合性及硬度、量块长度、长度变动量、长度稳定度。</li><li>④ 级与等的主要区别：对量块长度的认可方式不同，级按中心长度的极限偏差，等按中心长度测量的不确定度。</li><li>⑤ 使用规则：按“级”使用时，依据刻在量块上的标称尺寸，忽略量块尺寸的制造误差；按“等”使用时，依据检定书中的实际尺寸，忽略检定量块实际尺寸时的测量误差。</li><li>⑥ 选用原则：尽量使用最少数量的量块；利用研合性组合尺寸；按“由后向前逐步消去最末尾数法”选取。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>量块有什么用途？“级”与“等”有何区别？按级、按等使用各依据什么？选用原则是什么？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①用途四条（传递基准、检定校准、调零、精密测量/画线/机床调整）；</li><li>②分级按制造精度（K、0、1、2、3级），分等按检定精度（1—5等）；</li><li>③共同技术要求（平面度、粗糙度、研合性、硬度、长度、长度变动量、长度稳定度）；</li><li>④主要区别：级按中心长度极限偏差，等按中心长度测量不确定度；</li><li>⑤使用与选用：按级用标称尺寸、忽略制造误差，按等用检定书实际尺寸、忽略检定误差，选用最少块数、研合、由后向前消去最末尾数。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>“级”按制造精度、“等”按检定精度；按级忽略制造误差，按等忽略检定误差；不要写成“级用实测值、等用标称值”。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第二章》p10“量块的作用”；p16“分级与分等”；p17—18“研合性、选用原则”；复习PDF第1页第2章第2条；书内内容（老师提供）。</p></div>
+  
+</article>
+<article class="card searchable" data-search="测量方法的分类 测量方法如何分类？直接测量与间接测量、绝对测量与相对测量有何区别？ ①直接测量（读数得欲测值或偏差）；②间接测量（测相关量后按函数式求）；③绝对测量（得整个量值）；④相对测量（得对标准量的偏差）；⑤其余分类（接触/非接触、在线/离线、静态/动态）。 绝对测量得“整个量值”，相对测量得“偏差”；相对测量精度一般较高，仪器结构可简化。 PPT《第二章》p42—47“三、测量方法的分类”；复习PDF第1页第3条。 ① 按实测几何量是否为被测几何量：直接测量、间接测量。 ② 按示值是否为被测几何量的量值：绝对测量、相对测量。 ③ 按被测表面与测头是否接触：接触测量、非接触测量。 ④ 按是否多个几何量一起测量：单项测量、综合测量。 ⑤ 按是否在加工过程中：在线测量、离线测量。 ⑥ 按被测工件测量时状态：静态测量、动态测量。">
+  <div class="card-head"><span class="pill">知识点 3</span><h3>测量方法的分类</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>测量方法的分类，了解直接测量、间接测量，绝对测量、相对测量，接触测量和非接触测量，在线测量和离线测量，静态测量和动态测量等的含义。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 按实测几何量是否为被测几何量：直接测量、间接测量。</li><li>② 按示值是否为被测几何量的量值：绝对测量、相对测量。</li><li>③ 按被测表面与测头是否接触：接触测量、非接触测量。</li><li>④ 按是否多个几何量一起测量：单项测量、综合测量。</li><li>⑤ 按是否在加工过程中：在线测量、离线测量。</li><li>⑥ 按被测工件测量时状态：静态测量、动态测量。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>测量方法如何分类？直接测量与间接测量、绝对测量与相对测量有何区别？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①直接测量（读数得欲测值或偏差）；</li><li>②间接测量（测相关量后按函数式求）；</li><li>③绝对测量（得整个量值）；</li><li>④相对测量（得对标准量的偏差）；</li><li>⑤其余分类（接触/非接触、在线/离线、静态/动态）。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>绝对测量得“整个量值”，相对测量得“偏差”；相对测量精度一般较高，仪器结构可简化。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第二章》p42—47“三、测量方法的分类”；复习PDF第1页第3条。</p></div>
+  
+</article>
+<article class="card searchable" data-search="绝对误差与相对误差 什么是绝对误差和相对误差？为什么相对误差更能说明测量精度？ ①绝对误差定义及公式；②绝对误差有正负；③相对误差定义及公式；④相对误差取绝对值、可比较不同尺寸的测量精度。 绝对误差有正负，相对误差取绝对值；不同尺寸的测量结果不能只看绝对误差。 PPT《第二章》p50“绝对误差、相对误差”；复习PDF第1页第4条。 ① 绝对误差：被测几何量的量值与其真值之差，δ=x−x0，可能为正或负。 ② 相对误差：绝对误差取绝对值与真值之比，f=|δ|/x0≈|δ|/x。 ③ 相对误差比绝对误差能更好地说明测量的精确程度。">
+  <div class="card-head"><span class="pill">知识点 4</span><h3>绝对误差与相对误差</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>理解相对误差和绝对误差的概念。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 绝对误差：被测几何量的量值与其真值之差，δ=x−x0，可能为正或负。</li><li>② 相对误差：绝对误差取绝对值与真值之比，f=|δ|/x0≈|δ|/x。</li><li>③ 相对误差比绝对误差能更好地说明测量的精确程度。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>什么是绝对误差和相对误差？为什么相对误差更能说明测量精度？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①绝对误差定义及公式；</li><li>②绝对误差有正负；</li><li>③相对误差定义及公式；</li><li>④相对误差取绝对值、可比较不同尺寸的测量精度。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>绝对误差有正负，相对误差取绝对值；不同尺寸的测量结果不能只看绝对误差。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第二章》p50“绝对误差、相对误差”；复习PDF第1页第4条。</p></div>
+  
+</article>
+<article class="card searchable" data-search="测量误差的分类与处理 测量误差按性质分哪三类？各有什么特点和处理原则？ ①系统误差特点及处理（减小/消除）；②随机误差特点（不可预定、正态分布、四特性）及统计处理；③粗大误差特点（明显歪曲）及剔除；④正确度、精密度、准确度的含义。 正确度对应系统误差，精密度对应随机误差，准确度是综合；粗大误差必须剔除，不能与随机误差混为一谈。 PPT《第二章》p58“三、测量误差的分类”；p59“测量精度的分类”；p60—61“随机误差的四个特性”；复习PDF第1页第5条。 ① 系统误差：相同条件下多次测量同一量值时，误差大小和符号保持不变或按一定规律变化；应尽量减少或消除。 ② 随机误差：相同条件下多次测量同一量值时，误差大小和符号以不可预见方式变化；服从正态分布，具有单峰性、对称性、有界性、抵偿性，用数理统计方法处理。 ③ 粗大误差：明显歪曲测量结果的误差，数值较大，应避免或剔除。 ④ 测量精度分类：正确度反映系统误差影响；精密度反映随机误差影响；准确度反映两者综合影响。">
+  <div class="card-head"><span class="pill">知识点 5</span><h3>测量误差的分类与处理</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>测量误差按性质分哪三类，理解随机误差、系统误差、粗大误差的特点和处理原则。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 系统误差：相同条件下多次测量同一量值时，误差大小和符号保持不变或按一定规律变化；应尽量减少或消除。</li><li>② 随机误差：相同条件下多次测量同一量值时，误差大小和符号以不可预见方式变化；服从正态分布，具有单峰性、对称性、有界性、抵偿性，用数理统计方法处理。</li><li>③ 粗大误差：明显歪曲测量结果的误差，数值较大，应避免或剔除。</li><li>④ 测量精度分类：正确度反映系统误差影响；精密度反映随机误差影响；准确度反映两者综合影响。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>测量误差按性质分哪三类？各有什么特点和处理原则？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①系统误差特点及处理（减小/消除）；</li><li>②随机误差特点（不可预定、正态分布、四特性）及统计处理；</li><li>③粗大误差特点（明显歪曲）及剔除；</li><li>④正确度、精密度、准确度的含义。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>正确度对应系统误差，精密度对应随机误差，准确度是综合；粗大误差必须剔除，不能与随机误差混为一谈。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第二章》p58“三、测量误差的分类”；p59“测量精度的分类”；p60—61“随机误差的四个特性”；复习PDF第1页第5条。</p></div>
+  
+</article>
+<article class="card searchable" data-search="等精度测量列的数据处理 等精度测量列的数据处理步骤有哪些？ ①判断定值系统误差；②求算术平均值；③计算残差；④求单次标准偏差；⑤3σ判断粗大误差；⑥求平均值标准偏差及极限误差；⑦写出测量结果。 残差代数和为零；σ_x=σ/√n，不是σ；极限误差取3σ_x。 PPT《第二章》p64—71“2.6 等精度测量列的数据处理”及例1；复习PDF第1页第6条。 ① 判断定值系统误差； ② 求测量列算术平均值 x̄； ③ 计算残差 vi=xi−x̄； ④ 估算单次测量标准偏差 σ=√[Σvi²/(n−1)]； ⑤ 按 |vi|&gt;3σ 判断并剔除粗大误差； ⑥ 计算算术平均值标准偏差 σ_x=σ/√n； ⑦ 计算算术平均值极限误差 3σ_x； ⑧ 写出测量结果 x̄±3σ_x。">
+  <div class="card-head"><span class="pill">知识点 6</span><h3>等精度测量列的数据处理</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>了解等精度测量列数据的处理方法。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 判断定值系统误差；</li><li>② 求测量列算术平均值 x̄；</li><li>③ 计算残差 vi=xi−x̄；</li><li>④ 估算单次测量标准偏差 σ=√[Σvi²/(n−1)]；</li><li>⑤ 按 |vi|&gt;3σ 判断并剔除粗大误差；</li><li>⑥ 计算算术平均值标准偏差 σ_x=σ/√n；</li><li>⑦ 计算算术平均值极限误差 3σ_x；</li><li>⑧ 写出测量结果 x̄±3σ_x。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>等精度测量列的数据处理步骤有哪些？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①判断定值系统误差；</li><li>②求算术平均值；</li><li>③计算残差；</li><li>④求单次标准偏差；</li><li>⑤3σ判断粗大误差；</li><li>⑥求平均值标准偏差及极限误差；</li><li>⑦写出测量结果。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>残差代数和为零；σ_x=σ/√n，不是σ；极限误差取3σ_x。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第二章》p64—71“2.6 等精度测量列的数据处理”及例1；复习PDF第1页第6条。</p></div>
+  
+</article>
+    <div class="must-block"><h3>本章必背清单</h3><ol class="must-list"><li>测量：将被测量与标准量比较，得出比值的全过程。</li><li>四要素：测量对象、计量单位、测量方法、测量精度。</li><li>量块用途：传递基准、检定校准、调零、精密测量/画线/机床调整。</li><li>量块分级：K、0、1、2、3级（按制造精度）；分等：1—5等（按检定精度）；级按中心长度极限偏差，等按中心长度测量不确定度。</li><li>按级用标称尺寸、忽略制造误差；按等用检定书实际尺寸、忽略检定误差；选用最少块数、研合、由后向前消去最末尾数。</li><li>直接/间接、绝对/相对、接触/非接触、单项/综合、在线/离线、静态/动态。</li><li>绝对误差 δ=x−x0；相对误差 f=|δ|/x0≈|δ|/x。</li><li>系统误差（不变或按规律变）、随机误差（不可预定）、粗大误差（明显歪曲）。</li><li>正确度—系统误差；精密度—随机误差；准确度—综合。</li><li>数据处理：平均值→残差→σ→3σ判粗大→σ_x=σ/√n→3σ_x→结果。</li></ol></div>
+    <div class="selftest-block"><h3>本章自测题</h3><div class="selftest-grid">
+<article class="card mini searchable" data-search="什么是测量？完整测量过程包括哪四个要素？ ①测量定义；②测量对象；③计量单位；④测量方法；⑤测量精度。 ">
+  <div class="card-head"><span class="pill">自测 1</span><h4>什么是测量？完整测量过程包括哪四个要素？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①测量定义；</li><li>②测量对象；</li><li>③计量单位；</li><li>④测量方法；</li><li>⑤测量精度。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="测量与检验有何区别？ ①测量得具体数值；②检验只判断合格与否；③检测是二者统称；④测量误差会导致误收/误废（PPT第一章p38—39）。 ">
+  <div class="card-head"><span class="pill">自测 2</span><h4>测量与检验有何区别？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①测量得具体数值；</li><li>②检验只判断合格与否；</li><li>③检测是二者统称；</li><li>④测量误差会导致误收/误废（PPT第一章p38—39）。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="量块有什么用途？ ①长度基准传递媒介；②检定校准量具量仪；③相对测量调零；④精密测量/画线/机床调整。 ">
+  <div class="card-head"><span class="pill">自测 3</span><h4>量块有什么用途？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①长度基准传递媒介；</li><li>②检定校准量具量仪；</li><li>③相对测量调零；</li><li>④精密测量/画线/机床调整。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="量块的“级”和“等”有何区别？按级、按等使用各依据什么？ ①分级按制造精度（K、0、1、2、3级）；②分等按检定精度（1—5等）；③共同技术要求（平面度、粗糙度、研合性、硬度、长度、长度变动量、长度稳定度）；④级按中心长度极限偏差，等按中心长度测量不确定度；⑤按级用标称尺寸、忽略制造误差，按等用检定书实际尺寸、忽略检定误差。 ">
+  <div class="card-head"><span class="pill">自测 4</span><h4>量块的“级”和“等”有何区别？按级、按等使用各依据什么？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①分级按制造精度（K、0、1、2、3级）；</li><li>②分等按检定精度（1—5等）；</li><li>③共同技术要求（平面度、粗糙度、研合性、硬度、长度、长度变动量、长度稳定度）；</li><li>④级按中心长度极限偏差，等按中心长度测量不确定度；</li><li>⑤按级用标称尺寸、忽略制造误差，按等用检定书实际尺寸、忽略检定误差。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="量块选用原则是什么？如何组合尺寸？ ①尽量最少块数；②利用研合性；③由后向前消去最末尾数法；④减少累积误差。 ">
+  <div class="card-head"><span class="pill">自测 5</span><h4>量块选用原则是什么？如何组合尺寸？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①尽量最少块数；</li><li>②利用研合性；</li><li>③由后向前消去最末尾数法；</li><li>④减少累积误差。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="测量方法按示值分为哪两类？有何区别？ ①绝对测量得整个量值；②相对测量得对标准量的偏差；③相对测量精度一般较高；④仪器结构可简化。 ">
+  <div class="card-head"><span class="pill">自测 6</span><h4>测量方法按示值分为哪两类？有何区别？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①绝对测量得整个量值；</li><li>②相对测量得对标准量的偏差；</li><li>③相对测量精度一般较高；</li><li>④仪器结构可简化。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="直接测量与间接测量有何区别？各举一例。 ①直接测量读数得欲测值或偏差；②间接测量测相关量后按函数式求；③例：卡尺测外径；④例：弦高法测直径。 ">
+  <div class="card-head"><span class="pill">自测 7</span><h4>直接测量与间接测量有何区别？各举一例。</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①直接测量读数得欲测值或偏差；</li><li>②间接测量测相关量后按函数式求；</li><li>③例：卡尺测外径；</li><li>④例：弦高法测直径。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="什么是绝对误差和相对误差？ ①δ=x−x0；②δ有正负；③f=|δ|/x0≈|δ|/x；④相对误差更能说明测量精确程度。 ">
+  <div class="card-head"><span class="pill">自测 8</span><h4>什么是绝对误差和相对误差？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①δ=x−x0；</li><li>②δ有正负；</li><li>③f=|δ|/x0≈|δ|/x；</li><li>④相对误差更能说明测量精确程度。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="测量误差按性质分哪三类？各有什么特点？ ①系统误差（不变或按规律变）；②随机误差（不可预定、正态分布）；③粗大误差（明显歪曲）；④系统误差影响大，粗大误差应剔除。 ">
+  <div class="card-head"><span class="pill">自测 9</span><h4>测量误差按性质分哪三类？各有什么特点？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①系统误差（不变或按规律变）；</li><li>②随机误差（不可预定、正态分布）；</li><li>③粗大误差（明显歪曲）；</li><li>④系统误差影响大，粗大误差应剔除。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="随机误差有哪些特性？如何处理？ ①单峰性；②对称性；③有界性（|δ|≤3σ）；④抵偿性；⑤用数理统计方法处理。 ">
+  <div class="card-head"><span class="pill">自测 10</span><h4>随机误差有哪些特性？如何处理？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①单峰性；</li><li>②对称性；</li><li>③有界性（|δ|≤3σ）；</li><li>④抵偿性；</li><li>⑤用数理统计方法处理。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="正确度、精密度、准确度有何区别？ ①正确度反映系统误差；②精密度反映随机误差；③准确度反映综合影响；④三者不能等同。 ">
+  <div class="card-head"><span class="pill">自测 11</span><h4>正确度、精密度、准确度有何区别？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①正确度反映系统误差；</li><li>②精密度反映随机误差；</li><li>③准确度反映综合影响；</li><li>④三者不能等同。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="等精度测量列数据处理有哪些步骤？ ①判断定值系统误差；②求平均值；③求残差；④求σ；⑤3σ判粗大；⑥求σ_x=σ/√n；⑦写结果。 ">
+  <div class="card-head"><span class="pill">自测 12</span><h4>等精度测量列数据处理有哪些步骤？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①判断定值系统误差；</li><li>②求平均值；</li><li>③求残差；</li><li>④求σ；</li><li>⑤3σ判粗大；</li><li>⑥求σ_x=σ/√n；</li><li>⑦写结果。</li></ul></div>
+</article></div></div>
+  </div>
+</details>
+<details id="chapter-5" class="chapter searchable" open>
+  <summary>
+    <div><div class="chapter-title">第5章 表面粗糙度</div><div class="chapter-meta">6个知识点 · 必背10条 · 自测12题</div></div>
+    <span class="chevron">▶</span>
+  </summary>
+  <div class="chapter-body">
+    
+<article class="card searchable" data-search="表面形貌的三种情况 表面形貌包括哪三种基本情况？如何按波距划分？各有什么特点？ ①表面粗糙度（λ&lt;1mm、微观）；②表面波纹度（λ=1—10mm）；③形状误差（λ&gt;10mm、宏观）；④三者按波距λ划分；⑤粗糙度影响耐磨、配合、疲劳、腐蚀、密封等。 波距由小到大依次为粗糙度→波纹度→形状误差；不要与表面缺陷混淆。 PPT《第五章》p4“表面形貌的组成”；p12—15“表面轮廓、三种情况按波距划分”；复习PDF第1页第5章第1条。 ① 表面粗糙度：零件表面微小峰谷的不平程度，波长和波高之比一般小于50，属微观几何形状误差，λ&lt;1mm。 ② 表面波纹度：峰谷波长和波高之比为50—1000的不平程度，λ=1—10mm，会引起振动、噪声，对旋转零件影响大。 ③ 形状误差：峰谷波长和波高之比大于1000的不平程度，属宏观几何形状误差，λ&gt;10mm。 ④ 表面结构还包括纹理方向和表面缺陷。">
+  <div class="card-head"><span class="pill">知识点 1</span><h3>表面形貌的三种情况</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>理解表面形貌的三种情况、特点。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 表面粗糙度：零件表面微小峰谷的不平程度，波长和波高之比一般小于50，属微观几何形状误差，λ&lt;1mm。</li><li>② 表面波纹度：峰谷波长和波高之比为50—1000的不平程度，λ=1—10mm，会引起振动、噪声，对旋转零件影响大。</li><li>③ 形状误差：峰谷波长和波高之比大于1000的不平程度，属宏观几何形状误差，λ&gt;10mm。</li><li>④ 表面结构还包括纹理方向和表面缺陷。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>表面形貌包括哪三种基本情况？如何按波距划分？各有什么特点？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①表面粗糙度（λ&lt;1mm、微观）；</li><li>②表面波纹度（λ=1—10mm）；</li><li>③形状误差（λ&gt;10mm、宏观）；</li><li>④三者按波距λ划分；</li><li>⑤粗糙度影响耐磨、配合、疲劳、腐蚀、密封等。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>波距由小到大依次为粗糙度→波纹度→形状误差；不要与表面缺陷混淆。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第五章》p4“表面形貌的组成”；p12—15“表面轮廓、三种情况按波距划分”；复习PDF第1页第5章第1条。</p></div>
+  
+</article>
+<article class="card searchable" data-search="取样长度与评定长度 什么是取样长度和评定长度？各有什么作用？ ①取样长度定义及至少5峰5谷；②取样长度作用（削弱波纹度/形状误差）；③评定长度定义（连续几个取样长度）；④评定长度作用（削弱不均匀性）；⑤一般ln=5lr。 取样长度是“一段基准线长度”，评定长度是“总长度”；两者作用不同。 PPT《第五章》p20“取样长度”；p21“评定长度”；复习PDF第1页第2条。 ① 取样长度 lr：在X轴方向判别被评定轮廓不规则特征的长度，是测量或评定表面粗糙度所规定的一段基准线长度，至少包含5个微峰和5个微谷。 ② 规定取样长度的目的：限制或削弱表面波纹度和形状误差对粗糙度评定的影响。 ③ 评定长度 ln：用于评定被评定轮廓的X轴方向上的总长度，是连续的几个取样长度。 ④ 规定评定长度的目的：限制或削弱粗糙度轮廓特性不均匀性的影响；一般取 ln=5lr，均匀性好时可小于5lr，差时可大于5lr。">
+  <div class="card-head"><span class="pill">知识点 2</span><h3>取样长度与评定长度</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>理解取样长度、评定长度的含义。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 取样长度 lr：在X轴方向判别被评定轮廓不规则特征的长度，是测量或评定表面粗糙度所规定的一段基准线长度，至少包含5个微峰和5个微谷。</li><li>② 规定取样长度的目的：限制或削弱表面波纹度和形状误差对粗糙度评定的影响。</li><li>③ 评定长度 ln：用于评定被评定轮廓的X轴方向上的总长度，是连续的几个取样长度。</li><li>④ 规定评定长度的目的：限制或削弱粗糙度轮廓特性不均匀性的影响；一般取 ln=5lr，均匀性好时可小于5lr，差时可大于5lr。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>什么是取样长度和评定长度？各有什么作用？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①取样长度定义及至少5峰5谷；</li><li>②取样长度作用（削弱波纹度/形状误差）；</li><li>③评定长度定义（连续几个取样长度）；</li><li>④评定长度作用（削弱不均匀性）；</li><li>⑤一般ln=5lr。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>取样长度是“一段基准线长度”，评定长度是“总长度”；两者作用不同。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第五章》p20“取样长度”；p21“评定长度”；复习PDF第1页第2条。</p></div>
+  
+</article>
+<article class="card searchable" data-search="表面粗糙度评定参数 表面粗糙度常用评定参数有哪些？各自的符号、含义是什么？ ①Ra定义（绝对值的算术平均值）；②Rz定义（最大峰高+最大谷深）；③Rsm定义（轮廓单元平均宽度）；④Rmr(c)定义（实体材料长度比率）；⑤Rmr(c)越大耐磨性越好。 Ra是平均值，Rz是最大高度之和；Rmr(c)必须给出水平截距c；旧标准Rz曾表示“微观不平度十点高度”，新标准无此参数。 PPT《第五章》p25“常用参数4个”；p26“Ra”；p28“Rz”；p30“Rsm”；p31—32“Rmr(c)与耐磨性”；复习PDF第1页第3条。 ① 高度（幅值）参数：Ra——轮廓算术平均偏差，在一个取样长度内纵坐标值Z(x)绝对值的算术平均值；Rz——轮廓最大高度，在一个取样长度内最大轮廓峰高与最大轮廓谷深之和。 ② 波距（间距）参数：Rsm——轮廓单元的平均宽度，在一个取样长度内轮廓单元宽度Xs的平均值。 ③ 形状参数：Rmr(c)——轮廓支承长度率，在给定轮廓水平截距c上轮廓实体材料长度Ml(c)与评定长度ln的比率；Rmr(c)越大，耐磨性越好。 ④ 新国标常用参数4个：Ra、Rz、Rsm、Rmr(c)。">
+  <div class="card-head"><span class="pill">知识点 3</span><h3>表面粗糙度评定参数</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>掌握表面粗糙度高度特征参数（幅值参数）、波距参数（间距特性）、形状参数（控制耐磨性的参数）的名称、符号、含义。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 高度（幅值）参数：Ra——轮廓算术平均偏差，在一个取样长度内纵坐标值Z(x)绝对值的算术平均值；Rz——轮廓最大高度，在一个取样长度内最大轮廓峰高与最大轮廓谷深之和。</li><li>② 波距（间距）参数：Rsm——轮廓单元的平均宽度，在一个取样长度内轮廓单元宽度Xs的平均值。</li><li>③ 形状参数：Rmr(c)——轮廓支承长度率，在给定轮廓水平截距c上轮廓实体材料长度Ml(c)与评定长度ln的比率；Rmr(c)越大，耐磨性越好。</li><li>④ 新国标常用参数4个：Ra、Rz、Rsm、Rmr(c)。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>表面粗糙度常用评定参数有哪些？各自的符号、含义是什么？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①Ra定义（绝对值的算术平均值）；</li><li>②Rz定义（最大峰高+最大谷深）；</li><li>③Rsm定义（轮廓单元平均宽度）；</li><li>④Rmr(c)定义（实体材料长度比率）；</li><li>⑤Rmr(c)越大耐磨性越好。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>Ra是平均值，Rz是最大高度之和；Rmr(c)必须给出水平截距c；旧标准Rz曾表示“微观不平度十点高度”，新标准无此参数。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第五章》p25“常用参数4个”；p26“Ra”；p28“Rz”；p30“Rsm”；p31—32“Rmr(c)与耐磨性”；复习PDF第1页第3条。</p></div>
+  
+</article>
+<article class="card searchable" data-search="参数选用与检测方法 表面粗糙度评定参数如何选用？常用检测方法有哪些？ ①优先Ra；②Rz适用场合；③Ra与Rz联用场合；④Rsm、Rmr(c)适用场合；⑤数值选用原则（功能优先、经济性、与公差协调）；⑥检测方法（比较法、光切法、干涉法、触针法）。 不是所有表面都标Ra；附加参数一般不单独使用；数值不是越小越好，应满足功能前提下取较大值。 PPT《第五章》p54—58“5.5 选用”；p59“定性/定量评定、光切法/干涉法/触针法”；复习PDF第1页第4条。 ① 无特殊要求时只规定幅度参数之一，优先选用Ra，因Ra能充分反映表面轮廓特征。 ② 表面过于粗糙、太光滑或有抗疲劳破坏要求时，多采用Rz。 ③ 不允许较深加工痕迹、防止应力集中、保证抗疲劳强度和密封性时，Ra与Rz联用；测量面积很小时可选用Rz。 ④ 附加参数一般不单独使用：要求喷涂均匀、涂层附着性/光泽时控制Rsm；要求较高支撑刚度和耐磨性时规定Rmr(c)。 ⑤ 数值选用：先满足功能，再考虑经济性、工艺性；Ra、Rz允许值尽可能大，Rsm、Rmr(c)允许值尽可能小；采用类比法，并与尺寸公差、形状公差协调。 ⑥ 检测方法：定性比较法；定量光切法、干涉法、触针法等。">
+  <div class="card-head"><span class="pill">知识点 4</span><h3>参数选用与检测方法</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>理解表面粗糙度评定参数的选用原则，了解表面粗糙度的检测方法。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 无特殊要求时只规定幅度参数之一，优先选用Ra，因Ra能充分反映表面轮廓特征。</li><li>② 表面过于粗糙、太光滑或有抗疲劳破坏要求时，多采用Rz。</li><li>③ 不允许较深加工痕迹、防止应力集中、保证抗疲劳强度和密封性时，Ra与Rz联用；测量面积很小时可选用Rz。</li><li>④ 附加参数一般不单独使用：要求喷涂均匀、涂层附着性/光泽时控制Rsm；要求较高支撑刚度和耐磨性时规定Rmr(c)。</li><li>⑤ 数值选用：先满足功能，再考虑经济性、工艺性；Ra、Rz允许值尽可能大，Rsm、Rmr(c)允许值尽可能小；采用类比法，并与尺寸公差、形状公差协调。</li><li>⑥ 检测方法：定性比较法；定量光切法、干涉法、触针法等。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>表面粗糙度评定参数如何选用？常用检测方法有哪些？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①优先Ra；</li><li>②Rz适用场合；</li><li>③Ra与Rz联用场合；</li><li>④Rsm、Rmr(c)适用场合；</li><li>⑤数值选用原则（功能优先、经济性、与公差协调）；</li><li>⑥检测方法（比较法、光切法、干涉法、触针法）。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>不是所有表面都标Ra；附加参数一般不单独使用；数值不是越小越好，应满足功能前提下取较大值。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第五章》p54—58“5.5 选用”；p59“定性/定量评定、光切法/干涉法/触针法”；复习PDF第1页第4条。</p></div>
+  
+</article>
+<article class="card searchable" data-search="表面粗糙度的标注 表面粗糙度符号有哪几种？完整图形符号各位置注写什么？标注方向和要求是什么？ ①基本/扩展/完整图形符号；②去除材料/不去除材料/任何工艺；③a—e各位置内容；④注写方向与尺寸一致；⑤可标注位置。 a位写单一要求，b位写第2个或多个要求；c位是加工方法，d位是纹理方向，e位是加工余量。 PPT《第五章》p35—52“5.4 表面粗糙度的表示法”；复习PDF第1页第5条。 ① 图形符号：基本图形符号、扩展图形符号、完整图形符号；分去除材料、不去除材料、允许任何工艺。 ② 完整图形符号各位置：a注写单一表面粗糙度要求；b注写第2个或其他多个表面粗糙度要求；c注写加工方法、表面处理、涂层或其他工艺要求；d注写表面纹理和方向；e注写加工余量（mm）。 ③ 标注方向：表面粗糙度注写和读取方向与尺寸的注写和读取方向一致。 ④ 可标注位置：轮廓线或指引线上、特征尺寸的尺寸线上、几何公差框格上、延长线上、圆柱或棱柱表面上。 ⑤ 简化注法：大多数表面有相同要求时用简化注法；空间有限时用带字母的完整符号简化注法；两种或多种工艺获得的同一表面分别注写。">
+  <div class="card-head"><span class="pill">知识点 5</span><h3>表面粗糙度的标注</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>掌握表面粗糙度的标注（掌握新国标、了解旧国标）。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 图形符号：基本图形符号、扩展图形符号、完整图形符号；分去除材料、不去除材料、允许任何工艺。</li><li>② 完整图形符号各位置：a注写单一表面粗糙度要求；b注写第2个或其他多个表面粗糙度要求；c注写加工方法、表面处理、涂层或其他工艺要求；d注写表面纹理和方向；e注写加工余量（mm）。</li><li>③ 标注方向：表面粗糙度注写和读取方向与尺寸的注写和读取方向一致。</li><li>④ 可标注位置：轮廓线或指引线上、特征尺寸的尺寸线上、几何公差框格上、延长线上、圆柱或棱柱表面上。</li><li>⑤ 简化注法：大多数表面有相同要求时用简化注法；空间有限时用带字母的完整符号简化注法；两种或多种工艺获得的同一表面分别注写。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>表面粗糙度符号有哪几种？完整图形符号各位置注写什么？标注方向和要求是什么？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①基本/扩展/完整图形符号；</li><li>②去除材料/不去除材料/任何工艺；</li><li>③a—e各位置内容；</li><li>④注写方向与尺寸一致；</li><li>⑤可标注位置。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>a位写单一要求，b位写第2个或多个要求；c位是加工方法，d位是纹理方向，e位是加工余量。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第五章》p35—52“5.4 表面粗糙度的表示法”；复习PDF第1页第5条。</p></div>
+  
+</article>
+<article class="card searchable" data-search="表面粗糙度的测量 表面粗糙度的测量方法有哪些？各适用于什么场合？ ①比较法（样板、车间、较大粗糙度值）；②针描法/触针法（电动轮廓仪、Ra 0.025—6.3μm）；③印模法（大型/内表面）；④光切法、干涉法（PPT仅列名称）；⑤主要参数Ra、Rz、Rsm、Rmr(c)。 比较法是定性评定，针描法是接触式定量测量，印模法是间接测量；不要漏掉光切法、干涉法。 PPT《第五章》p59—69“5.6 表面粗糙度的测量”；复习PDF第1页第6条。 ① 比较法：被测表面与粗糙度标准样板比较，通过视觉、触感等评定；多用于车间，适用于粗糙度值较大的工件。 ② 针描法（触针法）：用电动轮廓仪的触针在被测表面轻轻划过，触针随轮廓垂直起伏，经电路转换、放大、运算得到参数值；常用于Ra 0.025—6.3μm，垂直分辨率可达几纳米。 ③ 印模法：用石蜡、低熔点合金等印模材料压印被测表面，再在显微镜下间接测量；适用于笨重零件及大型零件内表面。 ④ 光切法、干涉法：PPT第59页列为常用测量方法，但未展开原理。 ⑤ 主要测量参数：Ra、Rz、Rsm、Rmr(c)。">
+  <div class="card-head"><span class="pill">知识点 6</span><h3>表面粗糙度的测量</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>熟悉表面粗糙度的测量（仪器、主要参数）。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 比较法：被测表面与粗糙度标准样板比较，通过视觉、触感等评定；多用于车间，适用于粗糙度值较大的工件。</li><li>② 针描法（触针法）：用电动轮廓仪的触针在被测表面轻轻划过，触针随轮廓垂直起伏，经电路转换、放大、运算得到参数值；常用于Ra 0.025—6.3μm，垂直分辨率可达几纳米。</li><li>③ 印模法：用石蜡、低熔点合金等印模材料压印被测表面，再在显微镜下间接测量；适用于笨重零件及大型零件内表面。</li><li>④ 光切法、干涉法：PPT第59页列为常用测量方法，但未展开原理。</li><li>⑤ 主要测量参数：Ra、Rz、Rsm、Rmr(c)。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>表面粗糙度的测量方法有哪些？各适用于什么场合？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①比较法（样板、车间、较大粗糙度值）；</li><li>②针描法/触针法（电动轮廓仪、Ra 0.025—6.3μm）；</li><li>③印模法（大型/内表面）；</li><li>④光切法、干涉法（PPT仅列名称）；</li><li>⑤主要参数Ra、Rz、Rsm、Rmr(c)。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>比较法是定性评定，针描法是接触式定量测量，印模法是间接测量；不要漏掉光切法、干涉法。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第五章》p59—69“5.6 表面粗糙度的测量”；复习PDF第1页第6条。</p></div>
+  
+</article>
+    <div class="must-block"><h3>本章必背清单</h3><ol class="must-list"><li>表面粗糙度：λ&lt;1mm，微观几何形状误差。</li><li>表面波纹度：λ=1—10mm；形状误差：λ&gt;10mm。</li><li>取样长度lr：至少5峰5谷，削弱波纹度/形状误差影响。</li><li>评定长度ln：连续几个取样长度，削弱不均匀性，一般ln=5lr。</li><li>Ra：取样长度内|Z(x)|的算术平均值。</li><li>Rz：取样长度内最大峰高+最大谷深。</li><li>Rsm：轮廓单元平均宽度。</li><li>Rmr(c)：给定水平截距c上实体材料长度比率；越大耐磨性越好。</li><li>参数选用：优先Ra；粗糙/太光滑/抗疲劳用Rz；Rsm、Rmr(c)为附加参数。</li><li>标注：基本/扩展/完整符号；a—e位置；注写方向与尺寸一致；测量方法比较法、针描法、印模法、光切法、干涉法。</li></ol></div>
+    <div class="selftest-block"><h3>本章自测题</h3><div class="selftest-grid">
+<article class="card mini searchable" data-search="表面形貌包括哪三种基本情况？如何按波距划分？ ①粗糙度λ&lt;1mm；②波纹度λ=1—10mm；③形状误差λ&gt;10mm；④三者均为表面结构组成部分；⑤表面结构还包括纹理方向、表面缺陷。 ">
+  <div class="card-head"><span class="pill">自测 1</span><h4>表面形貌包括哪三种基本情况？如何按波距划分？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①粗糙度λ&lt;1mm；</li><li>②波纹度λ=1—10mm；</li><li>③形状误差λ&gt;10mm；</li><li>④三者均为表面结构组成部分；</li><li>⑤表面结构还包括纹理方向、表面缺陷。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="表面粗糙度对零件功用有哪些影响？ ①耐磨性；②配合性质稳定性；③疲劳强度；④抗腐蚀性；⑤密封性。 ">
+  <div class="card-head"><span class="pill">自测 2</span><h4>表面粗糙度对零件功用有哪些影响？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①耐磨性；</li><li>②配合性质稳定性；</li><li>③疲劳强度；</li><li>④抗腐蚀性；</li><li>⑤密封性。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="什么是取样长度？为什么要规定取样长度？ ①定义（判别轮廓不规则特征的长度）；②至少5峰5谷；③削弱波纹度影响；④削弱形状误差影响；⑤从标准系列选取。 ">
+  <div class="card-head"><span class="pill">自测 3</span><h4>什么是取样长度？为什么要规定取样长度？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①定义（判别轮廓不规则特征的长度）；</li><li>②至少5峰5谷；</li><li>③削弱波纹度影响；</li><li>④削弱形状误差影响；</li><li>⑤从标准系列选取。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="什么是评定长度？与取样长度是什么关系？ ①定义（评定轮廓的总长度）；②由连续几个取样长度组成；③削弱不均匀性影响；④一般ln=5lr；⑤均匀性不同可调整。 ">
+  <div class="card-head"><span class="pill">自测 4</span><h4>什么是评定长度？与取样长度是什么关系？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①定义（评定轮廓的总长度）；</li><li>②由连续几个取样长度组成；</li><li>③削弱不均匀性影响；</li><li>④一般ln=5lr；</li><li>⑤均匀性不同可调整。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="Ra的含义是什么？写出其表达式。 ①轮廓算术平均偏差；②一个取样长度内；③纵坐标值Z(x)绝对值的算术平均值；④Ra=(1/lr)∫|Z(x)|dx；⑤反映峰高、谷深的平均值。 ">
+  <div class="card-head"><span class="pill">自测 5</span><h4>Ra的含义是什么？写出其表达式。</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①轮廓算术平均偏差；</li><li>②一个取样长度内；</li><li>③纵坐标值Z(x)绝对值的算术平均值；</li><li>④Ra=(1/lr)∫|Z(x)|dx；</li><li>⑤反映峰高、谷深的平均值。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="Rz的含义是什么？与旧标准Rz有何区别？ ①最大轮廓峰高与最大轮廓谷深之和；②一个取样长度内；③Rz=Rp+Rv；④旧标准Rz为“微观不平度十点高度”；⑤新标准无十点高度参数。 ">
+  <div class="card-head"><span class="pill">自测 6</span><h4>Rz的含义是什么？与旧标准Rz有何区别？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①最大轮廓峰高与最大轮廓谷深之和；</li><li>②一个取样长度内；</li><li>③Rz=Rp+Rv；</li><li>④旧标准Rz为“微观不平度十点高度”；</li><li>⑤新标准无十点高度参数。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="Rsm的含义是什么？ ①轮廓单元的平均宽度；②一个取样长度内；③轮廓单元宽度Xs的平均值；④反映间距特性；⑤用于喷涂均匀、涂层附着性等场合。 ">
+  <div class="card-head"><span class="pill">自测 7</span><h4>Rsm的含义是什么？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①轮廓单元的平均宽度；</li><li>②一个取样长度内；</li><li>③轮廓单元宽度Xs的平均值；</li><li>④反映间距特性；</li><li>⑤用于喷涂均匀、涂层附着性等场合。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="Rmr(c)的含义是什么？为什么能反映耐磨性？ ①轮廓支承长度率；②给定水平截距c；③实体材料长度Ml(c)与评定长度ln的比率；④Rmr(c)越大耐磨性越好；⑤选用时必须给出c值。 ">
+  <div class="card-head"><span class="pill">自测 8</span><h4>Rmr(c)的含义是什么？为什么能反映耐磨性？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①轮廓支承长度率；</li><li>②给定水平截距c；</li><li>③实体材料长度Ml(c)与评定长度ln的比率；</li><li>④Rmr(c)越大耐磨性越好；</li><li>⑤选用时必须给出c值。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="表面粗糙度参数选用原则是什么？ ①优先Ra；②粗糙/太光滑/抗疲劳用Rz；③Ra与Rz联用场合；④Rsm、Rmr(c)附加参数；⑤数值满足功能前提下尽量大/小；⑥与尺寸公差、形状公差协调。 ">
+  <div class="card-head"><span class="pill">自测 9</span><h4>表面粗糙度参数选用原则是什么？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①优先Ra；</li><li>②粗糙/太光滑/抗疲劳用Rz；</li><li>③Ra与Rz联用场合；</li><li>④Rsm、Rmr(c)附加参数；</li><li>⑤数值满足功能前提下尽量大/小；</li><li>⑥与尺寸公差、形状公差协调。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="表面粗糙度完整图形符号各位置注写什么？ ①a位单一要求；②b位第2个或多个要求；③c位加工方法/表面处理；④d位纹理方向；⑤e位加工余量。 ">
+  <div class="card-head"><span class="pill">自测 10</span><h4>表面粗糙度完整图形符号各位置注写什么？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①a位单一要求；</li><li>②b位第2个或多个要求；</li><li>③c位加工方法/表面处理；</li><li>④d位纹理方向；</li><li>⑤e位加工余量。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="表面粗糙度标注方向和要求是什么？ ①注写/读取方向与尺寸一致；②可注在轮廓线/指引线上；③可注在尺寸线上；④可注在几何公差框格上；⑤可注在延长线、圆柱/棱柱表面上。 ">
+  <div class="card-head"><span class="pill">自测 11</span><h4>表面粗糙度标注方向和要求是什么？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①注写/读取方向与尺寸一致；</li><li>②可注在轮廓线/指引线上；</li><li>③可注在尺寸线上；</li><li>④可注在几何公差框格上；</li><li>⑤可注在延长线、圆柱/棱柱表面上。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="表面粗糙度常用测量方法有哪些？各适用什么场合？ ①比较法（车间、较大值）；②针描法（电动轮廓仪、Ra 0.025—6.3μm）；③印模法（大型/内表面）；④光切法；⑤干涉法。 ">
+  <div class="card-head"><span class="pill">自测 12</span><h4>表面粗糙度常用测量方法有哪些？各适用什么场合？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①比较法（车间、较大值）；</li><li>②针描法（电动轮廓仪、Ra 0.025—6.3μm）；</li><li>③印模法（大型/内表面）；</li><li>④光切法；</li><li>⑤干涉法。</li></ul></div>
+</article></div></div>
+  </div>
+</details>
+<details id="chapter-6" class="chapter searchable" open>
+  <summary>
+    <div><div class="chapter-title">第6章 圆柱螺纹结合的精度设计</div><div class="chapter-meta">6个知识点 · 必背10条 · 自测12题</div></div>
+    <span class="chevron">▶</span>
+  </summary>
+  <div class="chapter-body">
+    
+<article class="card searchable" data-search="螺纹分类与普通螺纹功能要求 螺纹按功能分为哪几类？普通螺纹的功能要求是什么？ ①联结螺纹（三角形、旋入性+连接强度）；②传动螺纹（传力/传位移）；③密封螺纹（管螺纹、密封性）；④普通螺纹两项功能要求。 普通螺纹属于联结螺纹，不是传动螺纹；传动螺纹牙型与普通螺纹不同。 PPT《第六章》p2“按功能分类及使用要求”；复习PDF第2页第6章第1条。 ① 按功能分：联结螺纹（普通紧固螺纹），牙型为三角形，要求良好旋入性和一定紧固连接强度。 ② 传动螺纹：传递动力和位移；传力用梯形、矩形、锯齿形牙型，传位移用三角形或滚珠丝杠。 ③ 密封螺纹（紧密紧固螺纹）：管螺纹，要求水/油/气密性高。 ④ 普通螺纹的功能要求：良好的旋入性、一定的紧固连接强度。">
+  <div class="card-head"><span class="pill">知识点 1</span><h3>螺纹分类与普通螺纹功能要求</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>螺纹按功能分类及使用要求。普通螺纹的功能要求。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 按功能分：联结螺纹（普通紧固螺纹），牙型为三角形，要求良好旋入性和一定紧固连接强度。</li><li>② 传动螺纹：传递动力和位移；传力用梯形、矩形、锯齿形牙型，传位移用三角形或滚珠丝杠。</li><li>③ 密封螺纹（紧密紧固螺纹）：管螺纹，要求水/油/气密性高。</li><li>④ 普通螺纹的功能要求：良好的旋入性、一定的紧固连接强度。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>螺纹按功能分为哪几类？普通螺纹的功能要求是什么？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①联结螺纹（三角形、旋入性+连接强度）；</li><li>②传动螺纹（传力/传位移）；</li><li>③密封螺纹（管螺纹、密封性）；</li><li>④普通螺纹两项功能要求。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>普通螺纹属于联结螺纹，不是传动螺纹；传动螺纹牙型与普通螺纹不同。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第六章》p2“按功能分类及使用要求”；复习PDF第2页第6章第1条。</p></div>
+  
+</article>
+<article class="card searchable" data-search="基本牙型、几何参数与合格性判断 普通螺纹有哪些基本几何参数？影响互换性的主要因素是什么？合格性判断原则是什么？ ①基本牙型；②大径、小径、中径；③螺距、导程；④牙型半角、螺旋升角、旋合长度；⑤影响互换性三因素（螺距、牙型半角、中径）；⑥泰勒原则（作用中径/单一中径）。 中径不是大径与小径的平均值；作用中径综合反映螺距和牙型半角误差；国标只规定中径公差和顶径公差。 PPT《第六章》p5“基本牙型”；p6—15“大径、小径、中径、螺距、导程、牙型半角、螺旋升角、旋合长度”；p16—18“影响互换性的参数、作用中径、合格性判断”；p29“小结”；复习PDF第2页第2条。 ① 基本牙型：将原始等边三角形顶部截去H/8、底部截去H/4所形成的内、外螺纹共有的理论牙型。 ② 大径d/D：与内螺纹牙底或外螺纹牙顶相切的假想圆柱直径；普通螺纹大径基本尺寸为公称直径。 ③ 小径d1/D1：与内螺纹牙顶或外螺纹牙底相切的假想圆柱直径。 ④ 中径d2/D2：齿廓与齿槽轴向宽度相等处的圆柱面直径；注意中径不是大径与小径的平均值。 ⑤ 螺距P：相邻两牙在中径线上对应两点间的距离；导程L=nP（n为头数）。 ⑥ 牙型半角α/2：牙侧与螺纹轴线垂线间的夹角，普通螺纹α=60°，α/2=30°。 ⑦ 螺旋升角ψ：中径圆柱上螺旋线切线与垂直于轴线平面的夹角，tanψ=nP/(πd2)；升角越小自锁能力越好。 ⑧ 旋合长度：相配合螺纹中螺母沿轴线旋入部分的长度，分S、N、L三种。 ⑨ 影响互换性的主要因素：螺距误差、牙型半角误差、中径偏差；用作用中径综合反映。国标只规定中径公差和顶径公差，中径公差综合控制三项误差。 ⑩ 合格性判断（泰勒原则）：实际螺纹的作用中径不允许超出最大实体牙型的中径，任何部位的单一中径不允许超出最小实体牙型的中径。外螺纹：d2m≤d2max，d2单一≥d2min；内螺纹：D2m≥D2min，D2单一≤D2max。">
+  <div class="card-head"><span class="pill">知识点 2</span><h3>基本牙型、几何参数与合格性判断</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>螺纹的基本牙型和基本几何参数（大径、小径、中径、螺距、导程、牙型半角、螺旋升角、旋合长度）的概念、影响普通螺纹互换性的主要几何参数误差或偏差有哪些、国标的有关规定（公差带）、普通螺纹合格性判断原则（泰勒原则）。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 基本牙型：将原始等边三角形顶部截去H/8、底部截去H/4所形成的内、外螺纹共有的理论牙型。</li><li>② 大径d/D：与内螺纹牙底或外螺纹牙顶相切的假想圆柱直径；普通螺纹大径基本尺寸为公称直径。</li><li>③ 小径d1/D1：与内螺纹牙顶或外螺纹牙底相切的假想圆柱直径。</li><li>④ 中径d2/D2：齿廓与齿槽轴向宽度相等处的圆柱面直径；注意中径不是大径与小径的平均值。</li><li>⑤ 螺距P：相邻两牙在中径线上对应两点间的距离；导程L=nP（n为头数）。</li><li>⑥ 牙型半角α/2：牙侧与螺纹轴线垂线间的夹角，普通螺纹α=60°，α/2=30°。</li><li>⑦ 螺旋升角ψ：中径圆柱上螺旋线切线与垂直于轴线平面的夹角，tanψ=nP/(πd2)；升角越小自锁能力越好。</li><li>⑧ 旋合长度：相配合螺纹中螺母沿轴线旋入部分的长度，分S、N、L三种。</li><li>⑨ 影响互换性的主要因素：螺距误差、牙型半角误差、中径偏差；用作用中径综合反映。国标只规定中径公差和顶径公差，中径公差综合控制三项误差。</li><li>⑩ 合格性判断（泰勒原则）：实际螺纹的作用中径不允许超出最大实体牙型的中径，任何部位的单一中径不允许超出最小实体牙型的中径。外螺纹：d2m≤d2max，d2单一≥d2min；内螺纹：D2m≥D2min，D2单一≤D2max。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>普通螺纹有哪些基本几何参数？影响互换性的主要因素是什么？合格性判断原则是什么？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①基本牙型；</li><li>②大径、小径、中径；</li><li>③螺距、导程；</li><li>④牙型半角、螺旋升角、旋合长度；</li><li>⑤影响互换性三因素（螺距、牙型半角、中径）；</li><li>⑥泰勒原则（作用中径/单一中径）。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>中径不是大径与小径的平均值；作用中径综合反映螺距和牙型半角误差；国标只规定中径公差和顶径公差。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第六章》p5“基本牙型”；p6—15“大径、小径、中径、螺距、导程、牙型半角、螺旋升角、旋合长度”；p16—18“影响互换性的参数、作用中径、合格性判断”；p29“小结”；复习PDF第2页第2条。</p></div>
+  
+</article>
+<article class="card searchable" data-search="公差等级与旋合长度 普通螺纹的公差等级和旋合长度如何规定？为什么螺纹精度与旋合长度有关？ ①内/外螺纹公差等级；②6级为基本级；③旋合长度S/N/L；④旋合长度越长，螺距累积误差越大；⑤精度与公差等级和旋合长度均有关。 螺纹精度不是只由公差等级决定，还与旋合长度有关；旋合长度不注时表示中等N。 PPT《第六章》p20“公差等级”；p21“基本偏差”；p23—24“旋合长度与精度”；复习PDF第2页第3条。 ① 公差等级：内螺纹中径、顶径为4、5、6、7、8级；外螺纹中径为3、4、5、6、7、8、9级，顶径为4、6、8级；6级为基本级。 ② 旋合长度：分短（S）、中（N）、长（L）三种，按公称直径和螺距选择。 ③ 螺纹精度与公差等级和旋合长度都有关：旋合长度越长，螺距累积误差越大，较难旋合，加工长螺纹也比短螺纹难保证精度。 ④ 公差带代号=公差等级+基本偏差；内螺纹基本偏差H、G，外螺纹e、f、g、h；内螺纹下偏差EI、外螺纹上偏差es为基本偏差。">
+  <div class="card-head"><span class="pill">知识点 3</span><h3>公差等级与旋合长度</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>螺纹公差等级和旋合长度（普通螺纹配合精度与螺纹公差等级和旋合长度有关）。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 公差等级：内螺纹中径、顶径为4、5、6、7、8级；外螺纹中径为3、4、5、6、7、8、9级，顶径为4、6、8级；6级为基本级。</li><li>② 旋合长度：分短（S）、中（N）、长（L）三种，按公称直径和螺距选择。</li><li>③ 螺纹精度与公差等级和旋合长度都有关：旋合长度越长，螺距累积误差越大，较难旋合，加工长螺纹也比短螺纹难保证精度。</li><li>④ 公差带代号=公差等级+基本偏差；内螺纹基本偏差H、G，外螺纹e、f、g、h；内螺纹下偏差EI、外螺纹上偏差es为基本偏差。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>普通螺纹的公差等级和旋合长度如何规定？为什么螺纹精度与旋合长度有关？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①内/外螺纹公差等级；</li><li>②6级为基本级；</li><li>③旋合长度S/N/L；</li><li>④旋合长度越长，螺距累积误差越大；</li><li>⑤精度与公差等级和旋合长度均有关。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>螺纹精度不是只由公差等级决定，还与旋合长度有关；旋合长度不注时表示中等N。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第六章》p20“公差等级”；p21“基本偏差”；p23—24“旋合长度与精度”；复习PDF第2页第3条。</p></div>
+  
+</article>
+<article class="card searchable" data-search="螺纹结合精度的三个级别 普通螺纹结合精度分为哪三个级别？各用于什么场合？ ①精密级（精密联结）；②中等级（一般用途）；③粗糙级（要求不高/制造困难）；④由公差等级和旋合长度决定。 三个级别不是单纯按公差等级划分，还与旋合长度有关。 PPT《第六章》p24—25“三种类型公差带、结合精度确定”；复习PDF第2页第4条。 ① 精密级：用于精密联结螺纹。 ② 中等级：用于一般用途联结。 ③ 粗糙级：用于要求不高及制造困难的螺纹。 ④ 三个级别由公差等级和旋合长度共同决定，代表不同加工难度。">
+  <div class="card-head"><span class="pill">知识点 4</span><h3>螺纹结合精度的三个级别</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>螺纹结合精度的三个级别。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 精密级：用于精密联结螺纹。</li><li>② 中等级：用于一般用途联结。</li><li>③ 粗糙级：用于要求不高及制造困难的螺纹。</li><li>④ 三个级别由公差等级和旋合长度共同决定，代表不同加工难度。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>普通螺纹结合精度分为哪三个级别？各用于什么场合？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①精密级（精密联结）；</li><li>②中等级（一般用途）；</li><li>③粗糙级（要求不高/制造困难）；</li><li>④由公差等级和旋合长度决定。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>三个级别不是单纯按公差等级划分，还与旋合长度有关。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第六章》p24—25“三种类型公差带、结合精度确定”；复习PDF第2页第4条。</p></div>
+  
+</article>
+<article class="card searchable" data-search="普通螺纹的标记 普通螺纹标记由哪几部分组成？举例说明。 ①螺纹代号（公称直径、螺距）；②公差带代号（中径、顶径顺序）；③旋合长度；④不注旋合长度表示N；⑤内外螺纹配合用斜线，左内右外；⑥左旋LH。 公差带代号顺序是中径在前、顶径在后；螺纹副标注左内右外。 PPT《第六章》p27—28“普通螺纹的标注”；复习PDF第2页第5条。 ① 标记组成：螺纹代号（含公称直径、螺距）、公差带代号（按中径、顶径顺序）、旋合长度，中间用“—”隔开。 ② 旋合长度不注时表示中等旋合长度；必要时可注旋合长度数值。 ③ 内、外螺纹装配在一起时，公差带代号用斜线分开，左边内螺纹，右边外螺纹。 ④ 左旋标“LH”，右旋不注。 ⑤ 例：外螺纹M20—5g6g—S；内螺纹M20×1.5—6H—LH；螺纹副M20×2—6H/5g6g—S。">
+  <div class="card-head"><span class="pill">知识点 5</span><h3>普通螺纹的标记</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>掌握普通螺纹的标记。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 标记组成：螺纹代号（含公称直径、螺距）、公差带代号（按中径、顶径顺序）、旋合长度，中间用“—”隔开。</li><li>② 旋合长度不注时表示中等旋合长度；必要时可注旋合长度数值。</li><li>③ 内、外螺纹装配在一起时，公差带代号用斜线分开，左边内螺纹，右边外螺纹。</li><li>④ 左旋标“LH”，右旋不注。</li><li>⑤ 例：外螺纹M20—5g6g—S；内螺纹M20×1.5—6H—LH；螺纹副M20×2—6H/5g6g—S。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>普通螺纹标记由哪几部分组成？举例说明。</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①螺纹代号（公称直径、螺距）；</li><li>②公差带代号（中径、顶径顺序）；</li><li>③旋合长度；</li><li>④不注旋合长度表示N；</li><li>⑤内外螺纹配合用斜线，左内右外；</li><li>⑥左旋LH。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>公差带代号顺序是中径在前、顶径在后；螺纹副标注左内右外。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第六章》p27—28“普通螺纹的标注”；复习PDF第2页第5条。</p></div>
+  
+</article>
+<article class="card searchable" data-search="螺纹的测量 螺纹常用测量工具和主要测量参数有哪些？ 资料未覆盖，需老师确认；建议按老师课堂补充复习，不凭教材记忆补写。 不要与螺纹公差带、合格性判断混淆。 PPT《第六章》p29“小结”；复习PDF第2页第6条。 ① PPT第6章仅在p29小结提到“螺纹参数的测量”，未展开测量工具和主要测量参数。 ② 复习PDF第6条第6款要求的测量工具、主要参数，资料未覆盖，需老师确认。">
+  <div class="card-head"><span class="pill">知识点 6</span><h3>螺纹的测量</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>熟悉螺纹的测量（测量工具、主要测量的参数）。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① PPT第6章仅在p29小结提到“螺纹参数的测量”，未展开测量工具和主要测量参数。</li><li>② 复习PDF第6条第6款要求的测量工具、主要参数，<strong><span class="warn">资料未覆盖</span>，<span class="warn">需老师确认</span></strong>。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>螺纹常用测量工具和主要测量参数有哪些？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li><span class="warn">资料未覆盖</span>，<span class="warn">需老师确认</span>；建议按老师课堂补充复习，不凭教材记忆补写。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>不要与螺纹公差带、合格性判断混淆。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第六章》p29“小结”；复习PDF第2页第6条。</p></div>
+  
+</article>
+    <div class="must-block"><h3>本章必背清单</h3><ol class="must-list"><li>螺纹按功能分：联结、传动、密封。</li><li>普通螺纹功能要求：良好旋入性、一定紧固连接强度。</li><li>基本牙型：等边三角形截去顶部H/8、底部H/4。</li><li>大径=公称直径；小径；中径≠大小径平均值。</li><li>螺距P；导程L=nP。</li><li>牙型半角α/2=30°；螺旋升角tanψ=nP/(πd2)。</li><li>影响互换性三因素：螺距误差、牙型半角误差、中径偏差。</li><li>合格性判断（泰勒原则）：作用中径不超最大实体牙型中径；单一中径不超最小实体牙型中径。</li><li>公差等级：内4—8，外中径3—9、顶径4/6/8；6级基本级；旋合长度S/N/L。</li><li>结合精度三级：精密级、中等级、粗糙级；标记=螺纹代号—公差带—旋合长度。</li></ol></div>
+    <div class="selftest-block"><h3>本章自测题</h3><div class="selftest-grid">
+<article class="card mini searchable" data-search="螺纹按功能分为哪几类？各有什么使用要求？ ①联结螺纹（旋入性、连接强度）；②传动螺纹（传力/传位移）；③密封螺纹（水/油/气密性）；④普通螺纹属联结螺纹。 ">
+  <div class="card-head"><span class="pill">自测 1</span><h4>螺纹按功能分为哪几类？各有什么使用要求？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①联结螺纹（旋入性、连接强度）；</li><li>②传动螺纹（传力/传位移）；</li><li>③密封螺纹（水/油/气密性）；</li><li>④普通螺纹属联结螺纹。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="普通螺纹的基本牙型是如何形成的？ ①原始等边三角形；②顶部截去H/8；③底部截去H/4；④内外螺纹共有理论牙型。 ">
+  <div class="card-head"><span class="pill">自测 2</span><h4>普通螺纹的基本牙型是如何形成的？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①原始等边三角形；</li><li>②顶部截去H/8；</li><li>③底部截去H/4；</li><li>④内外螺纹共有理论牙型。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="大径、小径、中径的定义是什么？ ①大径与内螺纹牙底/外螺纹牙顶相切；②小径与内螺纹牙顶/外螺纹牙底相切；③中径处齿廓与齿槽宽度相等；④中径不是大小径平均值。 ">
+  <div class="card-head"><span class="pill">自测 3</span><h4>大径、小径、中径的定义是什么？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①大径与内螺纹牙底/外螺纹牙顶相切；</li><li>②小径与内螺纹牙顶/外螺纹牙底相切；</li><li>③中径处齿廓与齿槽宽度相等；</li><li>④中径不是大小径平均值。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="螺距与导程有何区别？ ①螺距为相邻两牙在中径线上对应两点距离；②导程为同一螺旋线上相邻两牙距离；③单头L=P；④多头L=nP。 ">
+  <div class="card-head"><span class="pill">自测 4</span><h4>螺距与导程有何区别？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①螺距为相邻两牙在中径线上对应两点距离；</li><li>②导程为同一螺旋线上相邻两牙距离；</li><li>③单头L=P；</li><li>④多头L=nP。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="牙型半角和螺旋升角的含义是什么？ ①牙型半角为牙侧与轴线垂线夹角；②普通螺纹α/2=30°；③螺旋升角为中径圆柱上螺旋线切线与垂直轴线平面夹角；④tanψ=nP/(πd2)；⑤升角越小自锁越好。 ">
+  <div class="card-head"><span class="pill">自测 5</span><h4>牙型半角和螺旋升角的含义是什么？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①牙型半角为牙侧与轴线垂线夹角；</li><li>②普通螺纹α/2=30°；</li><li>③螺旋升角为中径圆柱上螺旋线切线与垂直轴线平面夹角；</li><li>④tanψ=nP/(πd2)；</li><li>⑤升角越小自锁越好。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="影响普通螺纹互换性的主要因素有哪些？ ①螺距误差；②牙型半角误差；③中径偏差；④用作用中径综合反映；⑤国标只规定中径公差和顶径公差。 ">
+  <div class="card-head"><span class="pill">自测 6</span><h4>影响普通螺纹互换性的主要因素有哪些？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①螺距误差；</li><li>②牙型半角误差；</li><li>③中径偏差；</li><li>④用作用中径综合反映；</li><li>⑤国标只规定中径公差和顶径公差。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="什么是作用中径？ ①旋合长度内实际起作用的中径；②综合反映螺距和牙型半角误差；③影响旋入性；④外螺纹d2m=d2a+(fP+fα)；⑤内螺纹D2m=D2a−(fP+fα)。 ">
+  <div class="card-head"><span class="pill">自测 7</span><h4>什么是作用中径？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①旋合长度内实际起作用的中径；</li><li>②综合反映螺距和牙型半角误差；</li><li>③影响旋入性；</li><li>④外螺纹d2m=d2a+(fP+fα)；</li><li>⑤内螺纹D2m=D2a−(fP+fα)。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="普通螺纹合格性判断原则是什么？ ①泰勒原则；②作用中径不超最大实体牙型中径；③单一中径不超最小实体牙型中径；④外螺纹d2m≤d2max、d2单一≥d2min；⑤内螺纹D2m≥D2min、D2单一≤D2max。 ">
+  <div class="card-head"><span class="pill">自测 8</span><h4>普通螺纹合格性判断原则是什么？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①泰勒原则；</li><li>②作用中径不超最大实体牙型中径；</li><li>③单一中径不超最小实体牙型中径；</li><li>④外螺纹d2m≤d2max、d2单一≥d2min；</li><li>⑤内螺纹D2m≥D2min、D2单一≤D2max。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="普通螺纹公差等级如何规定？ ①内螺纹中径/顶径4—8级；②外螺纹中径3—9级；③外螺纹顶径4、6、8级；④6级为基本级。 ">
+  <div class="card-head"><span class="pill">自测 9</span><h4>普通螺纹公差等级如何规定？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①内螺纹中径/顶径4—8级；</li><li>②外螺纹中径3—9级；</li><li>③外螺纹顶径4、6、8级；</li><li>④6级为基本级。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="为什么螺纹精度与旋合长度有关？ ①旋合长度分S/N/L；②旋合长度越长，螺距累积误差越大；③长螺纹较难旋合；④加工长螺纹较难保证精度；⑤精度由公差等级和旋合长度共同决定。 ">
+  <div class="card-head"><span class="pill">自测 10</span><h4>为什么螺纹精度与旋合长度有关？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①旋合长度分S/N/L；</li><li>②旋合长度越长，螺距累积误差越大；</li><li>③长螺纹较难旋合；</li><li>④加工长螺纹较难保证精度；</li><li>⑤精度由公差等级和旋合长度共同决定。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="螺纹结合精度分哪三级？各用于什么场合？ ①精密级（精密联结）；②中等级（一般用途）；③粗糙级（要求不高/制造困难）；④由公差等级和旋合长度决定。 ">
+  <div class="card-head"><span class="pill">自测 11</span><h4>螺纹结合精度分哪三级？各用于什么场合？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①精密级（精密联结）；</li><li>②中等级（一般用途）；</li><li>③粗糙级（要求不高/制造困难）；</li><li>④由公差等级和旋合长度决定。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="普通螺纹标记由哪几部分组成？举例说明。 ①螺纹代号（公称直径、螺距）；②公差带代号（中径、顶径顺序）；③旋合长度；④不注表示N；⑤内外螺纹配合左内右外；⑥左旋LH。 ">
+  <div class="card-head"><span class="pill">自测 12</span><h4>普通螺纹标记由哪几部分组成？举例说明。</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①螺纹代号（公称直径、螺距）；</li><li>②公差带代号（中径、顶径顺序）；</li><li>③旋合长度；</li><li>④不注表示N；</li><li>⑤内外螺纹配合左内右外；</li><li>⑥左旋LH。</li></ul></div>
+</article></div></div>
+  </div>
+</details>
+<details id="chapter-7" class="chapter searchable" open>
+  <summary>
+    <div><div class="chapter-title">第7章 圆柱齿轮传动的精度设计</div><div class="chapter-meta">3个知识点 · 必背10条 · 自测10题</div></div>
+    <span class="chevron">▶</span>
+  </summary>
+  <div class="chapter-body">
+    
+<article class="card searchable" data-search="齿轮分类与四项基本要求 齿轮按功能分为哪几类？齿轮传动有哪四项基本要求？ ①传递运动齿轮；②传递动力齿轮；③读数与分度齿轮；④四项基本要求（准确性、平稳性、载荷均匀性、侧隙）；⑤四项要求对应不同公差组。 四项要求不是并列同等，不同用途齿轮侧重不同；侧隙不是越小越好。 PPT《第七章》p2—4“齿轮分类”；p6—11“四项基本要求及侧隙作用”；复习PDF第3页第7章第1条。 ① 按功能分：传递运动齿轮（中模数，运动精度高、工作平稳，如减速箱齿轮）；传递动力齿轮（大模数，齿长接触精度高，如起重机齿轮）；读数与分度齿轮（小模数，读数准确、运动精度高，如精密仪器齿轮）。 ② 四项基本要求：传递运动的准确性（转角误差，第Ⅰ公差组）；传递运动的平稳性（瞬时传动比误差，第Ⅱ公差组）；载荷分布的均匀性（第Ⅲ公差组）；传动侧隙（齿厚极限偏差和中心距偏差）。 ③ 侧隙作用：贮存润滑油、补偿受力变形和热变形、补偿制造安装误差；侧隙过大则产生空程和换向冲击。">
+  <div class="card-head"><span class="pill">知识点 1</span><h3>齿轮分类与四项基本要求</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>了解齿轮按功能的分类。掌握齿轮传动的四项基本要求。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 按功能分：传递运动齿轮（中模数，运动精度高、工作平稳，如减速箱齿轮）；传递动力齿轮（大模数，齿长接触精度高，如起重机齿轮）；读数与分度齿轮（小模数，读数准确、运动精度高，如精密仪器齿轮）。</li><li>② 四项基本要求：传递运动的准确性（转角误差，第Ⅰ公差组）；传递运动的平稳性（瞬时传动比误差，第Ⅱ公差组）；载荷分布的均匀性（第Ⅲ公差组）；传动侧隙（齿厚极限偏差和中心距偏差）。</li><li>③ 侧隙作用：贮存润滑油、补偿受力变形和热变形、补偿制造安装误差；侧隙过大则产生空程和换向冲击。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>齿轮按功能分为哪几类？齿轮传动有哪四项基本要求？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①传递运动齿轮；</li><li>②传递动力齿轮；</li><li>③读数与分度齿轮；</li><li>④四项基本要求（准确性、平稳性、载荷均匀性、侧隙）；</li><li>⑤四项要求对应不同公差组。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>四项要求不是并列同等，不同用途齿轮侧重不同；侧隙不是越小越好。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第七章》p2—4“齿轮分类”；p6—11“四项基本要求及侧隙作用”；复习PDF第3页第7章第1条。</p></div>
+  
+</article>
+<article class="card searchable" data-search="圆柱齿轮精度评定指标 圆柱齿轮传动精度有哪些评定指标？各评定哪项基本要求？ ①Fp、Fpk评运动准确性；②fpt、Fα评传动平稳性；③Fβ评载荷分布均匀性；④fsn、Wk评侧隙；⑤综合指标Fi′、fi′、Fr、Fi″、fi″的归属。 Fp是齿距累积总偏差，Fβ是螺旋线总偏差；Fr评运动准确性，不是平稳性；fi″评平稳性。 PPT《第七章》p18—26“7.2评定指标、7.3可采用指标”；p19“国标规定应检指标”；复习PDF第3页第2条。 ① 运动准确性：齿距累积总偏差Fp、K个齿距累积偏差Fpk；综合指标有切向综合总偏差Fi′、齿轮径向圆跳动Fr、径向综合总偏差Fi″。 ② 传动平稳性：单个齿距偏差fpt、齿廓总偏差Fα；综合指标有一齿切向综合偏差fi′、一齿径向综合偏差fi″。 ③ 载荷分布均匀性：螺旋线总偏差Fβ。 ④ 侧隙：齿厚偏差fsn或公法线长度偏差Wk。 ⑤ 国标规定应检指标：齿距偏差（fpt、Fpk、Fp）、齿廓总偏差Fα、螺旋线总偏差Fβ。">
+  <div class="card-head"><span class="pill">知识点 2</span><h3>圆柱齿轮精度评定指标</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>圆柱齿轮传动精度的评定指标（名称、符号、评定哪项基本要求）。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 运动准确性：齿距累积总偏差Fp、K个齿距累积偏差Fpk；综合指标有切向综合总偏差Fi′、齿轮径向圆跳动Fr、径向综合总偏差Fi″。</li><li>② 传动平稳性：单个齿距偏差fpt、齿廓总偏差Fα；综合指标有一齿切向综合偏差fi′、一齿径向综合偏差fi″。</li><li>③ 载荷分布均匀性：螺旋线总偏差Fβ。</li><li>④ 侧隙：齿厚偏差fsn或公法线长度偏差Wk。</li><li>⑤ 国标规定应检指标：齿距偏差（fpt、Fpk、Fp）、齿廓总偏差Fα、螺旋线总偏差Fβ。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>圆柱齿轮传动精度有哪些评定指标？各评定哪项基本要求？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①Fp、Fpk评运动准确性；</li><li>②fpt、Fα评传动平稳性；</li><li>③Fβ评载荷分布均匀性；</li><li>④fsn、Wk评侧隙；</li><li>⑤综合指标Fi′、fi′、Fr、Fi″、fi″的归属。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>Fp是齿距累积总偏差，Fβ是螺旋线总偏差；Fr评运动准确性，不是平稳性；fi″评平稳性。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第七章》p18—26“7.2评定指标、7.3可采用指标”；p19“国标规定应检指标”；复习PDF第3页第2条。</p></div>
+  
+</article>
+<article class="card searchable" data-search="圆柱齿轮精度等级 圆柱齿轮精度等级如何规定？三个公差组是什么？选择精度等级应考虑哪些因素？ ①13个等级0—12；②0最高、12最低；③5级基础级；④三个公差组Ⅰ/Ⅱ/Ⅲ；⑤同一公差组项目必须同级；⑥选择因素（用途、要求、功率、速度、工艺、经济性）。 Fi″、fi″只有9个等级（4—12）；三个公差组可不同级，但同一组内必须同级。 PPT《第七章》p28“13个等级、5级基础级”；p31—32“三个公差组、精度等级选择”；复习PDF第3页第3条。 ① 齿轮及齿轮副共13个等级，用0、1、…、12表示；0级最高，12级最低。 ② 0—2级为有待发展级，3—5级为高精度级，6—9级为中等精度，10—12级为低精度级；5级为基础级。 ③ Fi″、fi″单独规定9个级别：4、5、…、12。 ④ 单个齿轮公差项目分Ⅰ、Ⅱ、Ⅲ三个公差组；同一公差组中的项目必须同级，三个公差组可采用同级或不同级。 ⑤ 精度等级根据用途、使用要求、传递功率、圆周速度、切齿工艺和经济性确定。">
+  <div class="card-head"><span class="pill">知识点 3</span><h3>圆柱齿轮精度等级</h3></div>
+  <div class="block review-q"><div class="label">复习PDF原文</div><p>圆柱齿轮精度等级的规定。</p></div>
+  <div class="block answer-block"><div class="label">答案要点</div><ul class="circled"><li>① 齿轮及齿轮副共13个等级，用0、1、…、12表示；0级最高，12级最低。</li><li>② 0—2级为有待发展级，3—5级为高精度级，6—9级为中等精度，10—12级为低精度级；5级为基础级。</li><li>③ Fi″、fi″单独规定9个级别：4、5、…、12。</li><li>④ 单个齿轮公差项目分Ⅰ、Ⅱ、Ⅲ三个公差组；同一公差组中的项目必须同级，三个公差组可采用同级或不同级。</li><li>⑤ 精度等级根据用途、使用要求、传递功率、圆周速度、切齿工艺和经济性确定。</li></ul></div>
+  <div class="block q"><div class="label">可能简答题</div><p>圆柱齿轮精度等级如何规定？三个公差组是什么？选择精度等级应考虑哪些因素？</p></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①13个等级0—12；</li><li>②0最高、12最低；</li><li>③5级基础级；</li><li>④三个公差组Ⅰ/Ⅱ/Ⅲ；</li><li>⑤同一公差组项目必须同级；</li><li>⑥选择因素（用途、要求、功率、速度、工艺、经济性）。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点/对比</div><p>Fi″、fi″只有9个等级（4—12）；三个公差组可不同级，但同一组内必须同级。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第七章》p28“13个等级、5级基础级”；p31—32“三个公差组、精度等级选择”；复习PDF第3页第3条。</p></div>
+  
+</article>
+    <div class="must-block"><h3>本章必背清单</h3><ol class="must-list"><li>齿轮按功能分：传递运动、传递动力、读数与分度。</li><li>四项基本要求：运动准确性、平稳性、载荷均匀性、侧隙。</li><li>第Ⅰ公差组—运动准确性；第Ⅱ—平稳性；第Ⅲ—载荷均匀性。</li><li>Fp、Fpk评运动准确性；Fr、Fi′、Fi″也评运动准确性。</li><li>fpt、Fα评平稳性；fi′、fi″也评平稳性。</li><li>Fβ评载荷分布均匀性。</li><li>fsn、Wk评侧隙。</li><li>精度等级0—12共13级；5级基础级。</li><li>Fi″、fi″为4—12共9级。</li><li>三个公差组可不同级，但同一组内必须同级。</li></ol></div>
+    <div class="selftest-block"><h3>本章自测题</h3><div class="selftest-grid">
+<article class="card mini searchable" data-search="齿轮按功能分为哪几类？各有什么特点？ ①传递运动齿轮（中模数、运动精度高、平稳）；②传递动力齿轮（大模数、接触精度高）；③读数与分度齿轮（小模数、读数准确）。 ">
+  <div class="card-head"><span class="pill">自测 1</span><h4>齿轮按功能分为哪几类？各有什么特点？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①传递运动齿轮（中模数、运动精度高、平稳）；</li><li>②传递动力齿轮（大模数、接触精度高）；</li><li>③读数与分度齿轮（小模数、读数准确）。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="齿轮传动有哪四项基本要求？ ①传递运动准确性；②传递运动平稳性；③载荷分布均匀性；④传动侧隙。 ">
+  <div class="card-head"><span class="pill">自测 2</span><h4>齿轮传动有哪四项基本要求？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①传递运动准确性；</li><li>②传递运动平稳性；</li><li>③载荷分布均匀性；</li><li>④传动侧隙。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="四项基本要求各对应哪个公差组？ ①准确性—第Ⅰ公差组；②平稳性—第Ⅱ公差组；③载荷均匀性—第Ⅲ公差组；④侧隙—齿厚极限偏差/中心距偏差。 ">
+  <div class="card-head"><span class="pill">自测 3</span><h4>四项基本要求各对应哪个公差组？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①准确性—第Ⅰ公差组；</li><li>②平稳性—第Ⅱ公差组；</li><li>③载荷均匀性—第Ⅲ公差组；</li><li>④侧隙—齿厚极限偏差/中心距偏差。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="侧隙的作用是什么？侧隙过大会有什么问题？ ①贮存润滑油；②补偿受力变形；③补偿热变形；④补偿制造安装误差；⑤过大会产生空程和换向冲击。 ">
+  <div class="card-head"><span class="pill">自测 4</span><h4>侧隙的作用是什么？侧隙过大会有什么问题？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①贮存润滑油；</li><li>②补偿受力变形；</li><li>③补偿热变形；</li><li>④补偿制造安装误差；</li><li>⑤过大会产生空程和换向冲击。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="评定运动准确性的指标有哪些？ ①Fp；②Fpk；③Fi′；④Fr；⑤Fi″。 ">
+  <div class="card-head"><span class="pill">自测 5</span><h4>评定运动准确性的指标有哪些？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①Fp；</li><li>②Fpk；</li><li>③Fi′；</li><li>④Fr；</li><li>⑤Fi″。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="评定传动平稳性的指标有哪些？ ①fpt；②Fα；③fi′；④fi″；⑤fpt反映实际齿距与公称齿距之差。 ">
+  <div class="card-head"><span class="pill">自测 6</span><h4>评定传动平稳性的指标有哪些？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①fpt；</li><li>②Fα；</li><li>③fi′；</li><li>④fi″；</li><li>⑤fpt反映实际齿距与公称齿距之差。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="评定载荷分布均匀性的指标是什么？ ①Fβ（螺旋线总偏差）；②在基圆柱切平面内；③齿宽有效部分；④包容实际螺旋线的两条设计螺旋线间法向距离；⑤反映齿宽方向接触。 ">
+  <div class="card-head"><span class="pill">自测 7</span><h4>评定载荷分布均匀性的指标是什么？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①Fβ（螺旋线总偏差）；</li><li>②在基圆柱切平面内；</li><li>③齿宽有效部分；</li><li>④包容实际螺旋线的两条设计螺旋线间法向距离；</li><li>⑤反映齿宽方向接触。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="评定侧隙的指标有哪些？ ①齿厚偏差fsn；②公法线长度偏差Wk；③齿厚上/下偏差一般为负值；④保证齿侧间隙；⑤公法线为基圆切线线段长度。 ">
+  <div class="card-head"><span class="pill">自测 8</span><h4>评定侧隙的指标有哪些？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①齿厚偏差fsn；</li><li>②公法线长度偏差Wk；</li><li>③齿厚上/下偏差一般为负值；</li><li>④保证齿侧间隙；</li><li>⑤公法线为基圆切线线段长度。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="圆柱齿轮精度等级如何规定？ ①0—12共13级；②0最高、12最低；③5级基础级；④0—2有待发展、3—5高精度、6—9中等、10—12低精度；⑤Fi″、fi″为4—12共9级。 ">
+  <div class="card-head"><span class="pill">自测 9</span><h4>圆柱齿轮精度等级如何规定？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①0—12共13级；</li><li>②0最高、12最低；</li><li>③5级基础级；</li><li>④0—2有待发展、3—5高精度、6—9中等、10—12低精度；</li><li>⑤Fi″、fi″为4—12共9级。</li></ul></div>
+</article>
+<article class="card mini searchable" data-search="选择齿轮精度等级应考虑哪些因素？ ①用途；②使用要求；③传递功率；④圆周速度；⑤切齿工艺及经济性；⑥三个公差组可不同级，同组内必须同级。 ">
+  <div class="card-head"><span class="pill">自测 10</span><h4>选择齿轮精度等级应考虑哪些因素？</h4></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①用途；</li><li>②使用要求；</li><li>③传递功率；</li><li>④圆周速度；</li><li>⑤切齿工艺及经济性；</li><li>⑥三个公差组可不同级，同组内必须同级。</li></ul></div>
+</article></div></div>
+  </div>
+</details>
+    <details id="comprehensive" class="chapter searchable" open>
+      <summary><div><div class="chapter-title">第3、4、8章 综合题考点</div><div class="chapter-meta">只列考点 · 公式 · 解题步骤</div></div><span class="chevron">▶</span></summary>
+      <div class="chapter-body"><blockquote>本文件只列综合题考点、公式、解题步骤关键词，不展开简答答案。<br>资料依据：PPT《第三章1》《第三章2》《第三章3》《第四章》《第八章》；页码为PDF页序号。</blockquote>
+<section class="comp-section searchable" data-search="第3章 综合题考点清单 本章只列计算、标注、查表、选用方法，不展开简答答案。 考点 公式/方法/步骤关键词 依据 孔、轴定义 孔=包容面，越加工越大；轴=被包容面，越加工越小 第三章1 p4 尺寸术语 基本尺寸D/d；实际尺寸Da/da；极限尺寸Dmax/Dmin、dmax/dmin；作用尺寸 第三章1 p5—7 偏差 ES=Dmax−D，EI=Dmin−D；es=dmax−d，ei=dmin−d；偏差可为正、负、零 第三章1 p9—10 公差 Th=ES−EI=Dmax−Dmin；Ts=es−ei=dmax−dmin；公差为正值 第三章1 p12—14 零线与公差带 零线=基本尺寸线；公差带大小由标准公差定，位置由基本偏差定 第三章1 p15—19 配合 间隙X=D−d；Xmax=ES−ei；Xmin=EI−es；过盈Ymax=EI−es、Ymin=ES−ei 第三章1 p21—24 配合公差 Tf=Th+Ts；间隙配合Tf=Xmax−Xmin；过盈配合Tf=Ymin−Ymax；过渡配合Tf=Xmax−Ymax 第三章1 p25—26 基准制 基孔制H：EI=0；基轴制h：es=0 第三章1 p28—32 极限尺寸判断原则 泰勒原则：孔Dm≥Dmin、Da≤Dmax；轴dm≤dmax、da≥dmin 第三章1 p33—34 标准公差 IT=ai；i=0.45D^(1/3)+0.001D（D≤500mm）；20级IT01—IT18；尺寸分段取几何平均值；&amp;gt;500—3150mm用I=0.004D+2.1 第三章1 p36—42 基本偏差 28种；A—H为EI，J—ZC为ES；a—h为es，j—zc为ei；H/h=0；JS/js=±IT/2；a—h间隙、js—n过渡、p—zc过盈 第三章1 p44—52 公差带图 先画零线，再按基本偏差定位置、按标准公差定大小；孔轴上下偏差标注 第三章1 p61—62 配合选用 基准制→公差等级→配合种类；方法：计算法、类比法、试验法 第三章1 p77—95；第三章2 配合设计计算 已知Xmax/Xmin（或Ymax/Ymin）→定基准制→定公差等级→求基本偏差→查表定另一极限偏差→画公差带图 第三章2 p8—10；第三章1 p93—95 光滑极限量规 通规按MMS、全形；止规按LMS、不全形；“通规通过、止规不通过”合格；孔通规上=EI+Z+T/2、下=EI+Z−T/2；孔止规上=ES、下=ES−T；孔通规磨损极限=EI；轴通规上=es−Z+T/2、下=es−Z−T/2；轴止规上=ei+T、下=ei；轴通规磨损极限=es 第三章3 p2—6 未注公差 4个等级（精密、中等、粗糙、最粗），对应IT12、IT14、IT16、IT17 第三章1 p97 大尺寸 &amp;gt;500—3150mm，标准公差因子I=0.004D+2.1，按尺寸分段计算 第三章1 p36、p69 综合题步骤模板（配合设计计算） ： ① 判断配合类型（间隙/过盈/过渡）；② 选基准制（一般基孔制H）；③ 由Xmax/Xmin或Ymax/Ymin及Tf=Th+Ts确定公差等级；④ 由极限间隙/过盈求另一件基本偏差；⑤ 查标准公差表和基本偏差表；⑥ 画孔、轴公差带图；⑦ 验算Xmax/Xmin（或Ymax/Ymin）。 ">
+  <h3>第3章 综合题考点清单</h3>
+  <blockquote>本章只列计算、标注、查表、选用方法，不展开简答答案。</blockquote>
+<div class="table-wrap"><table><thead><tr><th>考点</th><th>公式/方法/步骤关键词</th><th>依据</th></tr></thead><tbody><tr><td>孔、轴定义</td><td>孔=包容面，越加工越大；轴=被包容面，越加工越小</td><td>第三章1 p4</td></tr><tr><td>尺寸术语</td><td>基本尺寸D/d；实际尺寸Da/da；极限尺寸Dmax/Dmin、dmax/dmin；作用尺寸</td><td>第三章1 p5—7</td></tr><tr><td>偏差</td><td>ES=Dmax−D，EI=Dmin−D；es=dmax−d，ei=dmin−d；偏差可为正、负、零</td><td>第三章1 p9—10</td></tr><tr><td>公差</td><td>Th=ES−EI=Dmax−Dmin；Ts=es−ei=dmax−dmin；公差为正值</td><td>第三章1 p12—14</td></tr><tr><td>零线与公差带</td><td>零线=基本尺寸线；公差带大小由标准公差定，位置由基本偏差定</td><td>第三章1 p15—19</td></tr><tr><td>配合</td><td>间隙X=D−d；Xmax=ES−ei；Xmin=EI−es；过盈Ymax=EI−es、Ymin=ES−ei</td><td>第三章1 p21—24</td></tr><tr><td>配合公差</td><td>Tf=Th+Ts；间隙配合Tf=Xmax−Xmin；过盈配合Tf=Ymin−Ymax；过渡配合Tf=Xmax−Ymax</td><td>第三章1 p25—26</td></tr><tr><td>基准制</td><td>基孔制H：EI=0；基轴制h：es=0</td><td>第三章1 p28—32</td></tr><tr><td>极限尺寸判断原则</td><td>泰勒原则：孔Dm≥Dmin、Da≤Dmax；轴dm≤dmax、da≥dmin</td><td>第三章1 p33—34</td></tr><tr><td>标准公差</td><td>IT=ai；i=0.45D^(1/3)+0.001D（D≤500mm）；20级IT01—IT18；尺寸分段取几何平均值；&gt;500—3150mm用I=0.004D+2.1</td><td>第三章1 p36—42</td></tr><tr><td>基本偏差</td><td>28种；A—H为EI，J—ZC为ES；a—h为es，j—zc为ei；H/h=0；JS/js=±IT/2；a—h间隙、js—n过渡、p—zc过盈</td><td>第三章1 p44—52</td></tr><tr><td>公差带图</td><td>先画零线，再按基本偏差定位置、按标准公差定大小；孔轴上下偏差标注</td><td>第三章1 p61—62</td></tr><tr><td>配合选用</td><td>基准制→公差等级→配合种类；方法：计算法、类比法、试验法</td><td>第三章1 p77—95；第三章2</td></tr><tr><td>配合设计计算</td><td>已知Xmax/Xmin（或Ymax/Ymin）→定基准制→定公差等级→求基本偏差→查表定另一极限偏差→画公差带图</td><td>第三章2 p8—10；第三章1 p93—95</td></tr><tr><td>光滑极限量规</td><td>通规按MMS、全形；止规按LMS、不全形；“通规通过、止规不通过”合格；孔通规上=EI+Z+T/2、下=EI+Z−T/2；孔止规上=ES、下=ES−T；孔通规磨损极限=EI；轴通规上=es−Z+T/2、下=es−Z−T/2；轴止规上=ei+T、下=ei；轴通规磨损极限=es</td><td>第三章3 p2—6</td></tr><tr><td>未注公差</td><td>4个等级（精密、中等、粗糙、最粗），对应IT12、IT14、IT16、IT17</td><td>第三章1 p97</td></tr><tr><td>大尺寸</td><td>&gt;500—3150mm，标准公差因子I=0.004D+2.1，按尺寸分段计算</td><td>第三章1 p36、p69</td></tr></tbody></table></div>
+<p><strong>综合题步骤模板（配合设计计算）</strong>：<br>① 判断配合类型（间隙/过盈/过渡）；② 选基准制（一般基孔制H）；③ 由Xmax/Xmin或Ymax/Ymin及Tf=Th+Ts确定公差等级；④ 由极限间隙/过盈求另一件基本偏差；⑤ 查标准公差表和基本偏差表；⑥ 画孔、轴公差带图；⑦ 验算Xmax/Xmin（或Ymax/Ymin）。</p>
+<hr>
+<hr>
+</section>
+<section class="comp-section searchable" data-search="第4章 综合题考点清单 本章只列标注、计算、公差原则、误差评定方法，不展开简答答案。 考点 公式/方法/步骤关键词 依据 几何要素分类 按结构特征：轮廓要素/中心要素；按存在状态：实际/理想；按检测关系：被测/基准；按功能关系：单一/关联 第四章 p9—13 形位公差项目 形状：直线度、平面度、圆度、圆柱度、线轮廓度、面轮廓度；定向：平行度、垂直度、倾斜度；定位：同轴度、对称度、位置度；跳动：圆跳动、全跳动 第四章 p15—16 公差带四要素 形状、大小、方向、位置；11种公差带形状 第四章 p17—22 定向公差带特点 控制被测要素相对基准的方向；公差带方向与基准成理想关系；位置可浮动 第四章 p76—91 定位公差带特点 控制被测要素相对基准的位置；公差带位置由理论正确尺寸确定 第四章 p92—104 跳动公差带特点 综合控制位置、方向、形状；径向全跳动可综合控制同轴度和圆柱度；端面全跳动可综合控制垂直度和平面度 第四章 p105—111 公差原则分类 独立原则；相关原则（包容要求、最大实体要求、最小实体要求、可逆要求） 第四章 p112、p125 独立原则 尺寸和形位要求各自独立，分别满足；不加任何符号 第四章 p126—127 包容要求 标注“E”；遵守最大实体边界MMB；孔Dfe≥Dmin、Da≤Dmax；轴dfe≤dmax、da≥dmin；实际尺寸偏离MMS的偏离量补偿给形状误差 第四章 p128—132 最大实体要求 标注“M”；遵守最大实体实效边界MMVB；孔Dfe≥DMV=Dmin−t、Da≤Dmax；轴dfe≤dMV=dmax+t、da≥dmin；允许形位公差=给定值+偏离量 第四章 p133—139 最小实体要求 标注“L”；遵守最小实体实效边界LMVB；孔Dfi≤DLV=Dmax+t；轴dfi≥dLV=dmin−t；局部实际尺寸不超MMS 第四章 p142—146 可逆要求 标注“R”；尺寸公差可补偿形位公差，形位公差也可补偿尺寸公差 第四章 p144—146 作用尺寸 体外作用尺寸dfe/Dfe；体内作用尺寸dfi/Dfi；由实际尺寸和形位误差综合形成，是变量 第四章 p113—114、p123 实效尺寸 MMVS：孔DMV=Dmin−t，轴dMV=dmax+t；LMVS：孔DLV=Dmax+t，轴dLV=dmin−t；对一批零件是一定量 第四章 p117—123 边界 MMB=最大实体尺寸；LMB=最小实体尺寸；MMVB=最大实体实效尺寸；LMVB=最小实体实效尺寸 第四章 p124 形位误差评定 最小条件：最大变动量最小；最小包容区域：符合最小条件时包容实际要素的宽度/直径即误差值；轮廓要素相切不割，中心要素穿过中心 第四章 p29—30 标注 框格：第一格符号、第二格公差值及有关符号、第三格以后基准字母；指引线、基准符号、被测要素标注 第四章 p31—49 选用 形位公差选用包括项目、公差值、公差原则和基准的选择；PPT仅p147小结提及，具体条款资料未展开， 需老师确认 第四章 p147 综合题步骤模板（最大实体要求计算） ： ① 确定最大实体尺寸MMS（孔Dmin、轴dmax）；② 确定给定形位公差t；③ 求最大实体实效尺寸（孔DMV=Dmin−t、轴dMV=dmax+t）；④ 判断实际尺寸偏离量；⑤ 允许形位公差=给定值+偏离量；⑥ 用边界判断合格性（孔Dfe≥DMV、轴dfe≤dMV）。 ">
+  <h3>第4章 综合题考点清单</h3>
+  <blockquote>本章只列标注、计算、公差原则、误差评定方法，不展开简答答案。</blockquote>
+<div class="table-wrap"><table><thead><tr><th>考点</th><th>公式/方法/步骤关键词</th><th>依据</th></tr></thead><tbody><tr><td>几何要素分类</td><td>按结构特征：轮廓要素/中心要素；按存在状态：实际/理想；按检测关系：被测/基准；按功能关系：单一/关联</td><td>第四章 p9—13</td></tr><tr><td>形位公差项目</td><td>形状：直线度、平面度、圆度、圆柱度、线轮廓度、面轮廓度；定向：平行度、垂直度、倾斜度；定位：同轴度、对称度、位置度；跳动：圆跳动、全跳动</td><td>第四章 p15—16</td></tr><tr><td>公差带四要素</td><td>形状、大小、方向、位置；11种公差带形状</td><td>第四章 p17—22</td></tr><tr><td>定向公差带特点</td><td>控制被测要素相对基准的方向；公差带方向与基准成理想关系；位置可浮动</td><td>第四章 p76—91</td></tr><tr><td>定位公差带特点</td><td>控制被测要素相对基准的位置；公差带位置由理论正确尺寸确定</td><td>第四章 p92—104</td></tr><tr><td>跳动公差带特点</td><td>综合控制位置、方向、形状；径向全跳动可综合控制同轴度和圆柱度；端面全跳动可综合控制垂直度和平面度</td><td>第四章 p105—111</td></tr><tr><td>公差原则分类</td><td>独立原则；相关原则（包容要求、最大实体要求、最小实体要求、可逆要求）</td><td>第四章 p112、p125</td></tr><tr><td>独立原则</td><td>尺寸和形位要求各自独立，分别满足；不加任何符号</td><td>第四章 p126—127</td></tr><tr><td>包容要求</td><td>标注“E”；遵守最大实体边界MMB；孔Dfe≥Dmin、Da≤Dmax；轴dfe≤dmax、da≥dmin；实际尺寸偏离MMS的偏离量补偿给形状误差</td><td>第四章 p128—132</td></tr><tr><td>最大实体要求</td><td>标注“M”；遵守最大实体实效边界MMVB；孔Dfe≥DMV=Dmin−t、Da≤Dmax；轴dfe≤dMV=dmax+t、da≥dmin；允许形位公差=给定值+偏离量</td><td>第四章 p133—139</td></tr><tr><td>最小实体要求</td><td>标注“L”；遵守最小实体实效边界LMVB；孔Dfi≤DLV=Dmax+t；轴dfi≥dLV=dmin−t；局部实际尺寸不超MMS</td><td>第四章 p142—146</td></tr><tr><td>可逆要求</td><td>标注“R”；尺寸公差可补偿形位公差，形位公差也可补偿尺寸公差</td><td>第四章 p144—146</td></tr><tr><td>作用尺寸</td><td>体外作用尺寸dfe/Dfe；体内作用尺寸dfi/Dfi；由实际尺寸和形位误差综合形成，是变量</td><td>第四章 p113—114、p123</td></tr><tr><td>实效尺寸</td><td>MMVS：孔DMV=Dmin−t，轴dMV=dmax+t；LMVS：孔DLV=Dmax+t，轴dLV=dmin−t；对一批零件是一定量</td><td>第四章 p117—123</td></tr><tr><td>边界</td><td>MMB=最大实体尺寸；LMB=最小实体尺寸；MMVB=最大实体实效尺寸；LMVB=最小实体实效尺寸</td><td>第四章 p124</td></tr><tr><td>形位误差评定</td><td>最小条件：最大变动量最小；最小包容区域：符合最小条件时包容实际要素的宽度/直径即误差值；轮廓要素相切不割，中心要素穿过中心</td><td>第四章 p29—30</td></tr><tr><td>标注</td><td>框格：第一格符号、第二格公差值及有关符号、第三格以后基准字母；指引线、基准符号、被测要素标注</td><td>第四章 p31—49</td></tr><tr><td>选用</td><td>形位公差选用包括项目、公差值、公差原则和基准的选择；PPT仅p147小结提及，具体条款资料未展开，<span class="warn">需老师确认</span></td><td>第四章 p147</td></tr></tbody></table></div>
+<p><strong>综合题步骤模板（最大实体要求计算）</strong>：<br>① 确定最大实体尺寸MMS（孔Dmin、轴dmax）；② 确定给定形位公差t；③ 求最大实体实效尺寸（孔DMV=Dmin−t、轴dMV=dmax+t）；④ 判断实际尺寸偏离量；⑤ 允许形位公差=给定值+偏离量；⑥ 用边界判断合格性（孔Dfe≥DMV、轴dfe≤dMV）。</p>
+<hr>
+<hr>
+</section>
+<section class="comp-section searchable" data-search="第8章 综合题考点清单 本章只列尺寸链计算、标注、查表、步骤，不展开简答答案。 考点 公式/方法/步骤关键词 依据 尺寸链分类 按应用范围：零件尺寸链、工艺尺寸链、装配尺寸链；装配+零件=设计尺寸链；按空间形态：直线、平面、空间；按几何特征：长度、角度 第八章 p5—11 术语 环：尺寸链中每一个尺寸；封闭环：最后形成或间接获得的尺寸，有且仅有一个；组成环：除封闭环外的各环；增环：其他环不变时，该环增大使封闭环增大；减环：反之 第八章 p12—15 增减环判断 回路法：从封闭环开始顺路线标箭头，与封闭环箭头相反者为增环，相同者为减环 第八章 p16 传递系数 ξi=∂f/∂Ai；直线尺寸链ξ=1，增环取正、减环取负 第八章 p17—18 计算类型 正计算（校核）：已知组成环，求封闭环；反计算（设计）：已知封闭环，求组成环；中间计算：已知其余环，求某一组成环（工艺尺寸链） 第八章 p20、p30—37 极值法六公式 ①A0=Σ增环Ai−Σ减环Aj；②A0max=ΣAimax−ΣAjmin；③A0min=ΣAimin−ΣAjmax；④ES0=ΣESi−ΣEIj；⑤EI0=ΣEIi−ΣESj；⑥T0=ΣTi 第八章 p27—29 尺寸链画法 从加工顺序或装配关系抽象出封闭回路；先找封闭环，再找组成环；箭头首尾相接 第八章 p21—25 反计算 等公差法：Ti=T0/m；等公差等级法：各组成环取同一公差等级，查表后调整；最后验算T0=ΣTi 第八章 p35—37 中间计算 工艺尺寸链：先画尺寸链图，判断封闭环/增减环，代入六公式求未知环 第八章 p30—33 校核计算 已知各组成环基本尺寸和极限偏差，求封闭环基本尺寸和极限偏差 第八章 p34 统计法 大数互换法：各组成环实际尺寸趋近公差带中间概率大，按概率法计算，绝大多数产品装配不需挑选/修配 第八章 p19 重要结论 封闭环公差最大、精度最低；组成环数越多，各环公差越小、经济性越差；应遵守“最短尺寸链”原则 第八章 p29 综合题步骤模板（极值法解尺寸链） ： ① 根据装配/加工关系画尺寸链图；② 判断封闭环（最后形成/间接获得，唯一）；③ 用回路法判断增环、减环；④ 代公式①求A0；⑤ 代公式②③求A0max/A0min，或④⑤求ES0/EI0；⑥ 用T0=ΣTi验算；⑦ 反计算时先定公差等级/等公差，再求各环偏差并验算。 ">
+  <h3>第8章 综合题考点清单</h3>
+  <blockquote>本章只列尺寸链计算、标注、查表、步骤，不展开简答答案。</blockquote>
+<div class="table-wrap"><table><thead><tr><th>考点</th><th>公式/方法/步骤关键词</th><th>依据</th></tr></thead><tbody><tr><td>尺寸链分类</td><td>按应用范围：零件尺寸链、工艺尺寸链、装配尺寸链；装配+零件=设计尺寸链；按空间形态：直线、平面、空间；按几何特征：长度、角度</td><td>第八章 p5—11</td></tr><tr><td>术语</td><td>环：尺寸链中每一个尺寸；封闭环：最后形成或间接获得的尺寸，有且仅有一个；组成环：除封闭环外的各环；增环：其他环不变时，该环增大使封闭环增大；减环：反之</td><td>第八章 p12—15</td></tr><tr><td>增减环判断</td><td>回路法：从封闭环开始顺路线标箭头，与封闭环箭头相反者为增环，相同者为减环</td><td>第八章 p16</td></tr><tr><td>传递系数</td><td>ξi=∂f/∂Ai；直线尺寸链ξ=1，增环取正、减环取负</td><td>第八章 p17—18</td></tr><tr><td>计算类型</td><td>正计算（校核）：已知组成环，求封闭环；反计算（设计）：已知封闭环，求组成环；中间计算：已知其余环，求某一组成环（工艺尺寸链）</td><td>第八章 p20、p30—37</td></tr><tr><td>极值法六公式</td><td>①A0=Σ增环Ai−Σ减环Aj；②A0max=ΣAimax−ΣAjmin；③A0min=ΣAimin−ΣAjmax；④ES0=ΣESi−ΣEIj；⑤EI0=ΣEIi−ΣESj；⑥T0=ΣTi</td><td>第八章 p27—29</td></tr><tr><td>尺寸链画法</td><td>从加工顺序或装配关系抽象出封闭回路；先找封闭环，再找组成环；箭头首尾相接</td><td>第八章 p21—25</td></tr><tr><td>反计算</td><td>等公差法：Ti=T0/m；等公差等级法：各组成环取同一公差等级，查表后调整；最后验算T0=ΣTi</td><td>第八章 p35—37</td></tr><tr><td>中间计算</td><td>工艺尺寸链：先画尺寸链图，判断封闭环/增减环，代入六公式求未知环</td><td>第八章 p30—33</td></tr><tr><td>校核计算</td><td>已知各组成环基本尺寸和极限偏差，求封闭环基本尺寸和极限偏差</td><td>第八章 p34</td></tr><tr><td>统计法</td><td>大数互换法：各组成环实际尺寸趋近公差带中间概率大，按概率法计算，绝大多数产品装配不需挑选/修配</td><td>第八章 p19</td></tr><tr><td>重要结论</td><td>封闭环公差最大、精度最低；组成环数越多，各环公差越小、经济性越差；应遵守“最短尺寸链”原则</td><td>第八章 p29</td></tr></tbody></table></div>
+<p><strong>综合题步骤模板（极值法解尺寸链）</strong>：<br>① 根据装配/加工关系画尺寸链图；② 判断封闭环（最后形成/间接获得，唯一）；③ 用回路法判断增环、减环；④ 代公式①求A0；⑤ 代公式②③求A0max/A0min，或④⑤求ES0/EI0；⑥ 用T0=ΣTi验算；⑦ 反计算时先定公差等级/等公差，再求各环偏差并验算。</p>
+<hr>
+</section></div>
+    </details>
+    <details id="must" class="chapter searchable" open>
+      <summary><div><div class="chapter-title">简答题必背清单</div><div class="chapter-meta">19道高频题 · 评分点 · 易错点</div></div><span class="chevron">▶</span></summary>
+      <div class="chapter-body"><blockquote>只保留题目、3—5个评分点、1个易错点；完整答案见对应章节文件。  <br>资料依据：以《互换性与测量技术-复习主要知识点.pdf》为主，PPT为补充；页码为PDF页序号。</blockquote><h3>第1章 概述</h3>
+<article class="card compact searchable" data-search="第1章 概述 1. 什么是几何要素、几何量、几何量公差？ ①几何要素是构成零件几何特征的点、线、面；②几何量是表示要素大小、形状、位置及其精度的参量；③几何量公差是允许几何量变动的范围；④三者联系：要素→几何量→加工误差→公差限制。 公差是“允许变动量”，不是实际误差。 PPT《第一章》p12、p15、p19、p42；复习PDF第1页第1条。">
+  <div class="card-head"><span class="pill">第1章 概述</span><h3>1. 什么是几何要素、几何量、几何量公差？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①几何要素是构成零件几何特征的点、线、面；</li><li>②几何量是表示要素大小、形状、位置及其精度的参量；</li><li>③几何量公差是允许几何量变动的范围；</li><li>④三者联系：要素→几何量→加工误差→公差限制。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>公差是“允许变动量”，不是实际误差。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第一章》p12、p15、p19、p42；复习PDF第1页第1条。</p></div>
+</article>
+<article class="card compact searchable" data-search="第1章 概述 2. 加工误差为什么用几何量公差控制？公差大小对加工难度、成本和精度有何影响？ ①加工误差是加工后几何量的变动；②公差是设计给定的允许变动量；③公差大→难度小、成本低、精度低；④公差小→难度大、成本高、精度高；⑤满足功能前提下尽量取较大公差。 不是“公差越小越好”。 PPT《第一章》p15—22、p35—37、p42；复习PDF第1页第2条。">
+  <div class="card-head"><span class="pill">第1章 概述</span><h3>2. 加工误差为什么用几何量公差控制？公差大小对加工难度、成本和精度有何影响？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①加工误差是加工后几何量的变动；</li><li>②公差是设计给定的允许变动量；</li><li>③公差大→难度小、成本低、精度低；</li><li>④公差小→难度大、成本高、精度高；</li><li>⑤满足功能前提下尽量取较大公差。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>不是“公差越小越好”。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第一章》p15—22、p35—37、p42；复习PDF第1页第2条。</p></div>
+</article>
+<article class="card compact searchable" data-search="第1章 概述 3. 什么是互换性？完全互换与不完全互换有何区别？各举一例。 ①互换性定义（同一规格、按规定技术要求、相互替换、效果相同）；②完全互换：不挑选、不修配，例灯泡；③不完全互换：允许选择或调整，例滚动轴承分组装配；④其他分类：几何参数/功能、外/内互换性。 分组装配、调整法属于不完全互换。 PPT《第一章》p23—25；复习PDF第1页第3、4条。">
+  <div class="card-head"><span class="pill">第1章 概述</span><h3>3. 什么是互换性？完全互换与不完全互换有何区别？各举一例。</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①互换性定义（同一规格、按规定技术要求、相互替换、效果相同）；</li><li>②完全互换：不挑选、不修配，例灯泡；</li><li>③不完全互换：允许选择或调整，例滚动轴承分组装配；</li><li>④其他分类：几何参数/功能、外/内互换性。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>分组装配、调整法属于不完全互换。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第一章》p23—25；复习PDF第1页第3、4条。</p></div>
+</article>
+<article class="card compact searchable" data-search="第1章 概述 4. 技术测量有哪些基本原则？简述阿贝原则与圆周封闭（闭合）原则。 ①基准统一原则；②最小变形原则；③最短测量链原则；④阿贝原则（被测物与标准尺共线、串联）；⑤闭合原则（总和等于理论值，检查正确性、消除系统误差）、重复原则、随机原则。 阿贝原则不是“多次测量”；闭合原则针对系统误差。 PPT《第二章》§2.7 p72—81；复习PDF第1页第1章第6条。">
+  <div class="card-head"><span class="pill">第1章 概述</span><h3>4. 技术测量有哪些基本原则？简述阿贝原则与圆周封闭（闭合）原则。</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①基准统一原则；</li><li>②最小变形原则；</li><li>③最短测量链原则；</li><li>④阿贝原则（被测物与标准尺共线、串联）；</li><li>⑤闭合原则（总和等于理论值，检查正确性、消除系统误差）、重复原则、随机原则。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>阿贝原则不是“多次测量”；闭合原则针对系统误差。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第二章》§2.7 p72—81；复习PDF第1页第1章第6条。</p></div>
+</article><h3>第2章 几何量测量技术基础</h3>
+<article class="card compact searchable" data-search="第2章 几何量测量技术基础 5. 什么是测量？完整测量过程的四要素是什么？ ①测量是将被测量与标准量比较、得出比值的全过程；②测量对象；③计量单位；④测量方法；⑤测量精度。 测量给出数值，检验只判断合格与否。 PPT《第二章》p6—7；复习PDF第1页第2章第1条。">
+  <div class="card-head"><span class="pill">第2章 几何量测量技术基础</span><h3>5. 什么是测量？完整测量过程的四要素是什么？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①测量是将被测量与标准量比较、得出比值的全过程；</li><li>②测量对象；</li><li>③计量单位；</li><li>④测量方法；</li><li>⑤测量精度。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>测量给出数值，检验只判断合格与否。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第二章》p6—7；复习PDF第1页第2章第1条。</p></div>
+</article>
+<article class="card compact searchable" data-search="第2章 几何量测量技术基础 6. 量块“级”与“等”有何区别？按级、按等使用各依据什么？ ①分级按制造精度（K、0、1、2、3级）；②分等按检定精度（1—5等）；③共同技术要求（平面度、粗糙度、研合性、硬度、长度、长度变动量、长度稳定度）；④级按中心长度极限偏差，等按中心长度测量不确定度；⑤按级用标称尺寸、按等用检定书实际尺寸。 按级忽略制造误差，按等忽略检定误差。 PPT《第二章》p10、p16—18；复习PDF第1页第2条；书内内容（老师提供）。">
+  <div class="card-head"><span class="pill">第2章 几何量测量技术基础</span><h3>6. 量块“级”与“等”有何区别？按级、按等使用各依据什么？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①分级按制造精度（K、0、1、2、3级）；</li><li>②分等按检定精度（1—5等）；</li><li>③共同技术要求（平面度、粗糙度、研合性、硬度、长度、长度变动量、长度稳定度）；</li><li>④级按中心长度极限偏差，等按中心长度测量不确定度；</li><li>⑤按级用标称尺寸、按等用检定书实际尺寸。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>按级忽略制造误差，按等忽略检定误差。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第二章》p10、p16—18；复习PDF第1页第2条；书内内容（老师提供）。</p></div>
+</article>
+<article class="card compact searchable" data-search="第2章 几何量测量技术基础 7. 测量误差按性质分哪三类？各有什么特点和处理原则？ ①系统误差（大小符号不变或按规律变，减小/消除）；②随机误差（不可预定、正态分布、单峰/对称/有界/抵偿，统计处理）；③粗大误差（明显歪曲，剔除）；④正确度/精密度/准确度的含义。 正确度对应系统误差，精密度对应随机误差。 PPT《第二章》p58—61；复习PDF第1页第5条。">
+  <div class="card-head"><span class="pill">第2章 几何量测量技术基础</span><h3>7. 测量误差按性质分哪三类？各有什么特点和处理原则？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①系统误差（大小符号不变或按规律变，减小/消除）；</li><li>②随机误差（不可预定、正态分布、单峰/对称/有界/抵偿，统计处理）；</li><li>③粗大误差（明显歪曲，剔除）；</li><li>④正确度/精密度/准确度的含义。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>正确度对应系统误差，精密度对应随机误差。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第二章》p58—61；复习PDF第1页第5条。</p></div>
+</article>
+<article class="card compact searchable" data-search="第2章 几何量测量技术基础 8. 等精度测量列数据处理步骤有哪些？ ①判断定值系统误差；②求算术平均值；③计算残差；④求单次标准偏差σ并用3σ判粗大误差；⑤求σ_x=σ/√n、3σ_x并写出结果。 σ_x=σ/√n，不是σ。 PPT《第二章》p64—71；复习PDF第1页第6条。">
+  <div class="card-head"><span class="pill">第2章 几何量测量技术基础</span><h3>8. 等精度测量列数据处理步骤有哪些？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①判断定值系统误差；</li><li>②求算术平均值；</li><li>③计算残差；</li><li>④求单次标准偏差σ并用3σ判粗大误差；</li><li>⑤求σ_x=σ/√n、3σ_x并写出结果。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>σ_x=σ/√n，不是σ。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第二章》p64—71；复习PDF第1页第6条。</p></div>
+</article><h3>第5章 表面粗糙度</h3>
+<article class="card compact searchable" data-search="第5章 表面粗糙度 9. 表面形貌包括哪三种基本情况？如何按波距划分？ ①表面粗糙度λ&lt;1mm；②表面波纹度λ=1—10mm；③形状误差λ&gt;10mm；④三者按波距λ划分；⑤表面结构还包括纹理方向、表面缺陷。 波距由小到大依次为粗糙度→波纹度→形状误差。 PPT《第五章》p4、p12—15；复习PDF第1页第5章第1条。">
+  <div class="card-head"><span class="pill">第5章 表面粗糙度</span><h3>9. 表面形貌包括哪三种基本情况？如何按波距划分？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①表面粗糙度λ&lt;1mm；</li><li>②表面波纹度λ=1—10mm；</li><li>③形状误差λ&gt;10mm；</li><li>④三者按波距λ划分；</li><li>⑤表面结构还包括纹理方向、表面缺陷。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>波距由小到大依次为粗糙度→波纹度→形状误差。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第五章》p4、p12—15；复习PDF第1页第5章第1条。</p></div>
+</article>
+<article class="card compact searchable" data-search="第5章 表面粗糙度 10. 取样长度和评定长度的含义与作用是什么？ ①取样长度lr定义（至少5峰5谷）；②lr作用（削弱波纹度/形状误差）；③评定长度ln定义（连续几个lr）；④ln作用（削弱不均匀性）；⑤一般ln=5lr。 lr是“一段基准线长度”，ln是“总长度”。 PPT《第五章》p20—21；复习PDF第1页第2条。">
+  <div class="card-head"><span class="pill">第5章 表面粗糙度</span><h3>10. 取样长度和评定长度的含义与作用是什么？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①取样长度lr定义（至少5峰5谷）；</li><li>②lr作用（削弱波纹度/形状误差）；</li><li>③评定长度ln定义（连续几个lr）；</li><li>④ln作用（削弱不均匀性）；</li><li>⑤一般ln=5lr。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>lr是“一段基准线长度”，ln是“总长度”。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第五章》p20—21；复习PDF第1页第2条。</p></div>
+</article>
+<article class="card compact searchable" data-search="第5章 表面粗糙度 11. Ra、Rz、Rsm、Rmr(c)的含义是什么？ ①Ra=轮廓算术平均偏差；②Rz=最大峰高+最大谷深；③Rsm=轮廓单元平均宽度；④Rmr(c)=实体材料长度比率；⑤Rmr(c)越大耐磨性越好。 Rmr(c)必须给出水平截距c。 PPT《第五章》p25—32；复习PDF第1页第3条。">
+  <div class="card-head"><span class="pill">第5章 表面粗糙度</span><h3>11. Ra、Rz、Rsm、Rmr(c)的含义是什么？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①Ra=轮廓算术平均偏差；</li><li>②Rz=最大峰高+最大谷深；</li><li>③Rsm=轮廓单元平均宽度；</li><li>④Rmr(c)=实体材料长度比率；</li><li>⑤Rmr(c)越大耐磨性越好。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>Rmr(c)必须给出水平截距c。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第五章》p25—32；复习PDF第1页第3条。</p></div>
+</article>
+<article class="card compact searchable" data-search="第5章 表面粗糙度 12. 表面粗糙度参数选用原则和常用测量方法是什么？ ①优先选用Ra；②Rz适用场合；③Rsm、Rmr(c)为附加参数；④数值满足功能、经济性、与尺寸/形状公差协调；⑤测量方法：比较法、针描法、印模法、光切法、干涉法。 附加参数一般不单独使用。 PPT《第五章》p54—59、p59—69；复习PDF第1页第4、6条。">
+  <div class="card-head"><span class="pill">第5章 表面粗糙度</span><h3>12. 表面粗糙度参数选用原则和常用测量方法是什么？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①优先选用Ra；</li><li>②Rz适用场合；</li><li>③Rsm、Rmr(c)为附加参数；</li><li>④数值满足功能、经济性、与尺寸/形状公差协调；</li><li>⑤测量方法：比较法、针描法、印模法、光切法、干涉法。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>附加参数一般不单独使用。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第五章》p54—59、p59—69；复习PDF第1页第4、6条。</p></div>
+</article><h3>第6章 圆柱螺纹结合的精度设计</h3>
+<article class="card compact searchable" data-search="第6章 圆柱螺纹结合的精度设计 13. 螺纹按功能分为哪几类？普通螺纹的功能要求是什么？ ①联结螺纹（普通紧固螺纹）；②传动螺纹（传力/传位移）；③密封螺纹（管螺纹）；④普通螺纹功能要求：良好旋入性、一定紧固连接强度。 普通螺纹属于联结螺纹，不是传动螺纹。 PPT《第六章》p2；复习PDF第2页第6章第1条。">
+  <div class="card-head"><span class="pill">第6章 圆柱螺纹结合的精度设计</span><h3>13. 螺纹按功能分为哪几类？普通螺纹的功能要求是什么？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①联结螺纹（普通紧固螺纹）；</li><li>②传动螺纹（传力/传位移）；</li><li>③密封螺纹（管螺纹）；</li><li>④普通螺纹功能要求：良好旋入性、一定紧固连接强度。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>普通螺纹属于联结螺纹，不是传动螺纹。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第六章》p2；复习PDF第2页第6章第1条。</p></div>
+</article>
+<article class="card compact searchable" data-search="第6章 圆柱螺纹结合的精度设计 14. 普通螺纹有哪些基本几何参数？影响互换性的主要因素是什么？ ①基本牙型；②大径、小径、中径；③螺距、导程；④牙型半角、螺旋升角、旋合长度；⑤影响互换性三因素：螺距误差、牙型半角误差、中径偏差。 中径不是大径与小径的平均值。 PPT《第六章》p5—18；复习PDF第2页第2条。">
+  <div class="card-head"><span class="pill">第6章 圆柱螺纹结合的精度设计</span><h3>14. 普通螺纹有哪些基本几何参数？影响互换性的主要因素是什么？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①基本牙型；</li><li>②大径、小径、中径；</li><li>③螺距、导程；</li><li>④牙型半角、螺旋升角、旋合长度；</li><li>⑤影响互换性三因素：螺距误差、牙型半角误差、中径偏差。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>中径不是大径与小径的平均值。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第六章》p5—18；复习PDF第2页第2条。</p></div>
+</article>
+<article class="card compact searchable" data-search="第6章 圆柱螺纹结合的精度设计 15. 普通螺纹合格性判断原则（泰勒原则）是什么？ ①作用中径不超最大实体牙型中径；②单一中径不超最小实体牙型中径；③外螺纹d2m≤d2max、d2单一≥d2min；④内螺纹D2m≥D2min、D2单一≤D2max。 作用中径综合反映螺距和牙型半角误差。 PPT《第六章》p17—18；复习PDF第2页第2条。">
+  <div class="card-head"><span class="pill">第6章 圆柱螺纹结合的精度设计</span><h3>15. 普通螺纹合格性判断原则（泰勒原则）是什么？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①作用中径不超最大实体牙型中径；</li><li>②单一中径不超最小实体牙型中径；</li><li>③外螺纹d2m≤d2max、d2单一≥d2min；</li><li>④内螺纹D2m≥D2min、D2单一≤D2max。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>作用中径综合反映螺距和牙型半角误差。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第六章》p17—18；复习PDF第2页第2条。</p></div>
+</article>
+<article class="card compact searchable" data-search="第6章 圆柱螺纹结合的精度设计 16. 普通螺纹标记由哪几部分组成？举例说明。 ①螺纹代号（公称直径、螺距）；②公差带代号（中径、顶径顺序）；③旋合长度；④不注旋合长度表示N；⑤内外螺纹配合左内右外，左旋标LH。 公差带代号顺序是中径在前、顶径在后。 PPT《第六章》p27—28；复习PDF第2页第5条。">
+  <div class="card-head"><span class="pill">第6章 圆柱螺纹结合的精度设计</span><h3>16. 普通螺纹标记由哪几部分组成？举例说明。</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①螺纹代号（公称直径、螺距）；</li><li>②公差带代号（中径、顶径顺序）；</li><li>③旋合长度；</li><li>④不注旋合长度表示N；</li><li>⑤内外螺纹配合左内右外，左旋标LH。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>公差带代号顺序是中径在前、顶径在后。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第六章》p27—28；复习PDF第2页第5条。</p></div>
+</article><h3>第7章 圆柱齿轮传动的精度设计</h3>
+<article class="card compact searchable" data-search="第7章 圆柱齿轮传动的精度设计 17. 齿轮按功能分为哪几类？齿轮传动有哪四项基本要求？ ①传递运动齿轮；②传递动力齿轮；③读数与分度齿轮；④四项基本要求：运动准确性、平稳性、载荷均匀性、侧隙。 不同用途齿轮对四项要求的侧重点不同。 PPT《第七章》p2—11；复习PDF第3页第7章第1条。">
+  <div class="card-head"><span class="pill">第7章 圆柱齿轮传动的精度设计</span><h3>17. 齿轮按功能分为哪几类？齿轮传动有哪四项基本要求？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①传递运动齿轮；</li><li>②传递动力齿轮；</li><li>③读数与分度齿轮；</li><li>④四项基本要求：运动准确性、平稳性、载荷均匀性、侧隙。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>不同用途齿轮对四项要求的侧重点不同。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第七章》p2—11；复习PDF第3页第7章第1条。</p></div>
+</article>
+<article class="card compact searchable" data-search="第7章 圆柱齿轮传动的精度设计 18. 圆柱齿轮传动精度有哪些评定指标？各评定哪项基本要求？ ①Fp、Fpk评运动准确性；②fpt、Fα评传动平稳性；③Fβ评载荷分布均匀性；④fsn、Wk评侧隙；⑤综合指标Fi′、fi′、Fr、Fi″、fi″的归属。 Fr评运动准确性，不是平稳性；fi″评平稳性。 PPT《第七章》p18—26；复习PDF第3页第2条。">
+  <div class="card-head"><span class="pill">第7章 圆柱齿轮传动的精度设计</span><h3>18. 圆柱齿轮传动精度有哪些评定指标？各评定哪项基本要求？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①Fp、Fpk评运动准确性；</li><li>②fpt、Fα评传动平稳性；</li><li>③Fβ评载荷分布均匀性；</li><li>④fsn、Wk评侧隙；</li><li>⑤综合指标Fi′、fi′、Fr、Fi″、fi″的归属。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>Fr评运动准确性，不是平稳性；fi″评平稳性。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第七章》p18—26；复习PDF第3页第2条。</p></div>
+</article>
+<article class="card compact searchable" data-search="第7章 圆柱齿轮传动的精度设计 19. 圆柱齿轮精度等级如何规定？三个公差组是什么？ ①0—12共13级；②0最高、12最低；③5级基础级；④三个公差组Ⅰ/Ⅱ/Ⅲ；⑤同一公差组内必须同级，组间可不同级。 Fi″、fi″只有4—12共9级。 PPT《第七章》p28—32；复习PDF第3页第3条。">
+  <div class="card-head"><span class="pill">第7章 圆柱齿轮传动的精度设计</span><h3>19. 圆柱齿轮精度等级如何规定？三个公差组是什么？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①0—12共13级；</li><li>②0最高、12最低；</li><li>③5级基础级；</li><li>④三个公差组Ⅰ/Ⅱ/Ⅲ；</li><li>⑤同一公差组内必须同级，组间可不同级。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>Fi″、fi″只有4—12共9级。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第七章》p28—32；复习PDF第3页第3条。</p></div>
+</article></div>
+    </details>
+    <details id="mock" class="chapter searchable" open>
+      <summary><div><div class="chapter-title">简答模拟题与评分点</div><div class="chapter-meta">10道模拟题</div></div><span class="chevron">▶</span></summary>
+      <div class="chapter-body"><blockquote>共10道，覆盖第1、2、5、6、7章；每题给出评分点与资料依据。  <br>资料依据：以《互换性与测量技术-复习主要知识点.pdf》为主，PPT为补充；页码为PDF页序号。</blockquote>
+<article class="card mock searchable" data-search="模拟题1（第1章） 什么是几何要素、几何量、几何量公差？说明三者之间的关系。 ①几何要素是构成零件几何特征的点、线、面；②几何量是表示要素大小、形状、位置及其精度的参量；③几何量公差是允许几何量变动的范围；④加工后几何量变动形成加工误差，用公差限制；⑤公差是判断几何量是否在允许范围内的依据。 公差是“允许变动量”，不是实际误差。 PPT《第一章》p12、p15、p19、p42；复习PDF第1页第1条。">
+  <div class="card-head"><span class="pill">模拟题1（第1章）</span><h3>什么是几何要素、几何量、几何量公差？说明三者之间的关系。</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①几何要素是构成零件几何特征的点、线、面；</li><li>②几何量是表示要素大小、形状、位置及其精度的参量；</li><li>③几何量公差是允许几何量变动的范围；</li><li>④加工后几何量变动形成加工误差，用公差限制；</li><li>⑤公差是判断几何量是否在允许范围内的依据。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>公差是“允许变动量”，不是实际误差。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第一章》p12、p15、p19、p42；复习PDF第1页第1条。</p></div>
+</article>
+<article class="card mock searchable" data-search="模拟题2（第1章） 说明互换性、加工误差、公差、标准化之间的关系。 ①互换性定义（同一规格、按规定技术要求、相互替换、效果相同）；②加工误差是几何量的实际变动；③公差是允许变动量，用于控制加工误差；④标准化是互换性的前提，互换性设计需依据标准；⑤公差是互换性的保证，几何量在公差范围内充分近似即可互换。 “标准是前提、公差是保证”的顺序不能颠倒。 PPT《第一章》p23、p27、p35—37、p42；复习PDF第1页第3条。">
+  <div class="card-head"><span class="pill">模拟题2（第1章）</span><h3>说明互换性、加工误差、公差、标准化之间的关系。</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①互换性定义（同一规格、按规定技术要求、相互替换、效果相同）；</li><li>②加工误差是几何量的实际变动；</li><li>③公差是允许变动量，用于控制加工误差；</li><li>④标准化是互换性的前提，互换性设计需依据标准；</li><li>⑤公差是互换性的保证，几何量在公差范围内充分近似即可互换。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>“标准是前提、公差是保证”的顺序不能颠倒。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第一章》p23、p27、p35—37、p42；复习PDF第1页第3条。</p></div>
+</article>
+<article class="card mock searchable" data-search="模拟题3（第2章） 量块“级”与“等”有何区别？按级、按等使用各依据什么？ ①分级按制造精度（K、0、1、2、3级）；②分等按检定精度（1—5等）；③共同技术要求：测量面平面度、粗糙度、研合性及硬度、量块长度、长度变动量、长度稳定度；④级按中心长度极限偏差，等按中心长度测量不确定度；⑤按级用标称尺寸、忽略制造误差，按等用检定书实际尺寸、忽略检定误差。 不要写成“级用实测值、等用标称值”。 PPT《第二章》p10、p16—18；复习PDF第1页第2条；书内内容（老师提供）。">
+  <div class="card-head"><span class="pill">模拟题3（第2章）</span><h3>量块“级”与“等”有何区别？按级、按等使用各依据什么？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①分级按制造精度（K、0、1、2、3级）；</li><li>②分等按检定精度（1—5等）；</li><li>③共同技术要求：测量面平面度、粗糙度、研合性及硬度、量块长度、长度变动量、长度稳定度；</li><li>④级按中心长度极限偏差，等按中心长度测量不确定度；</li><li>⑤按级用标称尺寸、忽略制造误差，按等用检定书实际尺寸、忽略检定误差。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>不要写成“级用实测值、等用标称值”。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第二章》p10、p16—18；复习PDF第1页第2条；书内内容（老师提供）。</p></div>
+</article>
+<article class="card mock searchable" data-search="模拟题4（第2章） 测量误差按性质分为哪三类？各有什么特点和处理原则？ ①系统误差：大小和符号不变或按规律变化，应尽量减少或消除；②随机误差：大小和符号不可预定，服从正态分布，具有单峰性、对称性、有界性、抵偿性，用数理统计方法处理；③粗大误差：明显歪曲测量结果，应剔除；④正确度反映系统误差，精密度反映随机误差，准确度反映综合影响。 正确度≠精密度；粗大误差不能按随机误差处理。 PPT《第二章》p58—61；复习PDF第1页第5条。">
+  <div class="card-head"><span class="pill">模拟题4（第2章）</span><h3>测量误差按性质分为哪三类？各有什么特点和处理原则？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①系统误差：大小和符号不变或按规律变化，应尽量减少或消除；</li><li>②随机误差：大小和符号不可预定，服从正态分布，具有单峰性、对称性、有界性、抵偿性，用数理统计方法处理；</li><li>③粗大误差：明显歪曲测量结果，应剔除；</li><li>④正确度反映系统误差，精密度反映随机误差，准确度反映综合影响。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>正确度≠精密度；粗大误差不能按随机误差处理。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第二章》p58—61；复习PDF第1页第5条。</p></div>
+</article>
+<article class="card mock searchable" data-search="模拟题5（第5章） 表面粗糙度、表面波纹度、形状误差如何按波距划分？取样长度和评定长度各有什么作用？ ①表面粗糙度λ&lt;1mm，微观几何形状误差；②表面波纹度λ=1—10mm；③形状误差λ&gt;10mm，宏观几何形状误差；④取样长度lr至少含5峰5谷，作用是削弱波纹度和形状误差影响；⑤评定长度ln由连续几个lr组成，作用是削弱轮廓特性不均匀性影响，一般ln=5lr。 波距由小到大依次为粗糙度→波纹度→形状误差。 PPT《第五章》p4、p12—15、p20—21；复习PDF第1页第1、2条。">
+  <div class="card-head"><span class="pill">模拟题5（第5章）</span><h3>表面粗糙度、表面波纹度、形状误差如何按波距划分？取样长度和评定长度各有什么作用？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①表面粗糙度λ&lt;1mm，微观几何形状误差；</li><li>②表面波纹度λ=1—10mm；</li><li>③形状误差λ&gt;10mm，宏观几何形状误差；</li><li>④取样长度lr至少含5峰5谷，作用是削弱波纹度和形状误差影响；</li><li>⑤评定长度ln由连续几个lr组成，作用是削弱轮廓特性不均匀性影响，一般ln=5lr。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>波距由小到大依次为粗糙度→波纹度→形状误差。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第五章》p4、p12—15、p20—21；复习PDF第1页第1、2条。</p></div>
+</article>
+<article class="card mock searchable" data-search="模拟题6（第5章） 说明Ra、Rz、Rsm、Rmr(c)的含义，并简述表面粗糙度参数的选用原则。 ①Ra为轮廓算术平均偏差，是取样长度内|Z(x)|的算术平均值；②Rz为轮廓最大高度，是最大峰高与最大谷深之和；③Rsm为轮廓单元平均宽度；④Rmr(c)为轮廓支承长度率，Rmr(c)越大耐磨性越好；⑤选用时优先Ra，粗糙/太光滑/抗疲劳用Rz，Rsm、Rmr(c)为附加参数，数值应满足功能并兼顾经济性。 Rmr(c)必须给出水平截距c；附加参数一般不单独使用。 PPT《第五章》p25—32、p54—58；复习PDF第1页第3、4条。">
+  <div class="card-head"><span class="pill">模拟题6（第5章）</span><h3>说明Ra、Rz、Rsm、Rmr(c)的含义，并简述表面粗糙度参数的选用原则。</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①Ra为轮廓算术平均偏差，是取样长度内|Z(x)|的算术平均值；</li><li>②Rz为轮廓最大高度，是最大峰高与最大谷深之和；</li><li>③Rsm为轮廓单元平均宽度；</li><li>④Rmr(c)为轮廓支承长度率，Rmr(c)越大耐磨性越好；</li><li>⑤选用时优先Ra，粗糙/太光滑/抗疲劳用Rz，Rsm、Rmr(c)为附加参数，数值应满足功能并兼顾经济性。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>Rmr(c)必须给出水平截距c；附加参数一般不单独使用。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第五章》p25—32、p54—58；复习PDF第1页第3、4条。</p></div>
+</article>
+<article class="card mock searchable" data-search="模拟题7（第6章） 普通螺纹有哪些基本几何参数？影响互换性的主要因素是什么？合格性判断原则是什么？ ①基本牙型：等边三角形截去顶部H/8、底部H/4；②大径、小径、中径；③螺距、导程；④牙型半角、螺旋升角、旋合长度；⑤影响互换性三因素：螺距误差、牙型半角误差、中径偏差；⑥泰勒原则：作用中径不超最大实体牙型中径，单一中径不超最小实体牙型中径。 中径不是大径与小径的平均值；作用中径综合反映螺距和牙型半角误差。 PPT《第六章》p5—18；复习PDF第2页第2条。">
+  <div class="card-head"><span class="pill">模拟题7（第6章）</span><h3>普通螺纹有哪些基本几何参数？影响互换性的主要因素是什么？合格性判断原则是什么？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①基本牙型：等边三角形截去顶部H/8、底部H/4；</li><li>②大径、小径、中径；</li><li>③螺距、导程；</li><li>④牙型半角、螺旋升角、旋合长度；</li><li>⑤影响互换性三因素：螺距误差、牙型半角误差、中径偏差；</li><li>⑥泰勒原则：作用中径不超最大实体牙型中径，单一中径不超最小实体牙型中径。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>中径不是大径与小径的平均值；作用中径综合反映螺距和牙型半角误差。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第六章》p5—18；复习PDF第2页第2条。</p></div>
+</article>
+<article class="card mock searchable" data-search="模拟题8（第6章） 普通螺纹公差等级和旋合长度如何规定？结合精度分哪三级？标记由哪几部分组成？ ①内螺纹中径/顶径4—8级，外螺纹中径3—9级、顶径4/6/8级，6级为基本级；②旋合长度分S/N/L，精度与公差等级和旋合长度均有关；③结合精度分精密级、中等级、粗糙级；④标记由螺纹代号、公差带代号（中径、顶径顺序）、旋合长度组成；⑤不注旋合长度表示N，内外螺纹配合左内右外，左旋标LH。 螺纹精度不是只由公差等级决定；公差带顺序中径在前、顶径在后。 PPT《第六章》p20—28；复习PDF第2页第3、4、5条。">
+  <div class="card-head"><span class="pill">模拟题8（第6章）</span><h3>普通螺纹公差等级和旋合长度如何规定？结合精度分哪三级？标记由哪几部分组成？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①内螺纹中径/顶径4—8级，外螺纹中径3—9级、顶径4/6/8级，6级为基本级；</li><li>②旋合长度分S/N/L，精度与公差等级和旋合长度均有关；</li><li>③结合精度分精密级、中等级、粗糙级；</li><li>④标记由螺纹代号、公差带代号（中径、顶径顺序）、旋合长度组成；</li><li>⑤不注旋合长度表示N，内外螺纹配合左内右外，左旋标LH。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>螺纹精度不是只由公差等级决定；公差带顺序中径在前、顶径在后。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第六章》p20—28；复习PDF第2页第3、4、5条。</p></div>
+</article>
+<article class="card mock searchable" data-search="模拟题9（第7章） 齿轮传动有哪四项基本要求？各对应哪个公差组？各有哪些主要评定指标？ ①传递运动准确性—第Ⅰ公差组—Fp、Fpk；②传递运动平稳性—第Ⅱ公差组—fpt、Fα；③载荷分布均匀性—第Ⅲ公差组—Fβ；④传动侧隙—齿厚极限偏差/中心距偏差—fsn、Wk；⑤综合指标Fi′、fi′、Fr、Fi″、fi″的归属。 Fr评运动准确性，不是平稳性；fi″评平稳性。 PPT《第七章》p6—11、p18—26；复习PDF第3页第1、2条。">
+  <div class="card-head"><span class="pill">模拟题9（第7章）</span><h3>齿轮传动有哪四项基本要求？各对应哪个公差组？各有哪些主要评定指标？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①传递运动准确性—第Ⅰ公差组—Fp、Fpk；</li><li>②传递运动平稳性—第Ⅱ公差组—fpt、Fα；</li><li>③载荷分布均匀性—第Ⅲ公差组—Fβ；</li><li>④传动侧隙—齿厚极限偏差/中心距偏差—fsn、Wk；</li><li>⑤综合指标Fi′、fi′、Fr、Fi″、fi″的归属。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>Fr评运动准确性，不是平稳性；fi″评平稳性。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第七章》p6—11、p18—26；复习PDF第3页第1、2条。</p></div>
+</article>
+<article class="card mock searchable" data-search="模拟题10（第7章） 圆柱齿轮精度等级如何规定？三个公差组的关系是什么？选择精度等级应考虑哪些因素？ ①0—12共13级，0最高、12最低；②5级为基础级；③Fi″、fi″单独为4—12共9级；④三个公差组Ⅰ/Ⅱ/Ⅲ，同一组内项目必须同级，组间可不同级；⑤选择时考虑用途、使用要求、传递功率、圆周速度、切齿工艺及经济性。 三个公差组可不同级，但同一组内不能不同级。 PPT《第七章》p28—32；复习PDF第3页第3条。">
+  <div class="card-head"><span class="pill">模拟题10（第7章）</span><h3>圆柱齿轮精度等级如何规定？三个公差组的关系是什么？选择精度等级应考虑哪些因素？</h3></div>
+  <div class="block points"><div class="label">评分点</div><ul class="circled"><li>①0—12共13级，0最高、12最低；</li><li>②5级为基础级；</li><li>③Fi″、fi″单独为4—12共9级；</li><li>④三个公差组Ⅰ/Ⅱ/Ⅲ，同一组内项目必须同级，组间可不同级；</li><li>⑤选择时考虑用途、使用要求、传递功率、圆周速度、切齿工艺及经济性。</li></ul></div>
+  <div class="block pitfall"><div class="label">易错点</div><p>三个公差组可不同级，但同一组内不能不同级。</p></div>
+  <div class="block source"><div class="label">资料依据</div><p>PPT《第七章》p28—32；复习PDF第3页第3条。</p></div>
+</article></div>
+    </details>
+    <details id="compare" class="chapter searchable" open>
+      <summary><div><div class="chapter-title">易混概念对比表</div><div class="chapter-meta">12组表格 · 窄屏可横向滚动</div></div><span class="chevron">▶</span></summary>
+      <div class="chapter-body"><blockquote>用 Markdown 表格对比易混概念；每行均标注资料依据。  <br>资料依据：以《互换性与测量技术-复习主要知识点.pdf》为主，PPT为补充；页码为PDF页序号。</blockquote>
+<section class="table-section searchable" data-search="1. 公差、偏差、误差 概念 定义/关键点 与其他概念的区别 资料依据 公差 允许尺寸的变动量；Th=ES−EI、Ts=es−ei；一定为正值 公差是“允许范围”，由设计给定，反映加工难易 第三章1 p12—14 偏差 某一尺寸减基本尺寸的代数差；ES、EI、es、ei；可为正、负、零 偏差是“位置”，反映公差带位置；极限偏差限制实际偏差 第三章1 p9—11 误差 实际值与真值之差；δ=x−x0；可正可负 误差是“实际偏离”，加工产生；公差用于限制误差 第一章 p42 ">
+  <h3>1. 公差、偏差、误差</h3>
+  <div class="table-wrap"><table><thead><tr><th>概念</th><th>定义/关键点</th><th>与其他概念的区别</th><th>资料依据</th></tr></thead><tbody><tr><td>公差</td><td>允许尺寸的变动量；Th=ES−EI、Ts=es−ei；一定为正值</td><td>公差是“允许范围”，由设计给定，反映加工难易</td><td>第三章1 p12—14</td></tr><tr><td>偏差</td><td>某一尺寸减基本尺寸的代数差；ES、EI、es、ei；可为正、负、零</td><td>偏差是“位置”，反映公差带位置；极限偏差限制实际偏差</td><td>第三章1 p9—11</td></tr><tr><td>误差</td><td>实际值与真值之差；δ=x−x0；可正可负</td><td>误差是“实际偏离”，加工产生；公差用于限制误差</td><td>第一章 p42</td></tr></tbody></table></div>
+</section>
+<section class="table-section searchable" data-search="2. 尺寸术语 概念 定义 关键区别 资料依据 基本尺寸 设计给定的尺寸，用D/d表示 是计算偏差和公差的基准 第三章1 p5 实际尺寸 通过测量得到的尺寸，用Da/da表示 是加工后的实际值，可能落在极限尺寸内或外 第三章1 p5 极限尺寸 允许尺寸变化的两个界限值：Dmax/Dmin、dmax/dmin 是判断合格的界限；最大/最小极限尺寸 第三章1 p7—8 作用尺寸 配合面全长上，与实际孔内接的最大理想轴尺寸（孔）；与实际轴外接的最小理想孔尺寸（轴） 由实际尺寸和形位误差综合形成，是变量；无形状误差时等于局部实际尺寸 第三章1 p6 ">
+  <h3>2. 尺寸术语</h3>
+  <div class="table-wrap"><table><thead><tr><th>概念</th><th>定义</th><th>关键区别</th><th>资料依据</th></tr></thead><tbody><tr><td>基本尺寸</td><td>设计给定的尺寸，用D/d表示</td><td>是计算偏差和公差的基准</td><td>第三章1 p5</td></tr><tr><td>实际尺寸</td><td>通过测量得到的尺寸，用Da/da表示</td><td>是加工后的实际值，可能落在极限尺寸内或外</td><td>第三章1 p5</td></tr><tr><td>极限尺寸</td><td>允许尺寸变化的两个界限值：Dmax/Dmin、dmax/dmin</td><td>是判断合格的界限；最大/最小极限尺寸</td><td>第三章1 p7—8</td></tr><tr><td>作用尺寸</td><td>配合面全长上，与实际孔内接的最大理想轴尺寸（孔）；与实际轴外接的最小理想孔尺寸（轴）</td><td>由实际尺寸和形位误差综合形成，是变量；无形状误差时等于局部实际尺寸</td><td>第三章1 p6</td></tr></tbody></table></div>
+</section>
+<section class="table-section searchable" data-search="3. 配合类型与基准制 概念 定义/特征 公式/关键点 资料依据 间隙配合 孔公差带位于轴公差带之上，具有间隙（含最小间隙为零） Xmax=ES−ei；Xmin=EI−es；用于活动连接 第三章1 p21—22 过盈配合 孔公差带位于轴公差带之下，具有过盈（含最小过盈为零） Ymax=EI−es；Ymin=ES−ei；用于紧固连接 第三章1 p23 过渡配合 孔、轴公差带相互交叠，可能间隙也可能过盈 间隙或过盈都较小；用于定位连接 第三章1 p24 基孔制 基本偏差一定的孔公差带（H）与不同基本偏差的轴公差带形成配合 基准孔H：EI=0，公差带在零线上方 第三章1 p28—30 基轴制 基本偏差一定的轴公差带（h）与不同基本偏差的孔公差带形成配合 基准轴h：es=0，公差带在零线下方 第三章1 p31—32 ">
+  <h3>3. 配合类型与基准制</h3>
+  <div class="table-wrap"><table><thead><tr><th>概念</th><th>定义/特征</th><th>公式/关键点</th><th>资料依据</th></tr></thead><tbody><tr><td>间隙配合</td><td>孔公差带位于轴公差带之上，具有间隙（含最小间隙为零）</td><td>Xmax=ES−ei；Xmin=EI−es；用于活动连接</td><td>第三章1 p21—22</td></tr><tr><td>过盈配合</td><td>孔公差带位于轴公差带之下，具有过盈（含最小过盈为零）</td><td>Ymax=EI−es；Ymin=ES−ei；用于紧固连接</td><td>第三章1 p23</td></tr><tr><td>过渡配合</td><td>孔、轴公差带相互交叠，可能间隙也可能过盈</td><td>间隙或过盈都较小；用于定位连接</td><td>第三章1 p24</td></tr><tr><td>基孔制</td><td>基本偏差一定的孔公差带（H）与不同基本偏差的轴公差带形成配合</td><td>基准孔H：EI=0，公差带在零线上方</td><td>第三章1 p28—30</td></tr><tr><td>基轴制</td><td>基本偏差一定的轴公差带（h）与不同基本偏差的孔公差带形成配合</td><td>基准轴h：es=0，公差带在零线下方</td><td>第三章1 p31—32</td></tr></tbody></table></div>
+</section>
+<section class="table-section searchable" data-search="4. 公差原则 原则 标注 遵守边界 公式/允许量 资料依据 独立原则 不加任何符号 尺寸、形位分别满足，无边界关系 尺寸公差与形位公差独立 第四章 p126—127 包容要求 尺寸公差带代号后加“E” 最大实体边界MMB 孔Dfe≥Dmin、Da≤Dmax；轴dfe≤dmax、da≥dmin；偏离量补偿给形状误差 第四章 p128—132 最大实体要求 公差值后或基准字母后加“M” 最大实体实效边界MMVB 孔Dfe≥DMV=Dmin−t、Da≤Dmax；轴dfe≤dMV=dmax+t、da≥dmin；允许形位公差=给定值+偏离量 第四章 p133—139 最小实体要求 公差值后或基准字母后加“L” 最小实体实效边界LMVB 孔Dfi≤DLV=Dmax+t；轴dfi≥dLV=dmin−t；局部实际尺寸不超MMS 第四章 p142—146 可逆要求 加“R” 与最大/最小实体要求联用 尺寸公差可补偿形位公差，形位公差也可补偿尺寸公差 第四章 p144—146 ">
+  <h3>4. 公差原则</h3>
+  <div class="table-wrap"><table><thead><tr><th>原则</th><th>标注</th><th>遵守边界</th><th>公式/允许量</th><th>资料依据</th></tr></thead><tbody><tr><td>独立原则</td><td>不加任何符号</td><td>尺寸、形位分别满足，无边界关系</td><td>尺寸公差与形位公差独立</td><td>第四章 p126—127</td></tr><tr><td>包容要求</td><td>尺寸公差带代号后加“E”</td><td>最大实体边界MMB</td><td>孔Dfe≥Dmin、Da≤Dmax；轴dfe≤dmax、da≥dmin；偏离量补偿给形状误差</td><td>第四章 p128—132</td></tr><tr><td>最大实体要求</td><td>公差值后或基准字母后加“M”</td><td>最大实体实效边界MMVB</td><td>孔Dfe≥DMV=Dmin−t、Da≤Dmax；轴dfe≤dMV=dmax+t、da≥dmin；允许形位公差=给定值+偏离量</td><td>第四章 p133—139</td></tr><tr><td>最小实体要求</td><td>公差值后或基准字母后加“L”</td><td>最小实体实效边界LMVB</td><td>孔Dfi≤DLV=Dmax+t；轴dfi≥dLV=dmin−t；局部实际尺寸不超MMS</td><td>第四章 p142—146</td></tr><tr><td>可逆要求</td><td>加“R”</td><td>与最大/最小实体要求联用</td><td>尺寸公差可补偿形位公差，形位公差也可补偿尺寸公差</td><td>第四章 p144—146</td></tr></tbody></table></div>
+</section>
+<section class="table-section searchable" data-search="5. 作用尺寸、实效尺寸与边界 概念 定义 关键区别 资料依据 体外作用尺寸 与实际内表面体外相接的最大理想面（孔）；与实际外表面体外相接的最小理想面（轴） 由实际尺寸和形位误差综合形成，是变量 第四章 p113 体内作用尺寸 与实际轴体内相接的最大理想孔（轴）；与实际孔体内相接的最小理想轴（孔） 与体外作用尺寸方向相反 第四章 p114 最大/最小实体尺寸 孔MMS=Dmin、LMS=Dmax；轴MMS=dmax、LMS=dmin 最大实体=材料最多；最小实体=材料最少 第三章1 p33；第四章 p115—116 最大/最小实体实效尺寸 孔DMV=Dmin−t、DLV=Dmax+t；轴dMV=dmax+t、dLV=dmin−t 由实体尺寸和形位公差综合形成，对一批零件是一定量 第四章 p117、p120 边界 MMB=最大实体尺寸；LMB=最小实体尺寸；MMVB=最大实体实效尺寸；LMVB=最小实体实效尺寸 边界是设计给定的理想形状极限包容面 第四章 p124 ">
+  <h3>5. 作用尺寸、实效尺寸与边界</h3>
+  <div class="table-wrap"><table><thead><tr><th>概念</th><th>定义</th><th>关键区别</th><th>资料依据</th></tr></thead><tbody><tr><td>体外作用尺寸</td><td>与实际内表面体外相接的最大理想面（孔）；与实际外表面体外相接的最小理想面（轴）</td><td>由实际尺寸和形位误差综合形成，是变量</td><td>第四章 p113</td></tr><tr><td>体内作用尺寸</td><td>与实际轴体内相接的最大理想孔（轴）；与实际孔体内相接的最小理想轴（孔）</td><td>与体外作用尺寸方向相反</td><td>第四章 p114</td></tr><tr><td>最大/最小实体尺寸</td><td>孔MMS=Dmin、LMS=Dmax；轴MMS=dmax、LMS=dmin</td><td>最大实体=材料最多；最小实体=材料最少</td><td>第三章1 p33；第四章 p115—116</td></tr><tr><td>最大/最小实体实效尺寸</td><td>孔DMV=Dmin−t、DLV=Dmax+t；轴dMV=dmax+t、dLV=dmin−t</td><td>由实体尺寸和形位公差综合形成，对一批零件是一定量</td><td>第四章 p117、p120</td></tr><tr><td>边界</td><td>MMB=最大实体尺寸；LMB=最小实体尺寸；MMVB=最大实体实效尺寸；LMVB=最小实体实效尺寸</td><td>边界是设计给定的理想形状极限包容面</td><td>第四章 p124</td></tr></tbody></table></div>
+</section>
+<section class="table-section searchable" data-search="6. 形位公差分类 类别 项目 基准 控制内容 资料依据 形状公差 直线度、平面度、圆度、圆柱度、线轮廓度、面轮廓度 无基准 单一实际要素的形状 第四章 p15—16、p50 定向公差 平行度、垂直度、倾斜度 有基准 被测要素相对基准的方向 第四章 p76—91 定位公差 同轴度、对称度、位置度 有基准 被测要素相对基准的位置 第四章 p92—104 跳动公差 圆跳动、全跳动 有基准 综合控制位置、方向、形状 第四章 p105—111 ">
+  <h3>6. 形位公差分类</h3>
+  <div class="table-wrap"><table><thead><tr><th>类别</th><th>项目</th><th>基准</th><th>控制内容</th><th>资料依据</th></tr></thead><tbody><tr><td>形状公差</td><td>直线度、平面度、圆度、圆柱度、线轮廓度、面轮廓度</td><td>无基准</td><td>单一实际要素的形状</td><td>第四章 p15—16、p50</td></tr><tr><td>定向公差</td><td>平行度、垂直度、倾斜度</td><td>有基准</td><td>被测要素相对基准的方向</td><td>第四章 p76—91</td></tr><tr><td>定位公差</td><td>同轴度、对称度、位置度</td><td>有基准</td><td>被测要素相对基准的位置</td><td>第四章 p92—104</td></tr><tr><td>跳动公差</td><td>圆跳动、全跳动</td><td>有基准</td><td>综合控制位置、方向、形状</td><td>第四章 p105—111</td></tr></tbody></table></div>
+</section>
+<section class="table-section searchable" data-search="7. 表面粗糙度概念与参数 概念A 概念B 关键区别 资料依据 表面粗糙度 表面波纹度 粗糙度λ&amp;lt;1mm，微观；波纹度λ=1—10mm 第五章 p12—15 表面波纹度 形状误差 波纹度λ=1—10mm；形状误差λ&amp;gt;10mm，宏观 第五章 p12—15 Ra Rz Ra是取样长度内 Z(x) 的算术平均值；Rz是最大峰高+最大谷深 第五章 p26、p28 Rsm Rmr(c) Rsm是轮廓单元平均宽度（间距参数）；Rmr(c)是实体材料长度比率（支承参数），越大耐磨性越好 第五章 p30—32 取样长度lr 评定长度ln lr是一段基准线长度，至少5峰5谷；ln是连续几个lr，一般ln=5lr 第五章 p20—21 ">
+  <h3>7. 表面粗糙度概念与参数</h3>
+  <div class="table-wrap"><table><thead><tr><th>概念A</th><th>概念B</th><th>关键区别</th><th>资料依据</th></tr></thead><tbody><tr><td>表面粗糙度</td><td>表面波纹度</td><td>粗糙度λ&lt;1mm，微观；波纹度λ=1—10mm</td><td>第五章 p12—15</td></tr><tr><td>表面波纹度</td><td>形状误差</td><td>波纹度λ=1—10mm；形状误差λ&gt;10mm，宏观</td><td>第五章 p12—15</td></tr><tr><td>Ra</td><td>Rz</td><td>Ra是取样长度内</td><td>Z(x)</td><td>的算术平均值；Rz是最大峰高+最大谷深</td><td>第五章 p26、p28</td></tr><tr><td>Rsm</td><td>Rmr(c)</td><td>Rsm是轮廓单元平均宽度（间距参数）；Rmr(c)是实体材料长度比率（支承参数），越大耐磨性越好</td><td>第五章 p30—32</td></tr><tr><td>取样长度lr</td><td>评定长度ln</td><td>lr是一段基准线长度，至少5峰5谷；ln是连续几个lr，一般ln=5lr</td><td>第五章 p20—21</td></tr></tbody></table></div>
+</section>
+<section class="table-section searchable" data-search="8. 测量与误差 概念A 概念B 关键区别 资料依据 测量 检验 测量得到具体数值；检验只判断合格与否 第一章 p38；第二章 p6 绝对误差 相对误差 δ=x−x0，有正负；f= δ /x0≈ δ /x，取绝对值，更能比较不同尺寸的精度 第二章 p50 系统误差 随机误差 系统误差大小符号不变或按规律变；随机误差不可预定，服从正态分布 第二章 p58—61 随机误差 粗大误差 随机误差可用统计方法处理；粗大误差明显歪曲结果，应剔除 第二章 p58—61 正确度 精密度/准确度 正确度反映系统误差；精密度反映随机误差；准确度反映综合影响 第二章 p59 直接测量 间接测量 直接测量读数得欲测值或偏差；间接测量测相关量后按函数式求 第二章 p42 绝对测量 相对测量 绝对测量得整个量值；相对测量得对标准量的偏差 第二章 p43 在线测量 离线测量 在线在加工过程中测量，能即时防止废品；离线在加工后测量，仅发现并剔除废品 第二章 p46 静态测量 动态测量 静态时被测表面与测头静止；动态时处于相对运动或模拟工作状态 第二章 p47 ">
+  <h3>8. 测量与误差</h3>
+  <div class="table-wrap"><table><thead><tr><th>概念A</th><th>概念B</th><th>关键区别</th><th>资料依据</th></tr></thead><tbody><tr><td>测量</td><td>检验</td><td>测量得到具体数值；检验只判断合格与否</td><td>第一章 p38；第二章 p6</td></tr><tr><td>绝对误差</td><td>相对误差</td><td>δ=x−x0，有正负；f=</td><td>δ</td><td>/x0≈</td><td>δ</td><td>/x，取绝对值，更能比较不同尺寸的精度</td><td>第二章 p50</td></tr><tr><td>系统误差</td><td>随机误差</td><td>系统误差大小符号不变或按规律变；随机误差不可预定，服从正态分布</td><td>第二章 p58—61</td></tr><tr><td>随机误差</td><td>粗大误差</td><td>随机误差可用统计方法处理；粗大误差明显歪曲结果，应剔除</td><td>第二章 p58—61</td></tr><tr><td>正确度</td><td>精密度/准确度</td><td>正确度反映系统误差；精密度反映随机误差；准确度反映综合影响</td><td>第二章 p59</td></tr><tr><td>直接测量</td><td>间接测量</td><td>直接测量读数得欲测值或偏差；间接测量测相关量后按函数式求</td><td>第二章 p42</td></tr><tr><td>绝对测量</td><td>相对测量</td><td>绝对测量得整个量值；相对测量得对标准量的偏差</td><td>第二章 p43</td></tr><tr><td>在线测量</td><td>离线测量</td><td>在线在加工过程中测量，能即时防止废品；离线在加工后测量，仅发现并剔除废品</td><td>第二章 p46</td></tr><tr><td>静态测量</td><td>动态测量</td><td>静态时被测表面与测头静止；动态时处于相对运动或模拟工作状态</td><td>第二章 p47</td></tr></tbody></table></div>
+</section>
+<section class="table-section searchable" data-search="9. 量块“级”与“等” 概念 依据 使用 资料依据 级 按制造精度分K、0、1、2、3级；按中心长度极限偏差认可 按级使用时依据量块上刻的标称尺寸，忽略制造误差 PPT第二章p16；书内内容（老师提供） 等 按检定精度分1—5等；按中心长度测量不确定度认可 按等使用时依据检定书中的实际尺寸，忽略检定时的测量误差 PPT第二章p16；书内内容（老师提供） ">
+  <h3>9. 量块“级”与“等”</h3>
+  <div class="table-wrap"><table><thead><tr><th>概念</th><th>依据</th><th>使用</th><th>资料依据</th></tr></thead><tbody><tr><td>级</td><td>按制造精度分K、0、1、2、3级；按中心长度极限偏差认可</td><td>按级使用时依据量块上刻的标称尺寸，忽略制造误差</td><td>PPT第二章p16；书内内容（老师提供）</td></tr><tr><td>等</td><td>按检定精度分1—5等；按中心长度测量不确定度认可</td><td>按等使用时依据检定书中的实际尺寸，忽略检定时的测量误差</td><td>PPT第二章p16；书内内容（老师提供）</td></tr></tbody></table></div>
+</section>
+<section class="table-section searchable" data-search="10. 螺纹概念 概念A 概念B 关键区别 资料依据 大径/小径 中径 大径与内螺纹牙底/外螺纹牙顶相切；小径与内螺纹牙顶/外螺纹牙底相切；中径处齿廓与齿槽宽度相等，不是大小径平均值 第六章 p6—9 螺距P 导程L 螺距是相邻两牙在中径线上对应两点距离；导程是同一螺旋线上相邻两牙距离；L=nP 第六章 p11 作用中径 单一中径 作用中径综合反映螺距和牙型半角误差，影响旋入性；单一中径反映螺距误差 第六章 p9、p17 螺距误差 牙型半角误差/中径偏差 三者均影响互换性，前两项可折算成中径当量，用作用中径综合反映 第六章 p16—18 ">
+  <h3>10. 螺纹概念</h3>
+  <div class="table-wrap"><table><thead><tr><th>概念A</th><th>概念B</th><th>关键区别</th><th>资料依据</th></tr></thead><tbody><tr><td>大径/小径</td><td>中径</td><td>大径与内螺纹牙底/外螺纹牙顶相切；小径与内螺纹牙顶/外螺纹牙底相切；中径处齿廓与齿槽宽度相等，不是大小径平均值</td><td>第六章 p6—9</td></tr><tr><td>螺距P</td><td>导程L</td><td>螺距是相邻两牙在中径线上对应两点距离；导程是同一螺旋线上相邻两牙距离；L=nP</td><td>第六章 p11</td></tr><tr><td>作用中径</td><td>单一中径</td><td>作用中径综合反映螺距和牙型半角误差，影响旋入性；单一中径反映螺距误差</td><td>第六章 p9、p17</td></tr><tr><td>螺距误差</td><td>牙型半角误差/中径偏差</td><td>三者均影响互换性，前两项可折算成中径当量，用作用中径综合反映</td><td>第六章 p16—18</td></tr></tbody></table></div>
+</section>
+<section class="table-section searchable" data-search="11. 齿轮概念 概念A 概念B 关键区别 资料依据 Fp Fpk Fp是齿距累积总偏差，评运动准确性；Fpk是K个齿距累积偏差，限制局部圆周上的累积误差 第七章 p20 fpt Fα fpt是单个齿距偏差，评平稳性；Fα是齿廓总偏差，评平稳性 第七章 p21 Fα Fβ Fα评齿高方向的平稳性；Fβ是螺旋线总偏差，评齿宽方向的载荷分布均匀性 第七章 p21—22 Fi′ Fi″ Fi′是单面啮合切向综合总偏差；Fi″是双面啮合径向综合总偏差；均评运动准确性 第七章 p24—26 第Ⅰ/Ⅱ/Ⅲ公差组 — 第Ⅰ组运动准确性；第Ⅱ组平稳性；第Ⅲ组载荷分布均匀性 第七章 p6—11、p31 ">
+  <h3>11. 齿轮概念</h3>
+  <div class="table-wrap"><table><thead><tr><th>概念A</th><th>概念B</th><th>关键区别</th><th>资料依据</th></tr></thead><tbody><tr><td>Fp</td><td>Fpk</td><td>Fp是齿距累积总偏差，评运动准确性；Fpk是K个齿距累积偏差，限制局部圆周上的累积误差</td><td>第七章 p20</td></tr><tr><td>fpt</td><td>Fα</td><td>fpt是单个齿距偏差，评平稳性；Fα是齿廓总偏差，评平稳性</td><td>第七章 p21</td></tr><tr><td>Fα</td><td>Fβ</td><td>Fα评齿高方向的平稳性；Fβ是螺旋线总偏差，评齿宽方向的载荷分布均匀性</td><td>第七章 p21—22</td></tr><tr><td>Fi′</td><td>Fi″</td><td>Fi′是单面啮合切向综合总偏差；Fi″是双面啮合径向综合总偏差；均评运动准确性</td><td>第七章 p24—26</td></tr><tr><td>第Ⅰ/Ⅱ/Ⅲ公差组</td><td>—</td><td>第Ⅰ组运动准确性；第Ⅱ组平稳性；第Ⅲ组载荷分布均匀性</td><td>第七章 p6—11、p31</td></tr></tbody></table></div>
+</section>
+<section class="table-section searchable" data-search="12. 尺寸链与量规 概念A 概念B 关键区别 资料依据 增环 减环 其他环不变时，增环增大使封闭环增大；减环增大使封闭环减小；可用回路法判断 第八章 p15—16 封闭环 组成环 封闭环是最后形成或间接获得的尺寸，有且仅有一个；其余为组成环 第八章 p13—14 正计算 反计算/中间计算 正计算已知组成环求封闭环；反计算已知封闭环求组成环；中间计算求某一组成环 第八章 p20、p30—37 通规 止规 通规按最大实体尺寸设计、全形，控制作用尺寸；止规按最小实体尺寸设计、不全形，控制局部实际尺寸；“通规通过、止规不通过”合格 第三章3 p2—6 ">
+  <h3>12. 尺寸链与量规</h3>
+  <div class="table-wrap"><table><thead><tr><th>概念A</th><th>概念B</th><th>关键区别</th><th>资料依据</th></tr></thead><tbody><tr><td>增环</td><td>减环</td><td>其他环不变时，增环增大使封闭环增大；减环增大使封闭环减小；可用回路法判断</td><td>第八章 p15—16</td></tr><tr><td>封闭环</td><td>组成环</td><td>封闭环是最后形成或间接获得的尺寸，有且仅有一个；其余为组成环</td><td>第八章 p13—14</td></tr><tr><td>正计算</td><td>反计算/中间计算</td><td>正计算已知组成环求封闭环；反计算已知封闭环求组成环；中间计算求某一组成环</td><td>第八章 p20、p30—37</td></tr><tr><td>通规</td><td>止规</td><td>通规按最大实体尺寸设计、全形，控制作用尺寸；止规按最小实体尺寸设计、不全形，控制局部实际尺寸；“通规通过、止规不通过”合格</td><td>第三章3 p2—6</td></tr></tbody></table></div>
+</section></div>
+    </details>
+    <footer style="margin-top:30px;padding-top:14px;border-top:1px dashed var(--line);font-size:12px;color:var(--muted)">
+      资料依据：以《互换性与测量技术-复习主要知识点.pdf》为主，PPT为补充；量块“等/级”采用老师提供的书内内容。页码为PDF页序号。
+    </footer>
+  </main>
+</div>
+<div id="overlay"></div>
+<button id="backTop" aria-label="回到顶部">↑</button>
+<script>
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const sidebar = $('#sidebar');
+const overlay = $('#overlay');
+function closeSidebar(){ sidebar.classList.remove('open'); overlay.classList.remove('show'); }
+$('#menuBtn').addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('show'); });
+overlay.addEventListener('click', closeSidebar);
+$$('.toc-link').forEach(a => a.addEventListener('click', () => { if (window.innerWidth <= 900) closeSidebar(); }));
+$('#expandBtn').addEventListener('click', () => $$('details').forEach(d => d.open = true));
+$('#collapseBtn').addEventListener('click', () => $$('details.chapter').forEach(d => d.open = false));
+$('#printBtn').addEventListener('click', () => window.print());
+window.addEventListener('beforeprint', () => {
+  window.__printState = $$('details').map(d => d.open);
+  $$('details').forEach(d => d.open = true);
+});
+window.addEventListener('afterprint', () => {
+  if (!window.__printState) return;
+  $$('details').forEach((d, i) => { if (i < window.__printState.length) d.open = window.__printState[i]; });
+});
+const searchInput = $('#searchInput');
+const searchables = $$('.searchable');
+const noResults = $('#noResults');
+const searchCount = $('#searchCount');
+function doSearch(){
+  const q = searchInput.value.trim().toLowerCase();
+  let visible = 0;
+  searchables.forEach(el => {
+    const text = (el.dataset.search || el.textContent || '').toLowerCase();
+    const match = !q || text.includes(q);
+    el.classList.toggle('is-hidden', !match);
+    if (match) visible++;
+  });
+  if (q) {
+    $$('details.chapter').forEach(ch => {
+      const summary = ch.querySelector('summary');
+      const hasVisibleCard = ch.querySelector('.card:not(.is-hidden), .table-section:not(.is-hidden), .comp-section:not(.is-hidden)');
+      const summaryMatch = summary && summary.textContent.toLowerCase().includes(q);
+      if (!hasVisibleCard && !summaryMatch) ch.classList.add('is-hidden');
+      else ch.classList.remove('is-hidden');
+    });
+  } else {
+    $$('details.chapter').forEach(ch => ch.classList.remove('is-hidden'));
+  }
+  noResults.classList.toggle('show', visible === 0);
+  searchCount.textContent = q ? `匹配 ${visible} 个区块` : '';
+}
+searchInput.addEventListener('input', doSearch);
+$('#clearBtn').addEventListener('click', () => { searchInput.value = ''; doSearch(); searchInput.focus(); });
+const backTop = $('#backTop');
+window.addEventListener('scroll', () => backTop.classList.toggle('show', window.scrollY > 600));
+backTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+const sections = $$('main section[id], main details[id]');
+const links = $$('.toc-link');
+if ('IntersectionObserver' in window) {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+      }
+    });
+  }, {rootMargin:'-15% 0px -70% 0px'});
+  sections.forEach(s => obs.observe(s));
+}
+</script>
+</body>
+</html>
